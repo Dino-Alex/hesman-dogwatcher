@@ -6,6 +6,7 @@ import { ToastDescriptionWithTx } from 'components/Toast'
 import { MaxUint256 } from '@ethersproject/constants'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { useCake } from 'hooks/useContract'
+import { Erc20 } from 'config/abi/types'
 
 export const useApprovePottery = (potteryVaultAddress: string) => {
   const { t } = useTranslation()
@@ -16,7 +17,7 @@ export const useApprovePottery = (potteryVaultAddress: string) => {
 
   const onApprove = useCallback(async () => {
     const receipt = await fetchWithCatchTxError(() => {
-      return callWithGasPrice(cakeContract, 'approve', [potteryVaultAddress, MaxUint256])
+      return callWithGasPrice(cakeContract as unknown as Erc20, 'approve', [potteryVaultAddress, MaxUint256])
     })
 
     if (receipt?.status) {

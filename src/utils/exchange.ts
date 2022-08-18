@@ -36,7 +36,7 @@ export function getRouterContract(chainId: number, library: Web3Provider, accoun
     ROUTER_ADDRESS[chainId],
     IPancakeRouter02ABI,
     getProviderOrSigner(library, account),
-  ) as IPancakeRouter02
+  ) as unknown as IPancakeRouter02
 }
 
 // computes price breakdown for the trade

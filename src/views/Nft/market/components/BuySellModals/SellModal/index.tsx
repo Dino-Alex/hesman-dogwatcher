@@ -11,6 +11,7 @@ import { useTranslation, ContextApi } from '@pancakeswap/localization'
 import { isAddress } from 'utils'
 import { useErc721CollectionContract, useNftMarketContract } from 'hooks/useContract'
 import { NftToken } from 'state/nftMarket/types'
+import { Erc20 } from 'config/abi/types'
 import { useGetLowestPriceFromNft } from 'views/Nft/market/hooks/useGetLowestPrice'
 import SellStage from './SellStage'
 import SetPriceStage from './SetPriceStage'
@@ -95,7 +96,7 @@ const SellModal: React.FC<React.PropsWithChildren<SellModalProps>> = ({
   const { reader: collectionContractReader, signer: collectionContractSigner } = useErc721CollectionContract(
     nftToSell.collectionAddress,
   )
-  const nftMarketContract = useNftMarketContract()
+  const nftMarketContract = useNftMarketContract() as unknown as Erc20
 
   const isInvalidTransferAddress = transferAddress.length > 0 && !isAddress(transferAddress)
 
@@ -176,7 +177,10 @@ const SellModal: React.FC<React.PropsWithChildren<SellModalProps>> = ({
       }
     },
     onApprove: () => {
-      return callWithGasPrice(collectionContractSigner, 'setApprovalForAll', [nftMarketContract.address, true])
+      return callWithGasPrice(collectionContractSigner as unknown as Erc20, 'setApprovalForAll', [
+        nftMarketContract.address,
+        true,
+      ])
     },
     onApproveSuccess: async ({ receipt }) => {
       toastSuccess(
@@ -189,11 +193,11 @@ const SellModal: React.FC<React.PropsWithChildren<SellModalProps>> = ({
         return callWithGasPrice(nftMarketContract, 'cancelAskOrder', [nftToSell.collectionAddress, nftToSell.tokenId])
       }
       if (stage === SellingStage.CONFIRM_TRANSFER) {
-        return callWithGasPrice(collectionContractSigner, 'safeTransferFrom(address,address,uint256)', [
-          account,
-          transferAddress,
-          nftToSell.tokenId,
-        ])
+        return callWithGasPrice(
+          collectionContractSigner as unknown as Erc20,
+          'safeTransferFrom(address,address,uint256)',
+          [account, transferAddress, nftToSell.tokenId],
+        )
       }
       const methodName = variant === 'sell' ? 'createAskOrder' : 'modifyAskOrder'
       const askPrice = parseUnits(price)

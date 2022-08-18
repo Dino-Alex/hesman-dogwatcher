@@ -3,6 +3,7 @@ import { useMemo } from 'react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useTranslation } from '@pancakeswap/localization'
 import tryParseAmount from 'utils/tryParseAmount'
+import { Erc20 } from 'config/abi/types'
 import { useTransactionAdder } from '../state/transactions/hooks'
 import { useCurrencyBalance } from '../state/wallet/hooks'
 import { useWBNBContract } from './useContract'
@@ -39,6 +40,7 @@ export default function useWrapCallback(
     if (!wbnbContract || !chainId || !inputCurrency || !outputCurrency) return NOT_APPLICABLE
 
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
+    const wbnbErc20: Erc20 = wbnbContract as unknown as Erc20
 
     if (inputCurrency === ETHER && currencyEquals(WNATIVE[chainId], outputCurrency)) {
       return {
@@ -47,7 +49,7 @@ export default function useWrapCallback(
           sufficientBalance && inputAmount
             ? async () => {
                 try {
-                  const txReceipt = await callWithGasPrice(wbnbContract, 'deposit', undefined, {
+                  const txReceipt = await callWithGasPrice(wbnbErc20, 'deposit', undefined, {
                     value: `0x${inputAmount.raw.toString(16)}`,
                   })
                   addTransaction(txReceipt, {
@@ -69,9 +71,7 @@ export default function useWrapCallback(
           sufficientBalance && inputAmount
             ? async () => {
                 try {
-                  const txReceipt = await callWithGasPrice(wbnbContract, 'withdraw', [
-                    `0x${inputAmount.raw.toString(16)}`,
-                  ])
+                  const txReceipt = await callWithGasPrice(wbnbErc20, 'withdraw', [`0x${inputAmount.raw.toString(16)}`])
                   addTransaction(txReceipt, { summary: `Unwrap ${inputAmount.toSignificant(6)} WBNB to BNB` })
                 } catch (error) {
                   console.error('Could not withdraw', error)

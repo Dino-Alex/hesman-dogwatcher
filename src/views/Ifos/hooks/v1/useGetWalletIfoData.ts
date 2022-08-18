@@ -6,6 +6,7 @@ import { useERC20, useIfoV1Contract } from 'hooks/useContract'
 import { multicallv2 } from 'utils/multicall'
 import ifoV1Abi from 'config/abi/ifoV1.json'
 import { BIG_ZERO } from 'utils/bigNumber'
+import { Contract } from '@ethersproject/contracts'
 import useIfoAllowance from '../useIfoAllowance'
 import { WalletIfoState, WalletIfoData } from '../../types'
 
@@ -36,8 +37,8 @@ const useGetWalletIfoData = (ifo: Ifo): WalletIfoData => {
   const { poolUnlimited } = state
 
   const { account } = useWeb3React()
-  const contract = useIfoV1Contract(address)
-  const currencyContract = useERC20(currency.address, false)
+  const contract = useIfoV1Contract(address) as unknown as Contract
+  const currencyContract = useERC20(currency.address, false) as unknown as Contract
   const allowance = useIfoAllowance(currencyContract, address, poolUnlimited.isPendingTx)
 
   const setPendingTx = (status: boolean) =>
@@ -89,7 +90,6 @@ const useGetWalletIfoData = (ifo: Ifo): WalletIfoData => {
   const resetIfoData = useCallback(() => {
     setState(initialState)
   }, [])
-
   return { ...state, allowance, contract, setPendingTx, setIsClaimed, fetchIfoData, resetIfoData }
 }
 

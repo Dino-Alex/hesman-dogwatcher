@@ -12,6 +12,7 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import { MaxUint256 } from '@ethersproject/constants'
 import ApproveConfirmButtons, { ButtonArrangement } from 'components/ApproveConfirmButtons'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { Erc20 } from 'config/abi/types'
 import useReclaimAuctionBid from '../hooks/useReclaimAuctionBid'
 
 const StyledReclaimBidCard = styled(Card)`
@@ -36,7 +37,10 @@ const ReclaimBidCard: React.FC<React.PropsWithChildren> = () => {
       return requiresApproval(cakeContractReader, account, farmAuctionContract.address)
     },
     onApprove: () => {
-      return callWithGasPrice(cakeContractApprover, 'approve', [farmAuctionContract.address, MaxUint256])
+      return callWithGasPrice(cakeContractApprover as unknown as Erc20, 'approve', [
+        farmAuctionContract.address,
+        MaxUint256,
+      ])
     },
     onApproveSuccess: async ({ receipt }) => {
       toastSuccess(
@@ -45,7 +49,7 @@ const ReclaimBidCard: React.FC<React.PropsWithChildren> = () => {
       )
     },
     onConfirm: () => {
-      return callWithGasPrice(farmAuctionContract, 'claimAuction', [reclaimableAuction.id])
+      return callWithGasPrice(farmAuctionContract as unknown as Erc20, 'claimAuction', [reclaimableAuction.id])
     },
     onSuccess: async ({ receipt }) => {
       checkForNextReclaimableAuction()

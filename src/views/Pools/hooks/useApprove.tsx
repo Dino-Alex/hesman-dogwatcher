@@ -13,6 +13,7 @@ import useCatchTxError from 'hooks/useCatchTxError'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import useCakeApprovalStatus from 'hooks/useCakeApprovalStatus'
 import useCakeApprove from 'hooks/useCakeApprove'
+import { Erc20 } from 'config/abi/types'
 
 export const useApprovePool = (lpContract: Contract, sousId, earningTokenSymbol) => {
   const { toastSuccess } = useToast()
@@ -25,7 +26,7 @@ export const useApprovePool = (lpContract: Contract, sousId, earningTokenSymbol)
 
   const handleApprove = useCallback(async () => {
     const receipt = await fetchWithCatchTxError(() => {
-      return callWithGasPrice(lpContract, 'approve', [sousChefContract.address, MaxUint256])
+      return callWithGasPrice(lpContract as unknown as Erc20, 'approve', [sousChefContract.address, MaxUint256])
     })
     if (receipt?.status) {
       toastSuccess(

@@ -19,6 +19,7 @@ import DepositModal from 'views/Farms/components/DepositModal'
 import WithdrawModal from 'views/Farms/components/WithdrawModal'
 import { fetchFarmUserDataAsync } from 'state/farms'
 import { useAppDispatch } from 'state'
+import { Contract } from '@ethersproject/contracts'
 
 const IconButtonWrapper = styled.div`
   display: flex;
@@ -108,7 +109,7 @@ const StakeButton: React.FC<React.PropsWithChildren<StackedActionProps>> = ({
   const [onPresentWithdraw] = useModal(
     <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
   )
-  const lpContract = useERC20(lpAddress)
+  const lpContract = useERC20(lpAddress) as unknown as Contract
   const dispatch = useAppDispatch()
   const { onApprove } = useApproveFarm(lpContract)
 

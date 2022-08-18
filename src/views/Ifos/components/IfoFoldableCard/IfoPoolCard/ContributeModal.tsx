@@ -31,6 +31,7 @@ import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import { useERC20 } from 'hooks/useContract'
 import { bscTokens } from 'config/constants/tokens'
 import { requiresApproval } from 'utils/requiresApproval'
+import { Erc20 } from 'config/abi/types'
 
 const MessageTextLink = styled(Link)`
   display: inline;
@@ -121,7 +122,7 @@ const ContributeModal: React.FC<React.PropsWithChildren<Props>> = ({
       },
       onConfirm: () => {
         return callWithGasPrice(
-          contract,
+          contract as unknown as Erc20,
           'depositPool',
           [valueWithTokenDecimals.toString(), poolId === PoolIds.poolBasic ? 0 : 1],
           {

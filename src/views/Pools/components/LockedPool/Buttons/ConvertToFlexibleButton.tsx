@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react'
 import { Button, ButtonProps } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
-
+import { Erc20 } from 'config/abi/types'
 import { useAppDispatch } from 'state'
 import { fetchCakeVaultUserData } from 'state/pools'
 import useToast from 'hooks/useToast'
@@ -18,7 +18,7 @@ const ConvertToFlexibleButton: React.FC<React.PropsWithChildren<ButtonProps>> = 
 
   const { account } = useWeb3React()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
-  const vaultPoolContract = useVaultPoolContract(VaultKey.CakeVault)
+  const vaultPoolContract = useVaultPoolContract(VaultKey.CakeVault) as unknown as Erc20
   const { callWithGasPrice } = useCallWithGasPrice()
   const { t } = useTranslation()
   const { toastSuccess } = useToast()

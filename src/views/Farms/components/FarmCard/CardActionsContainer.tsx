@@ -10,6 +10,7 @@ import { useAppDispatch } from 'state'
 import { fetchFarmUserDataAsync } from 'state/farms'
 import styled from 'styled-components'
 import { getAddress } from 'utils/addressHelpers'
+import { Contract } from '@ethersproject/contracts'
 import { FarmWithStakedValue } from '../types'
 import useApproveFarm from '../../hooks/useApproveFarm'
 import HarvestAction from './HarvestAction'
@@ -43,7 +44,7 @@ const CardActions: React.FC<React.PropsWithChildren<FarmCardActionsProps>> = ({
   const isApproved = account && allowance && allowance.isGreaterThan(0)
   const dispatch = useAppDispatch()
 
-  const lpContract = useERC20(lpAddress)
+  const lpContract = useERC20(lpAddress) as unknown as Contract
 
   const { onApprove } = useApproveFarm(lpContract)
 

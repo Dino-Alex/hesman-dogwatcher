@@ -7,6 +7,8 @@ import { usePointCenterIfoContract } from 'hooks/useContract'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { Contract } from '@ethersproject/contracts'
+import { Erc20 } from 'config/abi/types'
 import AchievementTitle from 'views/Profile/components/Achievements/AchievementTitle'
 import AchievementAvatar from 'views/Profile/components/Achievements/AchievementAvatar'
 import AchievementDescription from 'views/Profile/components/Achievements/AchievementDescription'
@@ -53,7 +55,7 @@ const Body = styled(Flex)`
 
 const AchievementRow: React.FC<React.PropsWithChildren<AchievementRowProps>> = ({ achievement, onCollectSuccess }) => {
   const { t } = useTranslation()
-  const pointCenterContract = usePointCenterIfoContract()
+  const pointCenterContract = usePointCenterIfoContract() as unknown as Erc20
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: isCollecting } = useCatchTxError()
   const { callWithGasPrice } = useCallWithGasPrice()

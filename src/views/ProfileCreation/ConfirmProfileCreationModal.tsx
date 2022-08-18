@@ -9,6 +9,7 @@ import useToast from 'hooks/useToast'
 import { requiresApproval } from 'utils/requiresApproval'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { Erc20 } from 'config/abi/types'
 import ApproveConfirmButtons from 'components/ApproveConfirmButtons'
 import { REGISTER_COST } from './config'
 import { State } from './contexts/types'
@@ -32,7 +33,7 @@ const ConfirmProfileCreationModal: React.FC<React.PropsWithChildren<Props>> = ({
   onDismiss,
 }) => {
   const { t } = useTranslation()
-  const profileContract = useProfileContract()
+  const profileContract = useProfileContract() as unknown as Erc20
   const { refresh: refreshProfile } = useProfile()
   const { toastSuccess } = useToast()
   const { reader: cakeContractReader, signer: cakeContractApprover } = useCake()
@@ -44,7 +45,10 @@ const ConfirmProfileCreationModal: React.FC<React.PropsWithChildren<Props>> = ({
         return requiresApproval(cakeContractReader, account, profileContract.address, minimumCakeRequired)
       },
       onApprove: () => {
-        return callWithGasPrice(cakeContractApprover, 'approve', [profileContract.address, allowance.toJSON()])
+        return callWithGasPrice(cakeContractApprover as unknown as Erc20, 'approve', [
+          profileContract.address,
+          allowance.toJSON(),
+        ])
       },
       onConfirm: () => {
         return callWithGasPrice(profileContract, 'createProfile', [

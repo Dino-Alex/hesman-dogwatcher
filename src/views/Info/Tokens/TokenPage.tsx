@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Duration } from 'date-fns'
 import styled from 'styled-components'
@@ -39,6 +39,11 @@ import { useWatchlistTokens } from 'state/user/hooks'
 import { ONE_HOUR_SECONDS } from 'config/constants/info'
 import { useTranslation } from '@pancakeswap/localization'
 import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
+import { Provider } from 'react-redux'
+import store from 'store'
+import { FetchCirculatingSupply, fetchTotalSuppy } from '../hooks/useTotalSupply'
+import TeamWalletTable from '../components/InfoTables/TeamWalletTable'
+import { productsReducer } from '../reducers/productReducers'
 
 const ContentLayout = styled.div`
   margin-top: 16px;
@@ -97,8 +102,34 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
   }, [priceData, tokenData])
 
   const [watchlistTokens, addWatchlistToken] = useWatchlistTokens()
+  const [totalSupplyValue, setTotalSupplyValue] = useState({ totalSupply: 0 })
+  useEffect(() => {
+    const getSaleItems = async () => {
+      try {
+        const result = await fetchTotalSuppy()
+        setTotalSupplyValue(result)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    getSaleItems()
+  }, [])
+
+  const [circulatingSupplyDisplay, setCirculatingSupplyDisplay] = useState({ circulatingSupply: 0 })
+  useEffect(() => {
+    const getCirculatingSupplyDisplay = async () => {
+      try {
+        const result = await FetchCirculatingSupply()
+        setCirculatingSupplyDisplay(result)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    getCirculatingSupplyDisplay()
+  }, [])
 
   return (
+    // <Provider store={store}>
     <Page symbol={tokenData?.symbol}>
       {tokenData ? (
         !tokenData.exists ? (
@@ -204,10 +235,22 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   </Text>
 
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
-                    {t('Hello 24H')}
+                    {t('Transactions 24H')}
                   </Text>
                   <Text bold fontSize="24px">
                     {formatAmount(tokenData.txCount, { isInteger: true })}
+                  </Text>
+                  <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
+                    {t('Total Supply')}
+                  </Text>
+                  <Text bold fontSize="24px">
+                    {formatAmount(totalSupplyValue.totalSupply, { isInteger: true })}
+                  </Text>
+                  <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
+                    {t('Circulating Supply')}
+                  </Text>
+                  <Text bold fontSize="24px">
+                    {formatAmount(Math.round(circulatingSupplyDisplay.circulatingSupply), { isInteger: true })}
                   </Text>
                 </Box>
               </Card>
@@ -221,6 +264,13 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
             </ContentLayout>
 
             {/* pools and transaction tables */}
+
+            <Heading scale="lg" mb="16px" mt="40px">
+              {t('Teams Wallets')}
+            </Heading>
+
+            <TeamWalletTable poolDatas={poolDatas} />
+
             <Heading scale="lg" mb="16px" mt="40px">
               {t('Pools')}
             </Heading>
@@ -240,6 +290,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
         </Flex>
       )}
     </Page>
+    // </Provider>
   )
 }
 

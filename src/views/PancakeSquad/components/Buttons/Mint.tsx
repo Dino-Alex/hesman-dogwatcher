@@ -6,6 +6,7 @@ import { ContextApi } from '@pancakeswap/localization'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { useNftSaleContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
+import { Erc20 } from 'config/abi/types'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { DefaultTheme } from 'styled-components'
 import { SaleStatusEnum } from '../../types'
@@ -28,7 +29,7 @@ const MintButton: React.FC<React.PropsWithChildren<PreEventProps>> = ({
   ticketsOfUser,
 }) => {
   const { callWithGasPrice } = useCallWithGasPrice()
-  const nftSaleContract = useNftSaleContract()
+  const nftSaleContract = useNftSaleContract() as unknown as Erc20
   const [txHashMintingResult, setTxHashMintingResult] = useState(null)
   const canMintTickets = saleStatus === SaleStatusEnum.Claim && numberTicketsOfUser > 0
   const { toastSuccess } = useToast()

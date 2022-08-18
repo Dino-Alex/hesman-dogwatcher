@@ -10,6 +10,7 @@ import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { useCake, useNftSaleContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
 import { DefaultTheme } from 'styled-components'
+import { Erc20 } from 'config/abi/types'
 import { requiresApproval } from 'utils/requiresApproval'
 import { PancakeSquadContext } from 'views/PancakeSquad/context'
 import { SaleStatusEnum, UserStatusEnum } from '../../types'
@@ -55,7 +56,7 @@ const BuyTicketsButtons: React.FC<React.PropsWithChildren<BuyTicketsProps>> = ({
   const [txHashEnablingResult, setTxHashEnablingResult] = useState(null)
   const [txHashBuyingResult, setTxHashBuyingResult] = useState(null)
   const { callWithGasPrice } = useCallWithGasPrice()
-  const nftSaleContract = useNftSaleContract()
+  const nftSaleContract = useNftSaleContract() as unknown as Erc20
   const { toastSuccess } = useToast()
   const { reader: cakeContractReader, signer: cakeContractApprover } = useCake()
   const { isUserEnabled, setIsUserEnabled } = useContext(PancakeSquadContext)
@@ -74,7 +75,10 @@ const BuyTicketsButtons: React.FC<React.PropsWithChildren<BuyTicketsProps>> = ({
         return requiresApproval(cakeContractReader, account, nftSaleContract.address)
       },
       onApprove: () => {
-        return callWithGasPrice(cakeContractApprover, 'approve', [nftSaleContract.address, MaxUint256])
+        return callWithGasPrice(cakeContractApprover as unknown as Erc20, 'approve', [
+          nftSaleContract.address,
+          MaxUint256,
+        ])
       },
       onApproveSuccess: async ({ receipt }) => {
         toastSuccess(t('Transaction has succeeded!'), <ToastDescriptionWithTx txHash={receipt.transactionHash} />)

@@ -6,15 +6,16 @@ import { logError } from 'utils/sentry'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from '@pancakeswap/localization'
 import { ROUTER_ADDRESS } from 'config/constants/exchange'
+import { Erc20 } from 'config/abi/types'
 import useTokenAllowance from './useTokenAllowance'
-import { Field } from '../state/swap/actions'
-import { useTransactionAdder, useHasPendingApproval } from '../state/transactions/hooks'
-import { computeSlippageAdjustedAmounts } from '../utils/exchange'
-import { calculateGasMargin } from '../utils'
 import { useTokenContract } from './useContract'
 import { useCallWithGasPrice } from './useCallWithGasPrice'
 import useToast from './useToast'
 import useGelatoLimitOrdersLib from './limitOrders/useGelatoLimitOrdersLib'
+import { Field } from '../state/swap/actions'
+import { useTransactionAdder, useHasPendingApproval } from '../state/transactions/hooks'
+import { computeSlippageAdjustedAmounts } from '../utils/exchange'
+import { calculateGasMargin } from '../utils'
 
 export enum ApprovalState {
   UNKNOWN,
@@ -91,10 +92,10 @@ export function useApproveCallback(
       useExact = true
       return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
     })
-
+    let erc20Contract: Erc20
     // eslint-disable-next-line consistent-return
     return callWithGasPrice(
-      tokenContract,
+      erc20Contract,
       'approve',
       [spender, useExact ? amountToApprove.raw.toString() : MaxUint256],
       {

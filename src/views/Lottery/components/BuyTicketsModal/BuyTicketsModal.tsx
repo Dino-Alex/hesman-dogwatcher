@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { requiresApproval } from 'utils/requiresApproval'
 import { MaxUint256 } from '@ethersproject/constants'
+import { Erc20 } from 'config/abi/types'
 import {
   Modal,
   Text,
@@ -247,7 +248,10 @@ const BuyTicketsModal: React.FC<React.PropsWithChildren<BuyTicketsModalProps>> =
         return requiresApproval(cakeContractReader, account, lotteryContract.address)
       },
       onApprove: () => {
-        return callWithGasPrice(cakeContractApprover, 'approve', [lotteryContract.address, MaxUint256])
+        return callWithGasPrice(cakeContractApprover as unknown as Erc20, 'approve', [
+          lotteryContract.address,
+          MaxUint256,
+        ])
       },
       onApproveSuccess: async ({ receipt }) => {
         toastSuccess(
@@ -257,7 +261,10 @@ const BuyTicketsModal: React.FC<React.PropsWithChildren<BuyTicketsModalProps>> =
       },
       onConfirm: () => {
         const ticketsForPurchase = getTicketsForPurchase()
-        return callWithGasPrice(lotteryContract, 'buyTickets', [currentLotteryId, ticketsForPurchase])
+        return callWithGasPrice(lotteryContract as unknown as Erc20, 'buyTickets', [
+          currentLotteryId,
+          ticketsForPurchase,
+        ])
       },
       onSuccess: async ({ receipt }) => {
         onDismiss?.()

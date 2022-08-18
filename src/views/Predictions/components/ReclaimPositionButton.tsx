@@ -3,6 +3,8 @@ import { AutoRenewIcon, Button, ButtonProps } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { usePredictionsContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
+import { Contract } from '@ethersproject/contracts'
+import { Erc20 } from 'config/abi/types'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { ToastDescriptionWithTx } from 'components/Toast'
@@ -23,7 +25,7 @@ const ReclaimPositionButton: React.FC<React.PropsWithChildren<ReclaimPositionBut
   const { t } = useTranslation()
   const { address: predictionsAddress } = useConfig()
   const { token } = useConfig()
-  const predictionsContract = usePredictionsContract(predictionsAddress, token.symbol)
+  const predictionsContract = usePredictionsContract(predictionsAddress, token.symbol) as unknown as Erc20
   const { callWithGasPrice } = useCallWithGasPrice()
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: isPendingTx } = useCatchTxError()

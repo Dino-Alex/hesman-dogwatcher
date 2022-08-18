@@ -11,6 +11,7 @@ import { useProfileContract } from 'hooks/useContract'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { nftsBaseUrl } from 'views/Nft/market/constants'
+import { Erc20 } from 'config/abi/types'
 import { NftLocation } from 'state/nftMarket/types'
 import { useProfile } from 'state/profile/hooks'
 import SelectionCard from './SelectionCard'
@@ -77,7 +78,7 @@ const ProfilePicture: React.FC<React.PropsWithChildren> = () => {
   const { callWithGasPrice } = useCallWithGasPrice()
 
   const handleApprove = async () => {
-    const contract = getErc721Contract(selectedNft.collectionAddress, library.getSigner())
+    const contract = getErc721Contract(selectedNft.collectionAddress, library.getSigner()) as unknown as Erc20
     const receipt = await fetchWithCatchTxError(() => {
       return callWithGasPrice(contract, 'approve', [getPancakeProfileAddress(), selectedNft.tokenId])
     })

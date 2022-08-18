@@ -18,7 +18,8 @@ import {
 } from '@pancakeswap/uikit'
 import { AnyAction, AsyncThunkAction } from '@reduxjs/toolkit'
 import { Token } from '@pancakeswap/sdk'
-
+import { Contract } from '@ethersproject/contracts'
+import { Erc20 } from 'config/abi/types'
 import { useWeb3React } from '@web3-react/core'
 import { REWARD_RATE } from 'state/predictions/config'
 import { fetchNodeHistory, markAsCollected } from 'state/predictions'
@@ -98,7 +99,7 @@ const CollectRoundWinningsModal: React.FC<React.PropsWithChildren<CollectRoundWi
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: isPendingTx } = useCatchTxError()
   const { callWithGasPrice } = useCallWithGasPrice()
-  const predictionsContract = usePredictionsContract(predictionsAddress, token.symbol)
+  const predictionsContract = usePredictionsContract(predictionsAddress, token.symbol) as unknown as Erc20
   const bnbBusdPrice = useBUSDPrice(token)
 
   const { epochs, total } = calculateClaimableRounds(history)

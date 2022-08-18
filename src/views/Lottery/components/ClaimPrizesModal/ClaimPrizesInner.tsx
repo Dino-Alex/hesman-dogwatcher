@@ -15,6 +15,7 @@ import { ToastDescriptionWithTx } from 'components/Toast'
 import useToast from 'hooks/useToast'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { useLotteryV2Contract } from 'hooks/useContract'
+import { Contract } from '@ethersproject/contracts'
 
 interface ClaimInnerProps {
   roundsToClaim: LotteryTicketClaimData[]
@@ -35,7 +36,7 @@ const ClaimInnerContainer: React.FC<React.PropsWithChildren<ClaimInnerProps>> = 
       roundsToClaim[activeClaimIndex].ticketsWithUnclaimedRewards.length / maxNumberTicketsPerBuyOrClaim.toNumber(),
     ),
   )
-  const lotteryContract = useLotteryV2Contract()
+  const lotteryContract = useLotteryV2Contract() as unknown as Contract
   const activeClaimData = roundsToClaim[activeClaimIndex]
 
   const cakePriceBusd = usePriceCakeBusd()

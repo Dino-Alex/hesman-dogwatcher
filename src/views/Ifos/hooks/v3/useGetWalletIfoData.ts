@@ -9,6 +9,7 @@ import { fetchCakeVaultUserData } from 'state/pools'
 import { useAppDispatch } from 'state'
 import { useIfoCredit } from 'state/pools/hooks'
 import { BIG_ZERO } from 'utils/bigNumber'
+import { Contract } from '@ethersproject/contracts'
 import useIfoAllowance from '../useIfoAllowance'
 import { WalletIfoState, WalletIfoData } from '../../types'
 
@@ -54,7 +55,7 @@ const useGetWalletIfoData = (ifo: Ifo): WalletIfoData => {
 
   const { account } = useWeb3React()
   const contract = useIfoV3Contract(address)
-  const currencyContract = useERC20(currency.address, false)
+  const currencyContract = useERC20(currency.address, false) as unknown as Contract
   const allowance = useIfoAllowance(currencyContract, address)
 
   const setPendingTx = (status: boolean, poolId: PoolIds) =>

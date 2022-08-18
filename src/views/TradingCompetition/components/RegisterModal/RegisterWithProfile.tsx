@@ -6,6 +6,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useToast from 'hooks/useToast'
 import useCatchTxError from 'hooks/useCatchTxError'
+import { Erc20 } from 'config/abi/types'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { CompetitionProps } from '../../types'
 
@@ -23,7 +24,7 @@ const RegisterWithProfile: React.FC<React.PropsWithChildren<CompetitionProps>> =
   onRegisterSuccess,
 }) => {
   const [isAcknowledged, setIsAcknowledged] = useState(false)
-  const tradingCompetitionContract = useTradingCompetitionContractMoD()
+  const tradingCompetitionContract = useTradingCompetitionContractMoD() as unknown as Erc20
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: isConfirming } = useCatchTxError()
   const { t } = useTranslation()

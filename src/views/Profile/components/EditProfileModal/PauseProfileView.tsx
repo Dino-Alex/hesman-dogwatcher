@@ -9,6 +9,8 @@ import { useProfileContract } from 'hooks/useContract'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { Contract } from '@ethersproject/contracts'
+import { Erc20 } from 'config/abi/types'
 
 interface PauseProfilePageProps extends InjectedModalProps {
   onSuccess?: () => void
@@ -21,7 +23,7 @@ const PauseProfilePage: React.FC<React.PropsWithChildren<PauseProfilePageProps>>
     costs: { numberCakeToReactivate },
   } = useGetProfileCosts()
   const { t } = useTranslation()
-  const pancakeProfileContract = useProfileContract()
+  const pancakeProfileContract = useProfileContract() as unknown as Erc20
   const { callWithGasPrice } = useCallWithGasPrice()
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: isConfirming } = useCatchTxError()

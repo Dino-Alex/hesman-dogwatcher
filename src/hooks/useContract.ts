@@ -356,25 +356,25 @@ function useContract<T extends Contract = Contract>(
 }
 
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean) {
-  return useContract<Erc20>(tokenAddress, ERC20_ABI, withSignerIfPossible)
+  return useContract<Contract>(tokenAddress, ERC20_ABI, withSignerIfPossible)
 }
 
 export function useWBNBContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
-  return useContract<Weth>(chainId ? WNATIVE[chainId].address : undefined, WETH_ABI, withSignerIfPossible)
+  return useContract<Contract>(chainId ? WNATIVE[chainId].address : undefined, WETH_ABI, withSignerIfPossible)
 }
 
 export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract<Erc20Bytes32>(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
+  return useContract<Contract>(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
 }
 
-export function usePairContract(pairAddress?: string, withSignerIfPossible?: boolean): IPancakePair | null {
-  return useContract(pairAddress, IPancakePairABI, withSignerIfPossible)
+export function usePairContract(pairAddress?: string, withSignerIfPossible?: boolean) {
+  return useContract<Contract>(pairAddress, IPancakePairABI, withSignerIfPossible)
 }
 
 export function useMulticallContract() {
   const { chainId } = useActiveWeb3React()
-  return useContract<Multicall>(getMulticallAddress(chainId), multiCallAbi, false)
+  return useContract<Contract>(getMulticallAddress(chainId), multiCallAbi, false)
 }
 
 export const usePotterytVaultContract = (address) => {
@@ -388,5 +388,5 @@ export const usePotterytDrawContract = () => {
 }
 
 export function useZapContract(withSignerIfPossible = true) {
-  return useContract<Zap>(getZapAddress(), zapAbi, withSignerIfPossible)
+  return useContract<Contract>(getZapAddress(), zapAbi, withSignerIfPossible)
 }

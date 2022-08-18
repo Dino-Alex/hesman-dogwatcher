@@ -10,6 +10,8 @@ import fetchTokenChartData from 'state/info/queries/tokens/chartData'
 import fetchTokenTransactions from 'state/info/queries/tokens/transactions'
 import fetchTokenPriceData from 'state/info/queries/tokens/priceData'
 import fetchPoolsForToken from 'state/info/queries/tokens/poolsForToken'
+import { table } from 'console'
+import { TabletView } from 'react-device-detect'
 import {
   updateProtocolData,
   updateProtocolChartData,

@@ -27,6 +27,8 @@ import { useGetBnbBalance, useGetCakeBalance } from 'hooks/useTokenBalance'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { BetPosition } from 'state/types'
+import { Contract } from '@ethersproject/contracts'
+import { Erc20 } from 'config/abi/types'
 import { formatBigNumber, formatFixedNumber } from 'utils/formatBalance'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import { useConfig } from 'views/Predictions/context/ConfigProvider'
@@ -98,7 +100,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
   const { fetchWithCatchTxError, loading: isTxPending } = useCatchTxError()
   const { callWithGasPrice } = useCallWithGasPrice()
   const { address: predictionsAddress, token } = useConfig()
-  const predictionsContract = usePredictionsContract(predictionsAddress, token.symbol)
+  const predictionsContract = usePredictionsContract(predictionsAddress, token.symbol) as unknown as Erc20
   const useTokenBalance = useMemo(() => {
     return TOKEN_BALANCE_CONFIG[token.symbol]
   }, [token.symbol])

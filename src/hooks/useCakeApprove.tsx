@@ -5,6 +5,7 @@ import useToast from 'hooks/useToast'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { ToastDescriptionWithTx } from 'components/Toast'
+import { Erc20 } from 'config/abi/types'
 
 const useCakeApprove = (setLastUpdated: () => void, spender, successMsg) => {
   const { t } = useTranslation()
@@ -12,10 +13,11 @@ const useCakeApprove = (setLastUpdated: () => void, spender, successMsg) => {
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const { callWithGasPrice } = useCallWithGasPrice()
   const { signer: cakeContract } = useCake()
+  let erc20Var: Erc20
 
   const handleApprove = async () => {
     const receipt = await fetchWithCatchTxError(() => {
-      return callWithGasPrice(cakeContract, 'approve', [spender, MaxUint256])
+      return callWithGasPrice(erc20Var, 'approve', [spender, MaxUint256])
     })
     if (receipt?.status) {
       toastSuccess(

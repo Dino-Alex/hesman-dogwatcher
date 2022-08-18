@@ -5,6 +5,7 @@ import { useEffect, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useSWRConfig } from 'swr'
+import { Erc20 } from 'config/abi/types'
 import { AppState, useAppDispatch } from '../index'
 import {
   addMulticallListeners,

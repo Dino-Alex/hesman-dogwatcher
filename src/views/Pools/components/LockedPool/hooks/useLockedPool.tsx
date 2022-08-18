@@ -12,7 +12,7 @@ import { fetchCakeVaultUserData } from 'state/pools'
 import { Token } from '@pancakeswap/sdk'
 import { ONE_WEEK_DEFAULT, vaultPoolConfig } from 'config/constants/pools'
 import { VaultKey } from 'state/types'
-
+import { Erc20 } from 'config/abi/types'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { PrepConfirmArg } from '../types'
@@ -39,7 +39,7 @@ export default function useLockedPool(hookArgs: HookArgs): HookReturn {
 
   const { account } = useWeb3React()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
-  const vaultPoolContract = useVaultPoolContract(VaultKey.CakeVault)
+  const vaultPoolContract = useVaultPoolContract(VaultKey.CakeVault) as unknown as Erc20
   const { callWithGasPrice } = useCallWithGasPrice()
 
   const { t } = useTranslation()

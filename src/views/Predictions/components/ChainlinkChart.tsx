@@ -15,6 +15,7 @@ import { useGetRoundsByCloseOracleId, useGetSortedRounds } from 'state/predictio
 import styled from 'styled-components'
 import { Flex, Text, FlexProps } from '@pancakeswap/uikit'
 import PairPriceDisplay from 'components/PairPriceDisplay'
+import { Contract } from '@ethersproject/contracts'
 import { NodeRound } from 'state/types'
 import useSwiper from '../hooks/useSwiper'
 import usePollOraclePrice from '../hooks/usePollOraclePrice'
@@ -23,7 +24,7 @@ import { useConfig } from '../context/ConfigProvider'
 
 function useChainlinkLatestRound() {
   const { chainlinkOracleAddress } = useConfig()
-  const chainlinkOracleContract = useChainlinkOracleContract(chainlinkOracleAddress, false)
+  const chainlinkOracleContract = useChainlinkOracleContract(chainlinkOracleAddress, false) as unknown as Contract
   // Can refactor to subscription later
   const lastRound = useSWRContract([chainlinkOracleContract, 'latestRound'], {
     dedupingInterval: 10 * 1000,

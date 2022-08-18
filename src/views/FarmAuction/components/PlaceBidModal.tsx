@@ -20,6 +20,7 @@ import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { bscTokens } from 'config/constants/tokens'
 import { requiresApproval } from 'utils/requiresApproval'
+import { Erc20 } from 'config/abi/types'
 
 const StyledModal = styled(Modal)`
   & > div:nth-child(2) {
@@ -108,7 +109,10 @@ const PlaceBidModal: React.FC<React.PropsWithChildren<PlaceBidModalProps>> = ({
         return requiresApproval(cakeContractReader, account, farmAuctionContract.address)
       },
       onApprove: () => {
-        return callWithGasPrice(cakeContractApprover, 'approve', [farmAuctionContract.address, MaxUint256])
+        return callWithGasPrice(cakeContractApprover as unknown as Erc20, 'approve', [
+          farmAuctionContract.address,
+          MaxUint256,
+        ])
       },
       onApproveSuccess: async ({ receipt }) => {
         toastSuccess(
@@ -118,7 +122,8 @@ const PlaceBidModal: React.FC<React.PropsWithChildren<PlaceBidModalProps>> = ({
       },
       onConfirm: () => {
         const bidAmount = new BigNumber(bid).times(DEFAULT_TOKEN_DECIMAL).toString()
-        return callWithGasPrice(farmAuctionContract, 'bid', [bidAmount])
+        const farmAuctionErc20 = farmAuctionContract as unknown as Erc20
+        return callWithGasPrice(farmAuctionErc20, 'bid', [bidAmount])
       },
       onSuccess: async ({ receipt }) => {
         refreshBidders()

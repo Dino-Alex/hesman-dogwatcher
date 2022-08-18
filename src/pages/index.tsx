@@ -8,6 +8,7 @@ import { getCakeVaultAddress } from 'utils/addressHelpers'
 import { getCakeContract } from 'utils/contractHelpers'
 import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 import { formatEther } from '@ethersproject/units'
+import TokenPage from './info/tokens/[address]'
 import Home from '../views/Home'
 
 const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
@@ -21,7 +22,8 @@ const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
         },
       }}
     >
-      <Home />
+      {/* <Home /> */}
+      <TokenPage address="0xc643e83587818202e0fff5ed96d10abbc8bb48e7" />
     </SWRConfig>
   )
 }

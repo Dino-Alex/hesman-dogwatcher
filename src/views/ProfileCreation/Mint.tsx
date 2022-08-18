@@ -14,6 +14,7 @@ import { ApiSingleTokenData } from 'state/nftMarket/types'
 import { pancakeBunniesAddress } from 'views/Nft/market/constants'
 import { requiresApproval } from 'utils/requiresApproval'
 import { FetchStatus } from 'config/constants/types'
+import { Erc20 } from 'config/abi/types'
 import SelectionCard from './SelectionCard'
 import NextStepButton from './NextStepButton'
 import useProfileCreation from './contexts/hook'
@@ -31,7 +32,7 @@ const Mint: React.FC<React.PropsWithChildren> = () => {
 
   const { account } = useWeb3React()
   const { reader: cakeContractReader, signer: cakeContractApprover } = useCake()
-  const bunnyFactoryContract = useBunnyFactory()
+  const bunnyFactoryContract = useBunnyFactory() as unknown as Erc20
   const { t } = useTranslation()
   const { balance: cakeBalance, fetchStatus } = useGetCakeBalance()
   const hasMinimumCakeRequired = fetchStatus === FetchStatus.Fetched && cakeBalance.gte(MINT_COST)
@@ -61,7 +62,10 @@ const Mint: React.FC<React.PropsWithChildren> = () => {
         return requiresApproval(cakeContractReader, account, bunnyFactoryContract.address, minimumCakeRequired)
       },
       onApprove: () => {
-        return callWithGasPrice(cakeContractApprover, 'approve', [bunnyFactoryContract.address, allowance.toString()])
+        return callWithGasPrice(cakeContractApprover as unknown as Erc20, 'approve', [
+          bunnyFactoryContract.address,
+          allowance.toString(),
+        ])
       },
       onConfirm: () => {
         return callWithGasPrice(bunnyFactoryContract, 'mintNFT', [selectedBunnyId])

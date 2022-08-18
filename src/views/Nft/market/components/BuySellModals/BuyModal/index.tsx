@@ -17,6 +17,7 @@ import { requiresApproval } from 'utils/requiresApproval'
 import useToast from 'hooks/useToast'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import { NftToken } from 'state/nftMarket/types'
+import { Erc20 } from 'config/abi/types'
 import { StyledModal } from './styles'
 import ReviewStage from './ReviewStage'
 import ConfirmStage from '../shared/ConfirmStage'
@@ -51,7 +52,7 @@ const BuyModal: React.FC<React.PropsWithChildren<BuyModalProps>> = ({ nftToBuy, 
   const wbnbAddress = chainId === ChainId.BSC_TESTNET ? TESTNET_WBNB_NFT_ADDRESS : bscTokens.wbnb.address
   const wbnbContractReader = useERC20(wbnbAddress, false)
   const wbnbContractApprover = useERC20(wbnbAddress)
-  const nftMarketContract = useNftMarketContract()
+  const nftMarketContract = useNftMarketContract() as unknown as Erc20
 
   const { toastSuccess } = useToast()
 

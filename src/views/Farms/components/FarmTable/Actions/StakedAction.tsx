@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import { useAppDispatch } from 'state'
 import { fetchFarmUserDataAsync } from 'state/farms'
+import { Contract } from '@ethersproject/contracts'
 import { useFarmUser, useLpTokenPrice, usePriceCakeBusd } from 'state/farms/hooks'
 import styled from 'styled-components'
 import { getAddress } from 'utils/addressHelpers'
@@ -117,7 +118,7 @@ const Staked: React.FunctionComponent<React.PropsWithChildren<StackedActionProps
   const [onPresentWithdraw] = useModal(
     <WithdrawModal max={stakedBalance} onConfirm={handleUnstake} tokenName={lpSymbol} />,
   )
-  const lpContract = useERC20(lpAddress)
+  const lpContract = useERC20(lpAddress) as unknown as Contract
   const dispatch = useAppDispatch()
   const { onApprove } = useApproveFarm(lpContract)
 

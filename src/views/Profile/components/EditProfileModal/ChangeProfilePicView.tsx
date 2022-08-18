@@ -12,6 +12,8 @@ import { getPancakeProfileAddress } from 'utils/addressHelpers'
 import { ToastDescriptionWithTx } from 'components/Toast'
 import ApproveConfirmButtons from 'components/ApproveConfirmButtons'
 import SelectionCard from 'views/ProfileCreation/SelectionCard'
+import { Contract } from '@ethersproject/contracts'
+import { Erc20 } from 'config/abi/types'
 import { useApprovalNfts } from 'state/nftMarket/hooks'
 import { NftLocation } from 'state/nftMarket/types'
 import { useNftsForAddress } from '../../../Nft/market/hooks/useNftsForAddress'
@@ -32,7 +34,7 @@ const ChangeProfilePicPage: React.FC<React.PropsWithChildren<ChangeProfilePicPag
   const { account, library } = useWeb3React()
   const { isLoading: isProfileLoading, profile, refresh: refreshProfile } = useProfile()
   const { nfts, isLoading } = useNftsForAddress(account, profile, isProfileLoading)
-  const profileContract = useProfileContract()
+  const profileContract = useProfileContract() as unknown as Erc20
   const { toastSuccess } = useToast()
   const { callWithGasPrice } = useCallWithGasPrice()
   const nftsInWallet = useMemo(() => nfts.filter((nft) => nft.location === NftLocation.WALLET), [nfts])
@@ -46,7 +48,7 @@ const ChangeProfilePicPage: React.FC<React.PropsWithChildren<ChangeProfilePicPag
   const { isApproving, isApproved, isConfirmed, isConfirming, handleApprove, handleConfirm } =
     useApproveConfirmTransaction({
       onApprove: () => {
-        const contract = getErc721Contract(selectedNft.collectionAddress, library.getSigner())
+        const contract = getErc721Contract(selectedNft.collectionAddress, library.getSigner()) as unknown as Erc20
 
         return callWithGasPrice(contract, 'approve', [getPancakeProfileAddress(), selectedNft.tokenId])
       },

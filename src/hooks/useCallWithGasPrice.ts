@@ -4,6 +4,7 @@ import { Contract, CallOverrides } from '@ethersproject/contracts'
 import { useGasPrice } from 'state/user/hooks'
 import get from 'lodash/get'
 import * as Sentry from '@sentry/react'
+import { Erc20 } from 'config/abi/types'
 
 export function useCallWithGasPrice() {
   const gasPrice = useGasPrice()
@@ -18,7 +19,7 @@ export function useCallWithGasPrice() {
    */
   const callWithGasPrice = useCallback(
     async (
-      contract: Contract,
+      contract: Erc20,
       methodName: string,
       methodArgs: any[] = [],
       overrides: CallOverrides = null,
