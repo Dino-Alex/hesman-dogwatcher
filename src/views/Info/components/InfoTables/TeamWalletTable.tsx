@@ -93,12 +93,18 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => (
 )
 
 const DataRow = () => {
+  const [walletInfo, setWalletInfo] = useState([])
+  const [walletAddresses, setWalletAddresses] = useState([])
   const [tokenBalances, setTokenBalances] = useState({ tokenBalanceVal: [0] })
+  const tokenAuth = localStorage.getItem('token')
   useEffect(() => {
     const getSaleItems = async () => {
       try {
-        const result = await FetchTokenBalance()
-        setTokenBalances(result)
+        if (walletAddresses.length > 0) {
+          const result = await FetchTokenBalance(walletAddresses)
+          console.log(result)
+          setTokenBalances(result)
+        }
       } catch (e) {
         console.log(e)
       }

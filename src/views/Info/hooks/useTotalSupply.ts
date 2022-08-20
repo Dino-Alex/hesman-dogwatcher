@@ -2,17 +2,10 @@ import multicall from 'utils/multicall'
 import BigNumber from 'bignumber.js'
 import erc20Abi from '../abis/ERC20abi.json'
 
-const TEAMS = [
-  '0x3bb2b2455356de1cd8c91030b1864210c5ddc7f1',
-  '0x92d47b6e3dce6471f42021db650a611af4257771',
-  '0xa3438081956b35d5c23203197360f7b082cc4c9d',
-  '0xbc8aa54b5ccb8c6a306c07d8c70a9623970e160f',
-]
-
-export const FetchTokenBalance = async (): Promise<{ tokenBalanceVal: number[] }> => {
+export const FetchTokenBalance = async (addresses: string[]): Promise<{ tokenBalanceVal: number[] }> => {
   try {
     const calls = []
-    TEAMS.forEach((teams) => {
+    addresses.forEach((teams) => {
       calls.push({
         address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
         name: 'balanceOf',
@@ -58,10 +51,10 @@ export const fetchTotalSuppy = async (): Promise<{ totalSupply: number }> => {
   }
 }
 
-export const FetchCirculatingSupply = async (): Promise<{ circulatingSupply: number }> => {
+export const FetchCirculatingSupply = async (addresses: string[]): Promise<{ circulatingSupply: number }> => {
   try {
     const calls = []
-    TEAMS.forEach((teams) => {
+    addresses.forEach((teams) => {
       calls.push({
         address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
         name: 'balanceOf',

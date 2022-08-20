@@ -115,12 +115,25 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
     getSaleItems()
   }, [])
 
+  const [walletAddresses, setWalletAddresses] = useState([])
+  const [walletInfo, setWalletInfo] = useState([])
   const [circulatingSupplyDisplay, setCirculatingSupplyDisplay] = useState({ circulatingSupply: 0 })
+
+  // // useEffect(() => {
+  // //     getProductClient.get('').then((response) => {
+  // //       setWalletInfo(response.data.products)
+  // //       const addresses = response.data.products.map(wallet => wallet.address);
+  // //       setWalletAddresses(addresses);
+  // //       console.log("walletAddress", addresses)
+  // //     })
+  //   }, []);
   useEffect(() => {
     const getCirculatingSupplyDisplay = async () => {
       try {
-        const result = await FetchCirculatingSupply()
-        setCirculatingSupplyDisplay(result)
+        if (walletAddresses.length > 0) {
+          const result = await FetchCirculatingSupply(walletAddresses)
+          setCirculatingSupplyDisplay(result)
+        }
       } catch (e) {
         console.log(e)
       }
