@@ -44,6 +44,7 @@ import store from 'store'
 import { FetchCirculatingSupply, fetchTotalSuppy } from '../hooks/useTotalSupply'
 import TeamWalletTable from '../components/InfoTables/TeamWalletTable'
 import { productsReducer } from '../reducers/productReducers'
+import { getProductClient } from '../components/InfoTables/config'
 
 const ContentLayout = styled.div`
   margin-top: 16px;
@@ -119,14 +120,15 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
   const [walletInfo, setWalletInfo] = useState([])
   const [circulatingSupplyDisplay, setCirculatingSupplyDisplay] = useState({ circulatingSupply: 0 })
 
-  // // useEffect(() => {
-  // //     getProductClient.get('').then((response) => {
-  // //       setWalletInfo(response.data.products)
-  // //       const addresses = response.data.products.map(wallet => wallet.address);
-  // //       setWalletAddresses(addresses);
-  // //       console.log("walletAddress", addresses)
-  // //     })
-  //   }, []);
+  useEffect(() => {
+    getProductClient.get('').then((response) => {
+      setWalletInfo(response.data.products)
+      const addresses = response.data.products.map((wallet) => wallet.address)
+      setWalletAddresses(addresses)
+      console.log('walletAddress', addresses)
+    })
+  }, [])
+
   useEffect(() => {
     const getCirculatingSupplyDisplay = async () => {
       try {
@@ -139,7 +141,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       }
     }
     getCirculatingSupplyDisplay()
-  }, [])
+  }, [walletAddresses])
 
   return (
     // <Provider store={store}>
@@ -279,7 +281,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
             {/* pools and transaction tables */}
 
             <Heading scale="lg" mb="16px" mt="40px">
-              {t('Teams Wallets')}
+              {t('Team Wallets')}
             </Heading>
 
             <TeamWalletTable poolDatas={poolDatas} />

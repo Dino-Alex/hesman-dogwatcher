@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useMemo, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import { Backdrop, Box, Fade, Grid, IconButton, Modal, Stack, Tooltip, Typography } from '@mui/material'
+import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import styled from 'styled-components'
 import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Text, Flex, Skeleton, ArrowBackIcon, ArrowForwardIcon } from '@pancakeswap/uikit'
+import { ArrowBackIcon, ArrowForwardIcon, Button, Flex, Skeleton, Text } from '@pancakeswap/uikit'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
@@ -344,7 +345,42 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
         >
           {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
         </ClickableColumnHeader>
+        <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+          {t('Action')}
+        </ClickableColumnHeader>
+        {tokenAuth !== null && isLogOut ? (
+          <>
+            <Button onClick={() => handleClickCreate()}>{t('Create')}</Button>
+            <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
+          </>
+        ) : (
+          <>
+            <Button onClick={() => handleClickLogIn()}>{t('LOGIN')}</Button>
+          </>
+        )}
       </ResponsiveGrid>
+      <Grid>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <CustomBox sx={style}>
+              <Typography id="transition-modal-title" variant="h2" component="h2">
+                Create TEAM
+              </Typography>
+              <ModalCreate onRefresh={(newValue) => setOpen(newValue)} />
+            </CustomBox>
+          </Fade>
+        </Modal>
+      </Grid>
       <Break />
       {sortedPools.length > 0 ? (
         <>
