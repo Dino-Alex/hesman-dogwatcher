@@ -1,29 +1,19 @@
-import { useCallback, useState, useMemo, useEffect, Fragment } from 'react'
+import React, { useCallback, useState, useMemo, useEffect, Fragment } from 'react'
+import axios from 'axios'
+
 import styled from 'styled-components'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Text, Flex, Box, Skeleton, ArrowBackIcon, ArrowForwardIcon } from '@pancakeswap/uikit'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { PoolData } from 'state/info/types'
+import { useRouter } from 'next/router'
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
 import { DoubleCurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { useTranslation } from '@pancakeswap/localization'
 import { ClickableColumnHeader, TableWrapper, PageButtons, Arrow, Break } from './shared'
+import { getProductClient, deleteProductClient, updateProductClient } from './config'
 import datas from './data.json'
 import { FetchTokenBalance, fetchTotalSuppy } from '../../hooks/useTotalSupply'
-
-/**
- *  Columns on different layouts
- *  5 = | # | Pool | TVL | Volume 24H | Volume 7D |
- *  4 = | # | Pool |     | Volume 24H | Volume 7D |
- *  3 = | # | Pool |     | Volume 24H |           |
- *  2 = |   | Pool |     | Volume 24H |           |
- */
-const TEAMS = [
-  { name: 'Team 1', address: '0x3bb2b2455356de1cd8c91030b1864210c5ddc7f1' },
-  { name: 'Team 2', address: '0x92d47b6e3dce6471f42021db650a611af4257771' },
-  { name: 'Team 3', address: '0xa3438081956b35d5c23203197360f7b082cc4c9d' },
-  { name: 'Team 4', address: '0xbc8aa54b5ccb8c6a306c07d8c70a9623970e160f' },
-]
 
 const ResponsiveGrid = styled.div`
   display: grid;
@@ -110,7 +100,7 @@ const DataRow = () => {
       }
     }
     getSaleItems()
-  }, [])
+  }, [walletAddresses])
   console.log('tokenBalances', tokenBalances.tokenBalanceVal[1])
 
   function sAccount(dataAddress: string) {
@@ -120,22 +110,58 @@ const DataRow = () => {
     return ''
   }
 
-  return (TEAMS as any).map((data, index) => {
-    return (
-      <ResponsiveGrid>
-        <Text>{index + 1}</Text>
-        <Flex>
-          <Text ml="8px">{TEAMS[index].name}</Text>
-        </Flex>
-        <Flex>
-          <Text ml="8px">{sAccount(TEAMS[index].address)}</Text>
-        </Flex>
-        <Flex>
-          <Text>{Math.round(tokenBalances.tokenBalanceVal[index])}</Text>
-        </Flex>
-      </ResponsiveGrid>
+  // OpenModal
+  const [open, setOpen] = React.useState(false)
+  const handleClose = () => setOpen(false)
+  const [ID, setID] = useState(0)
+  const [posts, setPosts] = useState([])
+
+  function handleClickUpdate(id, e) {
+    setOpen(true)
+    setID(id)
+  }
+  const deletePost = async (id, e) => {
+    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `${tokenAuth}`,
+      },
+    })
+    setPosts(
+      posts.filter((post) => {
+        return post.id !== id
+      }),
     )
-  })
+  }
+
+  useEffect(() => {
+    getProductClient.get('').then((response) => {
+      setWalletInfo(response.data.products)
+      const addresses = response.data.products.map((wallet) => wallet.address)
+      setWalletAddresses(addresses)
+    })
+  }, [posts])
+
+  return (
+    <>
+      {walletInfo.map((data, index) => {
+        return (
+          <ResponsiveGrid>
+            <Text>{index + 1}</Text>
+            <Flex>
+              <Text ml="8px">{data.name}</Text>
+            </Flex>
+            <Flex>
+              <Text ml="8px">{sAccount(data.address)}</Text>
+            </Flex>
+            <Flex>
+              <Text>{Math.round(tokenBalances.tokenBalanceVal[index])}</Text>
+            </Flex>
+          </ResponsiveGrid>
+        )
+      })}
+    </>
+  )
 }
 
 interface PoolTableProps {
@@ -190,6 +216,48 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
     },
     [sortDirection, sortField],
   )
+
+  // Open Modal Create
+  const [open, setOpen] = React.useState(false)
+  const handleClose = () => setOpen(false)
+
+  function handleClickCreate() {
+    setOpen(true)
+  }
+
+  const [isLogOut, setLogOut] = useState(true)
+
+  async function handleClickLogOut() {
+    const tokenAuth = localStorage.getItem('token')
+    await axios.get('https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/products', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `${tokenAuth}`,
+      },
+    })
+    localStorage.removeItem('token')
+    setLogOut(false)
+  }
+
+  const router = useRouter()
+  function handleClickLogIn() {
+    router.push('/login')
+  }
+
+  const style = {
+    borderRadius: '10px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
+
+  const tokenAuth = localStorage.getItem('token')
 
   return (
     <TableWrapper>
