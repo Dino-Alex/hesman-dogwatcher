@@ -1,9 +1,10 @@
 import React, { useCallback, useState, useMemo, useEffect, Fragment } from 'react'
 import axios from 'axios'
-
+import { Backdrop, Box, Fade, Grid, IconButton, Modal, Stack, Tooltip, Typography } from '@mui/material'
+import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import styled from 'styled-components'
 import { NextLinkFromReactRouter } from 'components/NextLink'
-import { Text, Flex, Box, Skeleton, ArrowBackIcon, ArrowForwardIcon } from '@pancakeswap/uikit'
+import { Text, Flex, Skeleton, ArrowBackIcon, ArrowForwardIcon } from '@pancakeswap/uikit'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
@@ -134,6 +135,19 @@ const DataRow = () => {
     )
   }
 
+  const style = {
+    borderRadius: '10px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  }
+
   useEffect(() => {
     getProductClient.get('').then((response) => {
       setWalletInfo(response.data.products)
@@ -157,6 +171,50 @@ const DataRow = () => {
             <Flex>
               <Text>{Math.round(tokenBalances.tokenBalanceVal[index])}</Text>
             </Flex>
+            {tokenAuth !== null ? (
+              <>
+                <Flex>
+                  <Stack direction="row" justifyContent="center" alignItems="center">
+                    <Tooltip placement="top" title="Update" onClick={(e) => handleClickUpdate(data._id, e)}>
+                      <IconButton color="primary" aria-label="delete" size="large">
+                        {/* <EditOffIcon sx={{ fontSize: '2rem' }}
+                  /> */}
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip placement="top" title="Delete" onClick={(e) => deletePost(data._id, e)}>
+                      <IconButton color="primary" size="large">
+                        {/* <DeleteIcon sx={{ fontSize: '2rem' }} /> */}
+                      </IconButton>
+                    </Tooltip>
+                  </Stack>
+                </Flex>
+              </>
+            ) : (
+              <></>
+            )}
+
+            <Grid>
+              <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                  timeout: 500,
+                }}
+              >
+                <Fade in={open}>
+                  <CustomBox sx={style}>
+                    <Typography id="transition-modal-title" variant="h2" component="h2">
+                      Update TEAM
+                    </Typography>
+                    <ModalUpdate id={ID} />
+                  </CustomBox>
+                </Fade>
+              </Modal>
+            </Grid>
           </ResponsiveGrid>
         )
       })}
@@ -334,3 +392,15 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
 }
 
 export default TeamWalletTable
+
+const CustomBox = styled(Box)`
+  @media screen and (max-width: 600px) {
+    width: 95%;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 95%;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 95%;
+  }
+`
