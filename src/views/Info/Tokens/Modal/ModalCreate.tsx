@@ -22,7 +22,7 @@ const ModalCreate: React.FC<Proptype> = ({ onRefresh }) => {
       const resp = await axios
         .post(
           addProductClient,
-          { name: name, address: address, limit: limit },
+          { name, address, limit },
           {
             headers: {
               'Content-Type': 'application/json',

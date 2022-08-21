@@ -21,7 +21,7 @@ const ModalUpdate = (id: any) => {
     await axios
       .put(
         `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`,
-        { name: name, address: address, limit: limit },
+        { name, address, limit },
         {
           headers: {
             'Content-Type': 'application/json',
