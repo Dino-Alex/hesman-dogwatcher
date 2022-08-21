@@ -1,8 +1,28 @@
 import { Button, Flex, Input, InputGroup, Text } from '@pancakeswap/uikit'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { loginClient } from 'views/Info/components/InfoTables/config'
 
 const Login = () => {
+  const router = useRouter()
+  const [userName, setUserName] = useState('')
+  const [passWord, setPassWord] = useState('')
+  const [posts, setPosts] = useState([])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const resp = await loginClient.post('', { name: userName, password: passWord }).then((response) => {
+        setPosts([response.data, ...posts])
+        localStorage.setItem('token', response.data.token)
+        router.push('/')
+      })
+      // onRefresh(false);
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <Container>
       <FormLogin>
@@ -13,25 +33,25 @@ const Login = () => {
           <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
             <Flex width="100%" justifyContent="center" alignItems="center">
               <Flex width="30%">
-                <Text>Tài Khoản</Text>
+                <Text>Username</Text>
               </Flex>
               <Flex width="70%">
-                <Input />
+                <Input value={userName} onChange={(e) => setUserName(e.target.value)} />
               </Flex>
             </Flex>
           </Flex>
           <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
             <Flex width="100%" justifyContent="center" alignItems="center">
               <Flex width="30%">
-                <Text>Mật Khẩu</Text>
+                <Text>Password</Text>
               </Flex>
               <Flex width="70%">
-                <Input />
+                <Input value={passWord} onChange={(e) => setPassWord(e.target.value)} type="password" />
               </Flex>
             </Flex>
           </Flex>
           <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
-            <Button>Login</Button>
+            <Button onClick={handleSubmit}>Login</Button>
           </Flex>
         </Flex>
       </FormLogin>
