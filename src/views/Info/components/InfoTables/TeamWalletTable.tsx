@@ -5,6 +5,7 @@ import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import styled from 'styled-components'
 import { NextLinkFromReactRouter } from 'components/NextLink'
+import { FcDataBackup, FcDeleteDatabase } from 'react-icons/fc'
 import { ArrowBackIcon, ArrowForwardIcon, Button, Flex, Skeleton, Text } from '@pancakeswap/uikit'
 import { formatAmount } from 'utils/formatInfoNumbers'
 import { PoolData } from 'state/info/types'
@@ -180,11 +181,13 @@ const DataRow = () => {
                       <IconButton color="primary" aria-label="delete" size="large">
                         {/* <EditOffIcon sx={{ fontSize: '2rem' }}
                   /> */}
+                        <FcDataBackup />
                       </IconButton>
                     </Tooltip>
                     <Tooltip placement="top" title="Delete" onClick={(e) => deletePost(data._id, e)}>
                       <IconButton color="primary" size="large">
                         {/* <DeleteIcon sx={{ fontSize: '2rem' }} /> */}
+                        <FcDeleteDatabase />
                       </IconButton>
                     </Tooltip>
                   </Stack>

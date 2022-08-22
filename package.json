@@ -88,6 +88,7 @@
     "react-datepicker": "^4.8.0",
     "react-device-detect": "^2.1.2",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "react-markdown": "^6.0.2",
     "react-redux": "^8.0.2",
     "react-transition-group": "^4.4.1",
