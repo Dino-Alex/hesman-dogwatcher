@@ -156,7 +156,7 @@ const DataRow = () => {
       const addresses = response.data.products.map((wallet) => wallet.address)
       setWalletAddresses(addresses)
     })
-  }, [posts])
+  }, [posts, ID])
 
   return (
     <>

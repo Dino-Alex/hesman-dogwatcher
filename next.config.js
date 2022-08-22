@@ -91,9 +91,9 @@ const config = {
   async redirects() {
     return [
       {
-        source: '/send',
-        destination: '/swap',
-        permanent: true,
+        source: '/',
+        destination: '/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        permanent: false,
       },
       {
         source: '/swap/:outputCurrency',

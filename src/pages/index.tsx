@@ -13,18 +13,10 @@ import Home from '../views/Home'
 
 const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
   return (
-    <SWRConfig
-      value={{
-        fallback: {
-          totalTx30Days,
-          addressCount30Days,
-          tvl,
-        },
-      }}
-    >
+    <>
       {/* <Home /> */}
       <TokenPage address="0xc643e83587818202e0fff5ed96d10abbc8bb48e7" />
-    </SWRConfig>
+    </>
   )
 }
 
