@@ -7,7 +7,7 @@ export const InfoPageLayout = ({ children }) => {
       <ProtocolUpdater />
       <PoolUpdater />
       <TokenUpdater />
-      <InfoNav />
+      {/* <InfoNav /> */}
       {children}
     </>
   )

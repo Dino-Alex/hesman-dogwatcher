@@ -4,19 +4,18 @@ import { Backdrop, Box, Fade, Grid, IconButton, Modal, Stack, Tooltip, Typograph
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import styled from 'styled-components'
-import { NextLinkFromReactRouter } from 'components/NextLink'
 import { FcDataBackup, FcDeleteDatabase } from 'react-icons/fc'
-import { ArrowBackIcon, ArrowForwardIcon, Button, Flex, Skeleton, Text } from '@pancakeswap/uikit'
-import { formatAmount } from 'utils/formatInfoNumbers'
+import { ArrowBackIcon, ArrowForwardIcon, Button, Flex, Skeleton, Text, useModal, Link } from '@pancakeswap/uikit'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
+import useTheme from 'hooks/useTheme'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { getBscScanLink } from 'utils'
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
-import { DoubleCurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { useTranslation } from '@pancakeswap/localization'
 import { ClickableColumnHeader, TableWrapper, PageButtons, Arrow, Break } from './shared'
-import { getProductClient, deleteProductClient, updateProductClient } from './config'
-import datas from './data.json'
-import { FetchTokenBalance, fetchTotalSuppy } from '../../hooks/useTotalSupply'
+import { getProductClient } from './config'
+import { FetchTokenBalance } from '../../hooks/useTotalSupply'
 
 const ResponsiveGrid = styled.div`
   display: grid;
@@ -49,14 +48,6 @@ const ResponsiveGrid = styled.div`
   }
 `
 
-const LinkWrapper = styled(NextLinkFromReactRouter)`
-  text-decoration: none;
-  :hover {
-    cursor: pointer;
-    opacity: 0.7;
-  }
-`
-
 const SORT_FIELD = {
   volumeUSD: 'volumeUSD',
   liquidityUSD: 'liquidityUSD',
@@ -84,12 +75,52 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => (
     <LoadingRow />
   </>
 )
-
+const Refresh = []
 const DataRow = () => {
   const [walletInfo, setWalletInfo] = useState([])
+  const { isDark } = useTheme()
   const [walletAddresses, setWalletAddresses] = useState([])
   const [tokenBalances, setTokenBalances] = useState({ tokenBalanceVal: [0] })
   const tokenAuth = localStorage.getItem('token')
+
+  const style = {
+    borderRadius: '10px',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '80%',
+    bgcolor: 'background.paper',
+    border: isDark ? '2px solid #000' : '2px solid #fff',
+    background: isDark ? '#27262C' : '#fff',
+    boxShadow: 24,
+    p: 4,
+  }
+
+  // OpenModal
+  const [open, setOpen] = React.useState(false)
+  const handleClose = () => setOpen(false)
+  const [ID, setID] = useState(0)
+  const [posts, setPosts] = useState([])
+  const { chainId } = useActiveWeb3React()
+
+  function handleClickUpdate(id) {
+    setOpen(true)
+    setID(id)
+  }
+  const deletePost = async (id) => {
+    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `${tokenAuth}`,
+      },
+    })
+    setPosts(
+      posts.filter((post) => {
+        return post.id !== id
+      }),
+    )
+  }
   useEffect(() => {
     const getSaleItems = async () => {
       try {
@@ -104,7 +135,6 @@ const DataRow = () => {
     }
     getSaleItems()
   }, [walletAddresses])
-  console.log('tokenBalances', tokenBalances.tokenBalanceVal[1])
 
   function sAccount(dataAddress: string) {
     if (dataAddress) {
@@ -113,50 +143,13 @@ const DataRow = () => {
     return ''
   }
 
-  // OpenModal
-  const [open, setOpen] = React.useState(false)
-  const handleClose = () => setOpen(false)
-  const [ID, setID] = useState(0)
-  const [posts, setPosts] = useState([])
-
-  function handleClickUpdate(id, e) {
-    setOpen(true)
-    setID(id)
-  }
-  const deletePost = async (id, e) => {
-    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        token: `${tokenAuth}`,
-      },
-    })
-    setPosts(
-      posts.filter((post) => {
-        return post.id !== id
-      }),
-    )
-  }
-
-  const style = {
-    borderRadius: '10px',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  }
-
   useEffect(() => {
     getProductClient.get('').then((response) => {
       setWalletInfo(response.data.products)
       const addresses = response.data.products.map((wallet) => wallet.address)
       setWalletAddresses(addresses)
     })
-  }, [posts, ID])
+  }, [posts, ID, open, Refresh.length])
 
   return (
     <>
@@ -165,7 +158,12 @@ const DataRow = () => {
           <ResponsiveGrid>
             <Text>{index + 1}</Text>
             <Flex>
-              <Text ml="8px">{data.name}</Text>
+              {/* <Text ml="8px">
+              {data.name}
+            </Text> */}
+              <Link href={getBscScanLink(data.address, 'address', chainId)} external>
+                {data.name}
+              </Link>
             </Flex>
             <Flex>
               <Text ml="8px">{sAccount(data.address)}</Text>
@@ -177,16 +175,13 @@ const DataRow = () => {
               <>
                 <Flex>
                   <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Tooltip placement="top" title="Update" onClick={(e) => handleClickUpdate(data._id, e)}>
+                    <Tooltip placement="top" title="Update" onClick={() => handleClickUpdate(data._id)}>
                       <IconButton color="primary" aria-label="delete" size="large">
-                        {/* <EditOffIcon sx={{ fontSize: '2rem' }}
-                  /> */}
                         <FcDataBackup />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip placement="top" title="Delete" onClick={(e) => deletePost(data._id, e)}>
+                    <Tooltip placement="top" title="Delete" onClick={() => deletePost(data._id)}>
                       <IconButton color="primary" size="large">
-                        {/* <DeleteIcon sx={{ fontSize: '2rem' }} /> */}
                         <FcDeleteDatabase />
                       </IconButton>
                     </Tooltip>
@@ -208,10 +203,13 @@ const DataRow = () => {
                 BackdropProps={{
                   timeout: 500,
                 }}
+                sx={{
+                  background: isDark ? '#000' : '#fff',
+                }}
               >
                 <Fade in={open}>
                   <CustomBox sx={style}>
-                    <Typography id="transition-modal-title" variant="h2" component="h2">
+                    <Typography id="transition-modal-title" variant="h3" component="h2">
                       Update TEAM
                     </Typography>
                     <ModalUpdate id={ID} />
@@ -232,6 +230,24 @@ interface PoolTableProps {
 }
 
 const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ poolDatas, loading }) => {
+  const [isLogOut, setLogOut] = useState(true)
+  const router = useRouter()
+  function handleClickLogIn() {
+    router.push('/login')
+  }
+
+  async function handleClickLogOut() {
+    const tokenAuth = localStorage.getItem('token')
+    await axios.get('https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/products', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `${tokenAuth}`,
+      },
+    })
+    localStorage.removeItem('token')
+    setLogOut(false)
+  }
+
   // for sorting
   const [sortField, setSortField] = useState(SORT_FIELD.volumeUSD)
   const [sortDirection, setSortDirection] = useState<boolean>(true)
@@ -280,44 +296,9 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   )
 
   // Open Modal Create
-  const [open, setOpen] = React.useState(false)
-  const handleClose = () => setOpen(false)
 
-  function handleClickCreate() {
-    setOpen(true)
-  }
-
-  const [isLogOut, setLogOut] = useState(true)
-
-  async function handleClickLogOut() {
-    const tokenAuth = localStorage.getItem('token')
-    await axios.get('https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/products', {
-      headers: {
-        'Content-Type': 'application/json',
-        token: `${tokenAuth}`,
-      },
-    })
-    localStorage.removeItem('token')
-    setLogOut(false)
-  }
-
-  const router = useRouter()
-  function handleClickLogIn() {
-    router.push('/login')
-  }
-
-  const style = {
-    borderRadius: '10px',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  }
+  const [refresh, setRefresh] = useState(0)
+  const [handleClickCreate] = useModal(<ModalCreate onRefresh={(newValue) => Refresh.push(newValue)} />)
 
   const tokenAuth = localStorage.getItem('token')
 
@@ -362,32 +343,11 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
           </>
         )}
       </ResponsiveGrid>
-      <Grid>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={open}
-          onClose={handleClose}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={open}>
-            <CustomBox sx={style}>
-              <Typography id="transition-modal-title" variant="h2" component="h2">
-                Create TEAM
-              </Typography>
-              <ModalCreate onRefresh={(newValue) => setOpen(newValue)} />
-            </CustomBox>
-          </Fade>
-        </Modal>
-      </Grid>
+
       <Break />
       {sortedPools.length > 0 ? (
         <>
-          {sortedPools.map((poolData, i) => {
+          {sortedPools.map((poolData) => {
             if (poolData) {
               return (
                 <Fragment key={poolData.address}>

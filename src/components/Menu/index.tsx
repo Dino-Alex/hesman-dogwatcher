@@ -44,7 +44,7 @@ const Menu = (props) => {
         <>
           <GlobalSettings mode={SettingsMode.GLOBAL} />
           <NetworkSwitcher />
-          <UserMenu />
+          {/* <UserMenu /> */}
         </>
       }
       // banner={showPhishingWarningBanner && typeof window !== 'undefined' && <PhishingWarningBanner />}

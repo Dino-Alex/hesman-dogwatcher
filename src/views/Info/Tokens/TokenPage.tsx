@@ -162,7 +162,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
           <>
             {/* Stuff on top */}
             <Flex justifyContent="space-between" mb="24px" flexDirection={['column', 'column', 'row']}>
-              <Breadcrumbs mb="32px">
+              {/* <Breadcrumbs mb="32px">
                 <NextLinkFromReactRouter to="/info">
                   <Text color="primary">{t('Info')}</Text>
                 </NextLinkFromReactRouter>
@@ -173,7 +173,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   <Text mr="8px">{tokenData.symbol}</Text>
                   <Text>{`(${truncateHash(address)})`}</Text>
                 </Flex>
-              </Breadcrumbs>
+              </Breadcrumbs> */}
               <Flex justifyContent={[null, null, 'flex-end']} mt={['8px', '8px', 0]}>
                 <LinkExternal mr="8px" color="primary" href={getBscScanLink(address, 'address')}>
                   {t('View on BscScan')}
@@ -210,7 +210,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   <Percent value={tokenData.priceUSDChange} fontWeight={600} />
                 </Flex>
               </Flex>
-              <Flex>
+              {/* <Flex>
                 <NextLinkFromReactRouter to={`/add/${address}`}>
                   <Button mr="8px" variant="secondary">
                     {t('Add Liquidity')}
@@ -219,9 +219,8 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                 <NextLinkFromReactRouter to={`/swap?inputCurrency=${address}`}>
                   <Button>{t('Trade')}</Button>
                 </NextLinkFromReactRouter>
-              </Flex>
+              </Flex> */}
             </Flex>
-
             {/* data on the right side of chart */}
             <ContentLayout>
               <Card>
