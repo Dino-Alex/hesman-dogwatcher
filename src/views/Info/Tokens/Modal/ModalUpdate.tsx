@@ -12,7 +12,7 @@ const ModalUpdate = (id: any) => {
   const [walletInfo, setWalletInfo] = useState('')
   const tokenAuth = localStorage.getItem('token')
 
-  getSingleProductClient.get(`${id}`).then((response) => {
+  getSingleProductClient.get(`${id.id}`).then((response) => {
     setWalletInfo(response.data.product)
     console.log('walletInfo', walletInfo)
   })
@@ -20,7 +20,7 @@ const ModalUpdate = (id: any) => {
     console.log('id', id)
     await axios
       .put(
-        `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`,
+        `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id.id}`,
         { name, address, limit },
         {
           headers: {
