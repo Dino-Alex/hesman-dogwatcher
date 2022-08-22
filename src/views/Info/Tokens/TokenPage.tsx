@@ -224,11 +224,11 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
             {/* data on the right side of chart */}
             <ContentLayout>
               <Card>
-                <Box p="24px">
+                <Box p="30px">
                   <Text bold small color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Liquidity')}
                   </Text>
-                  <Text bold fontSize="24px">
+                  <Text bold fontSize="15px">
                     ${formatAmount(tokenData.liquidityUSD)}
                   </Text>
                   <Percent value={tokenData.liquidityUSDChange} />
@@ -236,7 +236,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Volume 24H')}
                   </Text>
-                  <Text bold fontSize="24px" textTransform="uppercase">
+                  <Text bold fontSize="15px" textTransform="uppercase">
                     ${formatAmount(tokenData.volumeUSD)}
                   </Text>
                   <Percent value={tokenData.volumeUSDChange} />
@@ -244,26 +244,26 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Volume 7D')}
                   </Text>
-                  <Text bold fontSize="24px">
+                  <Text bold fontSize="15px">
                     ${formatAmount(tokenData.volumeUSDWeek)}
                   </Text>
 
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Transactions 24H')}
                   </Text>
-                  <Text bold fontSize="24px">
+                  <Text bold fontSize="15px">
                     {formatAmount(tokenData.txCount, { isInteger: true })}
                   </Text>
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Total Supply')}
                   </Text>
-                  <Text bold fontSize="24px">
+                  <Text bold fontSize="15px">
                     {formatAmount(totalSupplyValue.totalSupply, { isInteger: true })}
                   </Text>
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Circulating Supply')}
                   </Text>
-                  <Text bold fontSize="24px">
+                  <Text bold fontSize="15px">
                     {formatAmount(Math.round(circulatingSupplyDisplay.circulatingSupply), { isInteger: true })}
                   </Text>
                 </Box>
