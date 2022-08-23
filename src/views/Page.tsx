@@ -52,10 +52,10 @@ const Page: React.FC<
       <PageMeta />
       <StyledPage $removePadding={removePadding} $noMinHeight={noMinHeight} {...props}>
         {children}
-        <Flex flexGrow={1} />
+        {/* <Flex flexGrow={1} />
         <Box display={['block', null, null, hideFooterOnDesktop ? 'none' : 'block']} width="100%">
           <Footer helpUrl={helpUrl} />
-        </Box>
+        </Box> */}
       </StyledPage>
     </>
   )

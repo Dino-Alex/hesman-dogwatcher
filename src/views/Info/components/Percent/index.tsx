@@ -12,7 +12,7 @@ const Percent: React.FC<React.PropsWithChildren<PercentProps>> = ({ value, ...re
   const isNegative = value < 0
 
   return (
-    <Text fontSize="10px" {...rest} color={isNegative ? 'failure' : 'success'}>
+    <Text fontSize="12px" {...rest} color={isNegative ? 'failure' : 'success'}>
       {isNegative ? '↓' : '↑'}
       {Math.abs(value).toFixed(2)}%
     </Text>

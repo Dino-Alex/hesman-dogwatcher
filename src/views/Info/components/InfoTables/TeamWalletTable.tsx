@@ -5,7 +5,17 @@ import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import styled from 'styled-components'
 import { FcDataBackup, FcDeleteDatabase } from 'react-icons/fc'
-import { ArrowBackIcon, ArrowForwardIcon, Button, Flex, Skeleton, Text, useModal, Link } from '@pancakeswap/uikit'
+import {
+  ArrowBackIcon,
+  ArrowForwardIcon,
+  Button,
+  Flex,
+  Skeleton,
+  Text,
+  useModal,
+  Link,
+  Overlay,
+} from '@pancakeswap/uikit'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
 import useTheme from 'hooks/useTheme'
@@ -169,7 +179,10 @@ const DataRow = () => {
               <Text ml="8px">{sAccount(data.address)}</Text>
             </Flex>
             <Flex>
-              <Text>{Math.round(tokenBalances.tokenBalanceVal[index])}</Text>
+              <Text>
+                {/* {Math.round(tokenBalances.tokenBalanceVal[index])} */}
+                {new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}
+              </Text>
             </Flex>
             {tokenAuth !== null ? (
               <>
@@ -204,7 +217,8 @@ const DataRow = () => {
                   timeout: 500,
                 }}
                 sx={{
-                  background: isDark ? '#000' : '#fff',
+                  // background: isDark ? '#000' : '#fff',
+                  background: isDark ? 'rgba(0,0,0,0.5)' : '#fff',
                 }}
               >
                 <Fade in={open}>

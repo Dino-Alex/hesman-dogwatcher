@@ -125,7 +125,6 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       setWalletInfo(response.data.products)
       const addresses = response.data.products.map((wallet) => wallet.address)
       setWalletAddresses(addresses)
-      console.log('walletAddress', addresses)
     })
   }, [])
 
@@ -291,11 +290,11 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 
             <PoolTable poolDatas={poolDatas} />
 
-            <Heading scale="lg" mb="16px" mt="40px">
+            {/* <Heading scale="lg" mb="16px" mt="40px">
               {t('Transactions')}
             </Heading>
 
-            <TransactionTable transactions={transactions} />
+            <TransactionTable transactions={transactions} /> */}
           </>
         )
       ) : (

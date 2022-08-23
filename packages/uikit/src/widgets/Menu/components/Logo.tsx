@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import Flex from "../../../components/Box/Flex";
 import { LogoIcon, LogoWithTextIcon } from "../../../components/Svg";
 import { MenuContext } from "../context";
+import LogoDeltaLabs from "../../../components/Svg/Icons/LogoDeltaLabs";
 
 interface Props {
   isDark: boolean;
@@ -49,7 +50,8 @@ const Logo: React.FC<React.PropsWithChildren<Props>> = ({ isDark, href }) => {
   const innerLogo = (
     <>
       <LogoIcon className="mobile-icon" />
-      <LogoWithTextIcon className="desktop-icon" isDark={isDark} />
+      {/* <LogoWithTextIcon className="desktop-icon" isDark={isDark} /> */}
+      <LogoDeltaLabs className="desktop-icon" isDark={isDark} />
     </>
   );
 
