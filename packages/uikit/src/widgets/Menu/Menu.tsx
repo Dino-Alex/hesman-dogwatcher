@@ -1,6 +1,7 @@
 import throttle from "lodash/throttle";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import useTheme from "../../../../../src/hooks/useTheme";
 import BottomNav from "../../components/BottomNav";
 import { Box } from "../../components/Box";
 import Flex from "../../components/Box/Flex";
@@ -14,6 +15,7 @@ import { MENU_HEIGHT, MOBILE_MENU_HEIGHT, TOP_BANNER_HEIGHT, TOP_BANNER_HEIGHT_M
 import { NavProps } from "./types";
 import LangSelector from "../../components/LangSelector/LangSelector";
 import { MenuContext } from "./context";
+import { ThemeSwitcher } from "../../components/ThemeSwitcher";
 
 const Wrapper = styled.div`
   position: relative;
@@ -81,6 +83,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
   buyCakeLabel,
   children,
 }) => {
+  const { setTheme } = useTheme();
   const { isMobile, isMd } = useMatchBreakpoints();
   const [showMenu, setShowMenu] = useState(true);
   const refPrevOffset = useRef(typeof window === "undefined" ? 0 : window.pageYOffset);
@@ -150,7 +153,8 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
                   hideLanguage
                 />
               </Box> */}
-              {rightSide}
+              {/* {rightSide} */}
+              <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? "light" : "dark")} />
             </Flex>
           </StyledNav>
         </FixedContainer>
