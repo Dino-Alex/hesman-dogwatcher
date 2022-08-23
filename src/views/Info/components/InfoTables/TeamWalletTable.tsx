@@ -224,7 +224,7 @@ const DataRow = () => {
                 <Fade in={open}>
                   <CustomBox sx={style}>
                     <Typography id="transition-modal-title" variant="h3" component="h2">
-                      Update TEAM
+                      Edit Team Wallet
                     </Typography>
                     <ModalUpdate id={ID} />
                   </CustomBox>

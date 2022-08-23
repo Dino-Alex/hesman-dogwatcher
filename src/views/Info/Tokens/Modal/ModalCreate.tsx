@@ -61,7 +61,7 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
     checkValidate(value)
   }
   return (
-    <Modal title="Claim Bounty" onDismiss={onDismiss}>
+    <Modal title="Create Team Wallet" onDismiss={onDismiss}>
       <Flex width="80vw" flexDirection="column" justifyContent="center" alignItems="center">
         <Flex width="50%" flexDirection="column" justifyContent="center" alignItems="center">
           <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
@@ -83,7 +83,7 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
           </Flex>
           <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
             <Flex width="20%">
-              <Text color="primary">address: </Text>
+              <Text color="primary">Address: </Text>
             </Flex>
             <Flex width="80%">
               <CustomInputGroup>
