@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { baseColors, darkColors, lightColors } from "../../theme/colors";
 import { Flex, Box } from "../Box";
 import { Link } from "../Link";
@@ -17,6 +18,8 @@ import LangSelector from "../LangSelector/LangSelector";
 import CakePrice from "../CakePrice/CakePrice";
 import { LogoWithTextIcon, ArrowForwardIcon } from "../Svg";
 import { Button } from "../Button";
+import LogoDeltaLabs from "../Svg/Icons/LogoDeltaLabs";
+import LogoDeltaLabsLine from "../Svg/Icons/LogoDeltaLabsLine";
 import { Colors } from "../..";
 
 const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
@@ -30,46 +33,16 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
   buyCakeLabel,
   ...props
 }) => {
+  const textColor = isDark ? "#FFFFFF" : "#07194F";
   return (
-    <StyledFooter p={["40px 16px", null, "56px 40px 32px 40px"]} {...props} justifyContent="center">
+    <Flex
+      borderTop={isDark ? "1px solid #383241" : "1px solid #E7E3EB"}
+      background={isDark ? "#27262C" : "#fff"}
+      p={["40px 16px", null, "56px 40px 32px 40px"]}
+      {...props}
+      justifyContent="center"
+    >
       <Flex flexDirection="column" width={["100%", null, "1200px;"]}>
-        <StyledIconMobileContainer display={["block", null, "none"]}>
-          <LogoWithTextIcon isDark width="130px" />
-        </StyledIconMobileContainer>
-        <Flex
-          order={[2, null, 1]}
-          flexDirection={["column", null, "row"]}
-          justifyContent="space-between"
-          alignItems="flex-start"
-          mb={["42px", null, "36px"]}
-        >
-          {items?.map((item) => (
-            <StyledList key={item.label}>
-              <StyledListItem>{item.label}</StyledListItem>
-              {item.items?.map(({ label, href, isHighlighted = false }) => (
-                <StyledListItem key={label}>
-                  {href ? (
-                    <Link
-                      href={href}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      color={isHighlighted ? baseColors.warning : darkColors.text}
-                      bold={false}
-                    >
-                      {label}
-                    </Link>
-                  ) : (
-                    <StyledText>{label}</StyledText>
-                  )}
-                </StyledListItem>
-              ))}
-            </StyledList>
-          ))}
-          <Box display={["none", null, "block"]}>
-            <LogoWithTextIcon isDark width="160px" />
-          </Box>
-        </Flex>
-        <StyledSocialLinks order={[2]} pb={["42px", null, "32px"]} mb={["0", null, "32px"]} />
         <StyledToolsContainer
           order={[1, null, 3]}
           flexDirection={["column", null, "row"]}
@@ -77,32 +50,106 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
         >
           <Flex order={[2, null, 1]} alignItems="center">
             <ThemeSwitcher isDark={isDark} toggleTheme={toggleTheme} />
-            <LangSelector
-              currentLang={currentLang}
-              langs={langs}
-              setLang={setLang}
-              color={darkColors.textSubtle as keyof Colors}
-              dropdownPosition="top-right"
-            />
           </Flex>
-          <Flex order={[1, null, 2]} mb={["24px", null, "0"]} justifyContent="space-between" alignItems="center">
-            <Box mr="20px">
-              <CakePrice cakePriceUsd={cakePriceUsd} color={darkColors.textSubtle as keyof Colors} />
-            </Box>
-            <Button
-              as="a"
-              href="https://pancakeswap.finance/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82"
-              target="_blank"
-              scale="sm"
-              endIcon={<ArrowForwardIcon color={lightColors.backgroundAlt} />}
-            >
-              {buyCakeLabel}
-            </Button>
+          <Flex
+            width="200px"
+            height="100px"
+            order={[1, null, 2]}
+            mb={["24px", null, "0"]}
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <StyledLink as="a" href="https://deltalabsjsc.com/" target="_blank">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 3813 1076"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                href="https://deltalabsjsc.com/"
+                target="_blank"
+              >
+                <path
+                  d="M433.975 0H0.447266C0.447266 74.706 30.7966 142.175 79.5889 191.201C128.381 240.227 196.084 270.342 270.79 270.342H349.931V168.789H346.196C336.858 168.789 329.387 161.318 329.387 151.98C329.387 142.642 336.858 135.171 346.196 135.171H490.238C499.577 135.171 507.047 142.642 507.047 151.98C507.047 161.318 499.577 168.789 490.238 168.789H486.503V278.28C602.531 302.793 677.937 393.14 684.007 520.374C684.474 526.21 684.707 532.047 684.707 537.883C684.707 684.961 565.411 804.49 418.1 804.49C271.023 804.49 151.493 685.194 151.493 537.883C151.493 491.425 163.4 447.769 184.411 409.716C147.758 424.657 114.841 446.835 87.293 474.383C33.598 528.078 0.447266 602.084 0.447266 684.027V687.062V698.034V1076H433.975C757.546 1076 987.033 851.182 987.033 537.183C987.033 222.717 758.246 0 433.975 0Z"
+                  fill="#1083FF"
+                />
+                <path
+                  d="M433.976 0H0.447266V0.700369C0.447266 149.645 120.911 270.576 270.089 271.043L349.931 271.276V168.789H346.196C336.858 168.789 329.387 161.318 329.387 151.98C329.387 142.642 336.858 135.171 346.196 135.171H490.238C499.577 135.171 507.047 142.642 507.047 151.98C507.047 161.318 499.577 168.789 490.238 168.789H486.503V276.179C680.972 304.66 830.384 473.449 830.384 677.49C830.384 862.854 707.119 1019.04 538.564 1067.36C805.638 1024.17 986.8 815.93 986.8 536.949C987.033 222.717 758.246 0 433.976 0Z"
+                  fill="#01B9FF"
+                />
+                <path
+                  d="M151.72 537.88C151.72 491.423 163.626 447.766 184.637 409.713C147.985 424.654 115.067 446.832 87.5195 474.38C33.8246 528.075 0.673828 602.081 0.673828 684.024V687.059V698.031C77.014 763.632 176.233 803.32 284.79 803.32C288.525 803.32 391.713 804.487 414.125 804.721C415.526 804.721 416.459 804.721 417.16 804.721H418.094C270.783 804.02 151.72 684.958 151.72 537.88Z"
+                  fill="#0033CC"
+                />
+                <path
+                  d="M533.67 489.089C485.578 489.556 415.774 528.31 361.146 553.056C306.984 577.569 244.184 544.185 204.03 518.505C203.563 524.808 203.096 531.111 203.096 537.648C203.096 656.477 299.513 752.894 418.342 752.894C535.537 752.894 630.787 659.278 633.355 542.784C631.955 506.365 593.434 488.389 533.67 489.089Z"
+                  fill="#01B9FF"
+                />
+                <path
+                  d="M1304.74 388.529H1424.56C1457.56 388.529 1483.48 390.886 1502.73 395.993C1521.98 401.1 1535.73 409.742 1544.77 422.313C1553.8 434.884 1558.12 452.169 1558.12 474.168V588.877C1558.12 610.483 1553.8 626.982 1545.55 638.767C1537.3 650.552 1523.55 658.802 1504.3 663.516C1485.05 668.23 1458.73 670.587 1424.95 670.587H1304.74V388.529ZM1422.2 622.268C1440.66 622.268 1454.81 621.482 1464.23 619.911C1473.66 618.339 1480.34 615.197 1484.66 610.483C1488.98 605.769 1490.95 598.697 1490.95 588.877V472.989C1490.95 459.633 1485.84 450.205 1475.23 445.098C1464.63 439.598 1447.74 437.241 1424.56 437.241H1372.7V622.66H1422.2V622.268Z"
+                  fill={textColor}
+                />
+                <path
+                  d="M1613.11 388.529H1827.99V436.848H1681.07V501.666H1813.85V549.593H1681.07V622.268H1832.71V670.587H1613.11V388.529Z"
+                  fill={textColor}
+                />
+                <path d="M1878.29 388.529H1946.25V622.268H2084.92V670.587H1878.29V388.529Z" fill={textColor} />
+                <path
+                  d="M2195.31 436.848H2108.5V388.529H2349.7V436.848H2263.27V670.587H2195.31V436.848Z"
+                  fill={textColor}
+                />
+                <path
+                  d="M2463.23 388.529H2545.73L2647.47 670.587H2578.73L2553.58 596.341H2450.66L2425.91 670.587H2359.13L2463.23 388.529ZM2539.05 551.164L2503.3 445.098H2501.73L2465.98 551.164H2539.05Z"
+                  fill={textColor}
+                />
+                <path d="M2778.68 388.529H2846.64V622.268H2985.31V670.587H2779.07V388.529H2778.68Z" fill={textColor} />
+                <path
+                  d="M3105.52 388.529H3188.02L3289.76 670.587H3221.02L3195.87 596.341H3092.95L3068.2 670.587H3001.42L3105.52 388.529ZM3180.95 551.164L3145.2 445.098H3143.63L3107.88 551.164H3180.95Z"
+                  fill={textColor}
+                />
+                <path
+                  d="M3320.8 388.529H3435.12C3462.22 388.529 3482.65 390.493 3497.58 394.422C3512.11 398.35 3522.72 404.636 3528.61 413.278C3534.5 421.92 3537.65 433.706 3537.65 449.026V483.596C3537.65 491.453 3534.51 498.917 3528.22 505.595C3521.93 512.666 3514.86 517.38 3506.22 520.13V522.487C3517.22 523.665 3527.43 528.38 3536.47 536.629C3545.5 544.879 3550.22 553.914 3550.22 564.128V607.733C3550.22 630.517 3541.18 647.016 3522.72 656.445C3504.65 665.873 3476.36 670.98 3437.87 670.98H3320.41V388.529H3320.8ZM3435.12 503.238C3445.72 503.238 3453.97 502.452 3459.08 500.488C3464.19 498.917 3467.72 495.774 3469.69 491.846C3471.65 487.917 3472.44 482.418 3472.44 474.561V460.812C3472.44 454.133 3471.65 449.026 3469.69 445.883C3468.12 442.741 3464.58 439.991 3459.08 438.812C3453.58 437.241 3445.33 436.456 3433.55 436.456H3388.37V502.845H3435.12V503.238ZM3436.69 622.268C3453.19 622.268 3464.97 620.303 3472.04 616.768C3479.11 612.839 3482.65 606.947 3482.65 598.697V575.913C3482.65 565.306 3479.9 558.235 3474.79 553.914C3469.29 549.593 3459.87 547.236 3446.51 547.236H3389.15V622.268H3436.69Z"
+                  fill={textColor}
+                />
+                <path
+                  d="M3587.9 667.047V615.193C3637 622.656 3670.79 626.585 3688.86 626.585C3726.57 626.585 3745.43 616.764 3745.43 597.515V579.444C3745.43 570.016 3742.68 562.945 3737.57 558.231C3732.07 553.124 3722.64 550.767 3708.5 550.767H3675.5C3613.43 550.767 3582.4 526.018 3582.4 476.914V456.093C3582.4 431.344 3592.61 413.274 3613.43 401.882C3633.86 390.489 3666.47 384.597 3711.25 384.597C3734.43 384.597 3763.89 386.561 3799.25 390.097V440.38C3755.64 435.273 3725.39 432.523 3708.89 432.523C3686.11 432.523 3670.79 434.487 3662.93 438.023C3654.68 441.951 3650.36 448.629 3650.36 457.272V477.306C3650.36 492.234 3662.93 499.305 3687.68 499.305H3721.46C3753.68 499.305 3776.85 505.198 3791.39 516.983C3805.92 528.768 3812.99 546.839 3812.99 571.195V590.051C3812.99 623.835 3800.82 646.227 3776.85 658.405C3765.07 664.297 3752.5 668.618 3738.36 671.368C3724.21 673.725 3707.32 674.904 3687.68 674.904C3660.97 674.904 3627.57 672.154 3587.9 667.047Z"
+                  fill={textColor}
+                />
+              </svg>
+            </StyledLink>
           </Flex>
         </StyledToolsContainer>
       </Flex>
-    </StyledFooter>
+    </Flex>
   );
 };
 
 export default MenuItem;
+
+const StyledLink = styled("a")`
+  display: flex;
+  align-items: center;
+  .mobile-icon {
+    width: 32px;
+    ${({ theme }) => theme.mediaQueries.nav} {
+      display: none;
+    }
+  }
+  .desktop-icon {
+    width: 160px;
+    display: none;
+    ${({ theme }) => theme.mediaQueries.nav} {
+      display: block;
+    }
+  }
+  .eye {
+    animation-delay: 20ms;
+  }
+  &:hover {
+    .eye {
+      transform-origin: center 60%;
+      animation-duration: 350ms;
+      animation-iteration-count: 1;
+    }
+  }
+`;

@@ -31,7 +31,7 @@ const ResponsiveGrid = styled.div`
   display: grid;
   grid-gap: 1em;
   align-items: center;
-  grid-template-columns: 20px 3.5fr repeat(5, 1fr);
+  grid-template-columns: 20px 5fr 10fr 4fr 4fr;
 
   padding: 0 24px;
   @media screen and (max-width: 900px) {
@@ -68,8 +68,6 @@ const SORT_FIELD = {
 
 const LoadingRow: React.FC<React.PropsWithChildren> = () => (
   <ResponsiveGrid>
-    <Skeleton />
-    <Skeleton />
     <Skeleton />
     <Skeleton />
     <Skeleton />
@@ -176,7 +174,10 @@ const DataRow = () => {
               </Link>
             </Flex>
             <Flex>
-              <Text ml="8px">{sAccount(data.address)}</Text>
+              {/* <Text ml="8px">{}</Text> */}
+              <Link href={getBscScanLink(data.address, 'address', chainId)} external>
+                {data.address}
+              </Link>
             </Flex>
             <Flex>
               <Text>

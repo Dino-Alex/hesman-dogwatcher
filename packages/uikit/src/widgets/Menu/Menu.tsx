@@ -175,7 +175,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
         <BodyWrapper mt={!subLinks ? `${totalTopMenuHeight + 1}px` : "0"}>
           <Inner isPushed={false} showMenu={showMenu}>
             {children}
-            {/* <Footer
+            <Footer
               items={footerLinks}
               isDark={isDark}
               toggleTheme={toggleTheme}
@@ -185,7 +185,7 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
               cakePriceUsd={cakePriceUsd}
               buyCakeLabel={buyCakeLabel}
               mb={[`${MOBILE_MENU_HEIGHT}px`, null, "0px"]}
-            /> */}
+            />
           </Inner>
         </BodyWrapper>
         {isMobile && <BottomNav items={links} activeItem={activeItem} activeSubItem={activeSubItem} />}
