@@ -138,23 +138,8 @@ const Menu: React.FC<React.PropsWithChildren<NavProps>> = ({
               {!isMobile && <MenuItems items={links} activeItem={activeItem} activeSubItem={activeSubItem} ml="24px" />}
             </Flex>
             <Flex alignItems="center" height="100%">
-              {/* {!isMobile && !isMd && (
-                <Box mr="12px">
-                  <CakePrice showSkeleton={false} cakePriceUsd={cakePriceUsd} />
-                </Box>
-              )}
-              <Box mt="4px">
-                <LangSelector
-                  currentLang={currentLang}
-                  langs={langs}
-                  setLang={setLang}
-                  buttonScale="xs"
-                  color="textSubtle"
-                  hideLanguage
-                />
-              </Box> */}
-              {/* {rightSide} */}
-              <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? "light" : "dark")} />
+              {rightSide}
+              {/* <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? "light" : "dark")} /> */}
             </Flex>
           </StyledNav>
         </FixedContainer>

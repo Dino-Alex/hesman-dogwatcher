@@ -25,13 +25,14 @@ import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
 import { useTranslation } from '@pancakeswap/localization'
 import { ClickableColumnHeader, TableWrapper, PageButtons, Arrow, Break } from './shared'
 import { getProductClient } from './config'
+import CardTable from './CardTables'
 import { FetchTokenBalance } from '../../hooks/useTotalSupply'
 
 const ResponsiveGrid = styled.div`
   display: grid;
   grid-gap: 1em;
   align-items: center;
-  grid-template-columns: 20px 5fr 10fr 4fr 4fr;
+  grid-template-columns: 20px 5fr 5fr 0fr 10fr;
 
   padding: 0 24px;
   @media screen and (max-width: 900px) {
@@ -68,6 +69,7 @@ const SORT_FIELD = {
 
 const LoadingRow: React.FC<React.PropsWithChildren> = () => (
   <ResponsiveGrid>
+    <Skeleton />
     <Skeleton />
     <Skeleton />
     <Skeleton />
@@ -146,7 +148,7 @@ const DataRow = () => {
 
   function sAccount(dataAddress: string) {
     if (dataAddress) {
-      return `${dataAddress.substring(0, 4)}...${dataAddress.substring(dataAddress.length - 4)}`
+      return `${dataAddress.substring(0, 8)}...${dataAddress.substring(dataAddress.length - 8)}`
     }
     return ''
   }
@@ -164,26 +166,22 @@ const DataRow = () => {
       {walletInfo.map((data, index) => {
         return (
           <ResponsiveGrid>
-            <Text>{index + 1}</Text>
-            <Flex>
-              {/* <Text ml="8px">
-              {data.name}
-            </Text> */}
+            <Flex width="2vw">
+              <Text>{index + 1}</Text>
+            </Flex>
+            <Flex width="20vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {data.name}
               </Link>
             </Flex>
-            <Flex>
-              {/* <Text ml="8px">{}</Text> */}
+            <input type="hidden" value={data._id} />
+            <Flex width="20vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
-                {data.address}
+                {sAccount(data.address)}
               </Link>
             </Flex>
-            <Flex>
-              <Text>
-                {/* {Math.round(tokenBalances.tokenBalanceVal[index])} */}
-                {new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}
-              </Text>
+            <Flex width="15vw">
+              <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
             </Flex>
             {tokenAuth !== null ? (
               <>
@@ -218,7 +216,6 @@ const DataRow = () => {
                   timeout: 500,
                 }}
                 sx={{
-                  // background: isDark ? '#000' : '#fff',
                   background: isDark ? 'rgba(0,0,0,0.5)' : '#fff',
                 }}
               >
@@ -320,43 +317,43 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   return (
     <TableWrapper>
       <ResponsiveGrid>
-        <Text color="secondary" fontSize="12px" bold>
-          #
-        </Text>
-        <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
-          {t('Name')}
-        </Text>
-        <ClickableColumnHeader
-          color="secondary"
-          fontSize="12px"
-          bold
-          onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-          textTransform="uppercase"
-        >
-          {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
-        </ClickableColumnHeader>
-        <ClickableColumnHeader
-          color="secondary"
-          fontSize="12px"
-          bold
-          onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-          textTransform="uppercase"
-        >
-          {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
-        </ClickableColumnHeader>
-        <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
-          {t('Action')}
-        </ClickableColumnHeader>
-        {tokenAuth !== null && isLogOut ? (
-          <>
-            <Button onClick={() => handleClickCreate()}>{t('Create')}</Button>
-            <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
-          </>
-        ) : (
-          <>
-            <Button onClick={() => handleClickLogIn()}>{t('LOGIN')}</Button>
-          </>
-        )}
+        <Flex width="2vw">
+          <Text color="secondary" fontSize="12px" bold>
+            #
+          </Text>
+        </Flex>
+        <Flex width="20vw">
+          <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
+            {t('Name')}
+          </Text>
+        </Flex>
+        <Flex width="20vw">
+          <ClickableColumnHeader
+            color="secondary"
+            fontSize="12px"
+            bold
+            onClick={() => handleSort(SORT_FIELD.volumeUSD)}
+            textTransform="uppercase"
+          >
+            {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+          </ClickableColumnHeader>
+        </Flex>
+        <Flex width="15vw">
+          <ClickableColumnHeader
+            color="secondary"
+            fontSize="12px"
+            bold
+            onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+            textTransform="uppercase"
+          >
+            {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+          </ClickableColumnHeader>
+        </Flex>
+        <Flex width="15vw">
+          <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+            {t('Action')}
+          </ClickableColumnHeader>
+        </Flex>
       </ResponsiveGrid>
 
       <Break />

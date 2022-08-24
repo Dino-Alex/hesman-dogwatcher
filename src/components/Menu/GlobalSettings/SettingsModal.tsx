@@ -1,6 +1,19 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Text, PancakeToggle, Toggle, Flex, Modal, InjectedModalProps, ThemeSwitcher, Box } from '@pancakeswap/uikit'
+import { useRouter } from 'next/router'
+import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
+import {
+  Text,
+  PancakeToggle,
+  Toggle,
+  Flex,
+  Modal,
+  InjectedModalProps,
+  ThemeSwitcher,
+  Box,
+  Button,
+  useModal,
+} from '@pancakeswap/uikit'
 import {
   useAudioModeManager,
   useExpertModeManager,
@@ -12,12 +25,14 @@ import {
 import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import { useTranslation } from '@pancakeswap/localization'
 import useTheme from 'hooks/useTheme'
+import axios from 'axios'
 import QuestionHelper from '../../QuestionHelper'
 import TransactionSettings from './TransactionSettings'
 import ExpertModal from './ExpertModal'
 import GasSettings from './GasSettings'
 import { SettingsMode } from './types'
 
+const Refresh = []
 const ScrollableContainer = styled(Flex)`
   flex-direction: column;
   height: auto;
@@ -30,6 +45,29 @@ const ScrollableContainer = styled(Flex)`
 `
 
 const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ onDismiss, mode }) => {
+  const router = useRouter()
+  const [isLogOut, setLogOut] = useState(true)
+
+  function handleClickLogIn() {
+    onDismiss()
+    router.push('/login')
+  }
+
+  async function handleClickLogOut() {
+    const tokenAuth = localStorage.getItem('token')
+
+    await axios.get('https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/products', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `${tokenAuth}`,
+      },
+    })
+    localStorage.removeItem('token')
+    setLogOut(false)
+  }
+
+  const [handleClickCreate] = useModal(<ModalCreate onRefresh={(newValue) => Refresh.push(newValue)} />)
+
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
   const [showExpertModeAcknowledgement, setShowExpertModeAcknowledgement] = useUserExpertModeAcknowledgementShow()
   const [expertMode, toggleExpertMode] = useExpertModeManager()
@@ -64,6 +102,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
     }
   }
 
+  const tokenAuth = localStorage.getItem('token')
   return (
     <Modal
       title={t('Settings')}
@@ -75,118 +114,22 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
         {mode === SettingsMode.GLOBAL && (
           <>
             <Flex pb="24px" flexDirection="column">
-              <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
-                {t('Global')}
-              </Text>
               <Flex justifyContent="space-between" mb="24px">
                 <Text>{t('Dark mode')}</Text>
                 <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? 'light' : 'dark')} />
               </Flex>
-              <Flex justifyContent="space-between" alignItems="center" mb="24px">
-                <Flex alignItems="center">
-                  <Text>{t('Subgraph Health Indicator')}</Text>
-                  <QuestionHelper
-                    text={t(
-                      'Turn on NFT market subgraph health indicator all the time. Default is to show the indicator only when the network is delayed',
-                    )}
-                    placement="top-start"
-                    ml="4px"
-                  />
-                </Flex>
-                <Toggle
-                  id="toggle-subgraph-health-button"
-                  checked={subgraphHealth}
-                  scale="md"
-                  onChange={() => {
-                    setSubgraphHealth(!subgraphHealth)
-                  }}
-                />
+              <Flex>
+                {tokenAuth !== null && isLogOut ? (
+                  <Flex width="100%" flexDirection="row" justifyContent="space-around">
+                    <Button onClick={() => handleClickCreate()}>{t('Create')}</Button>
+                    <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
+                  </Flex>
+                ) : (
+                  <>
+                    <Button onClick={() => handleClickLogIn()}>{t('LOGIN')}</Button>
+                  </>
+                )}
               </Flex>
-              <GasSettings />
-            </Flex>
-          </>
-        )}
-        {mode === SettingsMode.SWAP_LIQUIDITY && (
-          <>
-            <Flex pt="3px" flexDirection="column">
-              <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
-                {t('Swaps & Liquidity')}
-              </Text>
-              <Flex justifyContent="space-between" alignItems="center" mb="24px">
-                <GasSettings />
-              </Flex>
-              <TransactionSettings />
-            </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
-              <Flex alignItems="center">
-                <Text>{t('Zap (Beta)')}</Text>
-                <QuestionHelper
-                  text={
-                    <Box>
-                      <Text>
-                        {t(
-                          'Zap enables simple liquidity provision. Add liquidity with one token and one click, without manual swapping or token balancing.',
-                        )}
-                      </Text>
-                      <Text>
-                        {t(
-                          'If you experience any issue when adding or removing liquidity, please disable Zap and retry.',
-                        )}
-                      </Text>
-                    </Box>
-                  }
-                  placement="top-start"
-                  ml="4px"
-                />
-              </Flex>
-              <Toggle
-                checked={zapMode}
-                scale="md"
-                onChange={() => {
-                  toggleZapMode(!zapMode)
-                }}
-              />
-            </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
-              <Flex alignItems="center">
-                <Text>{t('Expert Mode')}</Text>
-                <QuestionHelper
-                  text={t('Bypasses confirmation modals and allows high slippage trades. Use at your own risk.')}
-                  placement="top-start"
-                  ml="4px"
-                />
-              </Flex>
-              <Toggle
-                id="toggle-expert-mode-button"
-                scale="md"
-                checked={expertMode}
-                onChange={handleExpertModeToggle}
-              />
-            </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
-              <Flex alignItems="center">
-                <Text>{t('Disable Multihops')}</Text>
-                <QuestionHelper text={t('Restricts swaps to direct pairs only.')} placement="top-start" ml="4px" />
-              </Flex>
-              <Toggle
-                id="toggle-disable-multihop-button"
-                checked={singleHopOnly}
-                scale="md"
-                onChange={() => {
-                  setSingleHopOnly(!singleHopOnly)
-                }}
-              />
-            </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
-              <Flex alignItems="center">
-                <Text>{t('Flippy sounds')}</Text>
-                <QuestionHelper
-                  text={t('Fun sounds to make a truly immersive pancake-flipping trading experience')}
-                  placement="top-start"
-                  ml="4px"
-                />
-              </Flex>
-              <PancakeToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" />
             </Flex>
           </>
         )}
