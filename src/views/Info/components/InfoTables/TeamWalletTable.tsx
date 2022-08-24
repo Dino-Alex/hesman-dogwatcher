@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Backdrop, Box, Fade, Grid, IconButton, Modal, Stack, Tooltip, Typography } from '@mui/material'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
+import { FaWindowClose } from 'react-icons/fa'
 import styled from 'styled-components'
 import { FcDataBackup, FcDeleteDatabase } from 'react-icons/fc'
 import {
@@ -221,9 +222,14 @@ const DataRow = () => {
               >
                 <Fade in={open}>
                   <CustomBox sx={style}>
-                    <Typography id="transition-modal-title" variant="h3" component="h2">
-                      Edit Team Wallet
-                    </Typography>
+                    <Flex width="100%" justifyContent="space-between">
+                      <Typography id="transition-modal-title" variant="h4" component="h2">
+                        Edit Team Wallet
+                      </Typography>
+                      <Flex style={{ cursor: 'pointer' }} onClick={handleClose}>
+                        <FaWindowClose />
+                      </Flex>
+                    </Flex>
                     <ModalUpdate id={ID} />
                   </CustomBox>
                 </Fade>
