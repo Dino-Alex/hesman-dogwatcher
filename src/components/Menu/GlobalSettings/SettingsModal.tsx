@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
@@ -32,7 +32,9 @@ import ExpertModal from './ExpertModal'
 import GasSettings from './GasSettings'
 import { SettingsMode } from './types'
 
-const Refresh = []
+const RefreshCreate = []
+
+export const RefreshCreateGlobal = createContext(RefreshCreate)
 const ScrollableContainer = styled(Flex)`
   flex-direction: column;
   height: auto;
@@ -66,8 +68,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
     setLogOut(false)
   }
 
-  const [handleClickCreate] = useModal(<ModalCreate onRefresh={(newValue) => Refresh.push(newValue)} />)
-
+  const [handleClickCreate] = useModal(<ModalCreate onRefresh={(newValue) => RefreshCreate.push(newValue)} />)
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
   const [showExpertModeAcknowledgement, setShowExpertModeAcknowledgement] = useUserExpertModeAcknowledgementShow()
   const [expertMode, toggleExpertMode] = useExpertModeManager()

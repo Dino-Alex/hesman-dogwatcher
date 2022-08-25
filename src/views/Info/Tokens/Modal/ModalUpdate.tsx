@@ -1,21 +1,26 @@
-import { Button, Flex, Input, InputGroup, Text } from '@pancakeswap/uikit'
-import styled from 'styled-components'
+import { Button, Flex, Input, InputGroup, Modal, Text } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { getSingleProductClient } from 'views/Info/components/InfoTables/config'
 
-const ModalUpdate = (id: any) => {
+interface Proptype {
+  onDismiss?: () => void
+  onRefresh?: (newValue) => void
+  id?: any
+}
+
+const ModalUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) => {
   const [name, setName] = useState<string>('')
   const [address, setAddress] = useState('')
   const [limit, setLimit] = useState(1)
   const [posts, setPosts] = useState([])
   const [walletInfo, setWalletInfo] = useState('')
   const tokenAuth = localStorage.getItem('token')
-  const [noti, setNoti] = useState('')
 
   useEffect(() => {
-    getSingleProductClient.get(`${id.id}`).then((response) => {
+    getSingleProductClient.get(`${id}`).then((response) => {
       if (walletInfo === '') {
         setWalletInfo(response.data.product)
         setName(response.data.product.name)
@@ -24,35 +29,27 @@ const ModalUpdate = (id: any) => {
       }
     })
   }, [walletInfo])
+
   const updatePost = async () => {
-    console.log('id', id)
-    await axios
-      .put(
-        `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id.id}`,
-        { name, address, limit },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            token: `${tokenAuth}`,
-          },
+    await axios.put(
+      `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`,
+      { name: name, address: address, limit: limit },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          token: `${tokenAuth}`,
         },
-      )
-      .then((res) => {
-        console.log(res)
-        if (res.status === 200) {
-          setNoti('Success')
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-        setNoti('Fail')
-      })
+      },
+    )
+    onRefresh('Reset')
+    onDismiss()
     setPosts(
       posts.filter((post) => {
-        return post.id !== id
+        return post !== id
       }),
     )
   }
+
   const { account } = useWeb3React()
 
   const [check, setCheck] = useState(0)
@@ -72,60 +69,68 @@ const ModalUpdate = (id: any) => {
     setAddress(value)
     checkValidate(value)
   }
+
   return (
-    <Flex width="100%" flexDirection="column" justifyContent="center" alignItems="center">
-      <Flex width="50%" flexDirection="column" justifyContent="center" alignItems="center">
-        <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
-          <Flex width="20%">
-            <Text color="primary">Name: </Text>
+    <Modal title="Update Team Wallet" onDismiss={onDismiss}>
+      <Flex width="70vw" flexDirection="column" justifyContent="center" alignItems="center">
+        <Flex width="50%" flexDirection="column" justifyContent="center" alignItems="center">
+          <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <Flex width="20%">
+              <Text color="primary">Name: </Text>
+            </Flex>
+            <Flex width="80%">
+              <CustomInputGroup>
+                <Input color="primary" value={name} onChange={(e) => setName(e.target.value)} />
+              </CustomInputGroup>
+            </Flex>
           </Flex>
-          <Flex width="80%">
-            <CustomInputGroup>
-              <Input color="primary" value={name} onChange={(e) => setName(e.target.value)} />
-            </CustomInputGroup>
+          <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <Flex width="20%">
+              <Text color="primary">Address: </Text>
+            </Flex>
+            <Flex width="80%">
+              <CustomInputGroup>
+                <Input color="primary" value={address} onChange={handleInputChangeAddress} />
+              </CustomInputGroup>
+            </Flex>
+          </Flex>
+          <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <Flex width="20%">
+              <Text color="primary">Limit: </Text>
+            </Flex>
+            <Flex width="80%">
+              <CustomInputGroup>
+                <Input color="primary" value={limit} onChange={(e) => setLimit(parseFloat(e.target.value))} />
+              </CustomInputGroup>
+            </Flex>
           </Flex>
         </Flex>
-        <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
-          <Flex width="20%">
-            <Text color="primary">Address: </Text>
-          </Flex>
-          <Flex width="80%">
-            <CustomInputGroup>
-              <Input color="primary" value={address} onChange={handleInputChangeAddress} />
-            </CustomInputGroup>
-          </Flex>
+        <Flex mt="2rem">
+          <Button
+            onClick={updatePost}
+            disabled={Number.isNaN(limit) !== false || limit <= 0 || name === '' || address === '' || check !== 0}
+          >
+            Update
+          </Button>
         </Flex>
-        <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
-          <Flex width="20%">
-            <Text color="primary">Limit: </Text>
-          </Flex>
-          <Flex width="80%">
-            <CustomInputGroup>
-              <Input color="primary" value={limit} onChange={(e) => setLimit(parseFloat(e.target.value))} />
-            </CustomInputGroup>
-          </Flex>
-        </Flex>
+
+        {check === 2 && (
+          <Text marginTop="1rem" width="100%" textAlign="center">
+            Địa chỉ nhận đang là ví của bạn
+          </Text>
+        )}
+        {check === 1 && (
+          <Text marginTop="1rem" width="100%" textAlign="center">
+            Địa chỉ ví không đúng
+          </Text>
+        )}
+        {name === '' && (
+          <Text marginTop="1rem" width="100%" textAlign="center">
+            Tên ví trống
+          </Text>
+        )}
       </Flex>
-      <Flex mt="2rem">
-        <Button onClick={updatePost}>Update</Button>
-      </Flex>
-      {noti && <Text>Thành công</Text>}
-      {check === 2 && (
-        <Text marginTop="1rem" width="100%" textAlign="center">
-          Địa chỉ nhận đang là ví của bạn
-        </Text>
-      )}
-      {check === 1 && (
-        <Text marginTop="1rem" width="100%" textAlign="center">
-          Địa chỉ ví không đúng
-        </Text>
-      )}
-      {name === '' && (
-        <Text marginTop="1rem" width="100%" textAlign="center">
-          Tên ví trống
-        </Text>
-      )}
-    </Flex>
+    </Modal>
   )
 }
 

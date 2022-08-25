@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo, useEffect, Fragment } from 'react'
+import React, { useCallback, useState, useMemo, useContext, useEffect, Fragment } from 'react'
 import axios from 'axios'
 import { Backdrop, Box, Fade, Grid, IconButton, Modal, Stack, Tooltip, Typography } from '@mui/material'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
@@ -19,14 +19,15 @@ import {
 } from '@pancakeswap/uikit'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
+import { RefreshCreateGlobal } from 'components/Menu/GlobalSettings/SettingsModal'
 import useTheme from 'hooks/useTheme'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { getBscScanLink } from 'utils'
 import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
 import { useTranslation } from '@pancakeswap/localization'
+import ModalDelete from 'views/Info/Tokens/Modal/ModalDelete'
 import { ClickableColumnHeader, TableWrapper, PageButtons, Arrow, Break } from './shared'
 import { getProductClient } from './config'
-import CardTable from './CardTables'
 import { FetchTokenBalance } from '../../hooks/useTotalSupply'
 
 const ResponsiveGrid = styled.div`
@@ -94,50 +95,13 @@ const DataRow = () => {
   const [tokenBalances, setTokenBalances] = useState({ tokenBalanceVal: [0] })
   const tokenAuth = localStorage.getItem('token')
 
-  const style = {
-    borderRadius: '10px',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    bgcolor: 'background.paper',
-    border: isDark ? '2px solid #000' : '2px solid #fff',
-    background: isDark ? '#27262C' : '#fff',
-    boxShadow: 24,
-    p: 4,
-  }
-
-  // OpenModal
-  const [open, setOpen] = React.useState(false)
-  const handleClose = () => setOpen(false)
-  const [ID, setID] = useState(0)
-  const [posts, setPosts] = useState([])
   const { chainId } = useActiveWeb3React()
 
-  function handleClickUpdate(id) {
-    setOpen(true)
-    setID(id)
-  }
-  const deletePost = async (id) => {
-    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        token: `${tokenAuth}`,
-      },
-    })
-    setPosts(
-      posts.filter((post) => {
-        return post.id !== id
-      }),
-    )
-  }
   useEffect(() => {
     const getSaleItems = async () => {
       try {
         if (walletAddresses.length > 0) {
           const result = await FetchTokenBalance(walletAddresses)
-          console.log(result)
           setTokenBalances(result)
         }
       } catch (e) {
@@ -153,6 +117,7 @@ const DataRow = () => {
     }
     return ''
   }
+  const appContext = useContext(RefreshCreateGlobal)
 
   useEffect(() => {
     getProductClient.get('').then((response) => {
@@ -160,7 +125,14 @@ const DataRow = () => {
       const addresses = response.data.products.map((wallet) => wallet.address)
       setWalletAddresses(addresses)
     })
-  }, [posts, ID, open, Refresh.length])
+  }, [Refresh.length, appContext.length])
+
+  const [idDelete, setIdDelete] = useState(0)
+  const [idUpdate, setUpdate] = useState(0)
+
+  const [handleClickDel] = useModal(<ModalDelete ID={idDelete} onRefresh={(newValue) => Refresh.push(newValue)} />)
+
+  const [handleClickUpdate] = useModal(<ModalUpdate id={idUpdate} onRefresh={(newValue) => Refresh.push(newValue)} />)
 
   return (
     <>
@@ -188,12 +160,22 @@ const DataRow = () => {
               <>
                 <Flex>
                   <Stack direction="row" justifyContent="center" alignItems="center">
-                    <Tooltip placement="top" title="Update" onClick={() => handleClickUpdate(data._id)}>
+                    <Tooltip
+                      placement="top"
+                      title="Update"
+                      onClick={handleClickUpdate}
+                      onClickCapture={() => setUpdate(data._id)}
+                    >
                       <IconButton color="primary" aria-label="delete" size="large">
                         <FcDataBackup />
                       </IconButton>
                     </Tooltip>
-                    <Tooltip placement="top" title="Delete" onClick={() => deletePost(data._id)}>
+                    <Tooltip
+                      placement="top"
+                      title="Delete"
+                      onClick={handleClickDel}
+                      onClickCapture={() => setIdDelete(data._id)}
+                    >
                       <IconButton color="primary" size="large">
                         <FcDeleteDatabase />
                       </IconButton>
@@ -204,37 +186,6 @@ const DataRow = () => {
             ) : (
               <></>
             )}
-
-            <Grid>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500,
-                }}
-                sx={{
-                  background: isDark ? 'rgba(0,0,0,0.5)' : '#fff',
-                }}
-              >
-                <Fade in={open}>
-                  <CustomBox sx={style}>
-                    <Flex width="100%" justifyContent="space-between">
-                      <Typography id="transition-modal-title" variant="h4" component="h2">
-                        Edit Team Wallet
-                      </Typography>
-                      <Flex style={{ cursor: 'pointer' }} onClick={handleClose}>
-                        <FaWindowClose />
-                      </Flex>
-                    </Flex>
-                    <ModalUpdate id={ID} />
-                  </CustomBox>
-                </Fade>
-              </Modal>
-            </Grid>
           </ResponsiveGrid>
         )
       })}
@@ -248,23 +199,7 @@ interface PoolTableProps {
 }
 
 const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ poolDatas, loading }) => {
-  const [isLogOut, setLogOut] = useState(true)
   const router = useRouter()
-  function handleClickLogIn() {
-    router.push('/login')
-  }
-
-  async function handleClickLogOut() {
-    const tokenAuth = localStorage.getItem('token')
-    await axios.get('https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/products', {
-      headers: {
-        'Content-Type': 'application/json',
-        token: `${tokenAuth}`,
-      },
-    })
-    localStorage.removeItem('token')
-    setLogOut(false)
-  }
 
   // for sorting
   const [sortField, setSortField] = useState(SORT_FIELD.volumeUSD)
