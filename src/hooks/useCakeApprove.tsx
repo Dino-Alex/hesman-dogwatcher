@@ -12,7 +12,6 @@ const useCakeApprove = (setLastUpdated: () => void, spender, successMsg) => {
   const { toastSuccess } = useToast()
   const { fetchWithCatchTxError, loading: pendingTx } = useCatchTxError()
   const { callWithGasPrice } = useCallWithGasPrice()
-  const { signer: cakeContract } = useCake()
   let erc20Var: Erc20
 
   const handleApprove = async () => {

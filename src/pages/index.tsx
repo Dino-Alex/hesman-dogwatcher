@@ -2,14 +2,12 @@ import { FACTORY_ADDRESS } from '@pancakeswap/sdk'
 import { getUnixTime, sub } from 'date-fns'
 import { gql } from 'graphql-request'
 import { GetStaticProps } from 'next'
-import { SWRConfig } from 'swr'
 import { bitQueryServerClient, infoServerClient } from 'utils/graphql'
 import { getCakeVaultAddress } from 'utils/addressHelpers'
 import { getCakeContract } from 'utils/contractHelpers'
 import { getBlocksFromTimestamps } from 'utils/getBlocksFromTimestamps'
 import { formatEther } from '@ethersproject/units'
 import TokenPage from './info/tokens/[address]'
-import Home from '../views/Home'
 
 const IndexPage = ({ totalTx30Days, addressCount30Days, tvl }) => {
   return (

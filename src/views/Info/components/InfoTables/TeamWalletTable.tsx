@@ -1,22 +1,10 @@
 import React, { useCallback, useState, useMemo, useContext, useEffect, Fragment } from 'react'
-import axios from 'axios'
-import { Backdrop, Box, Fade, Grid, IconButton, Modal, Stack, Tooltip, Typography } from '@mui/material'
+import { Box, IconButton, Stack, Tooltip } from '@mui/material'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
-import { FaWindowClose } from 'react-icons/fa'
 import styled from 'styled-components'
 import { FcDataBackup, FcDeleteDatabase } from 'react-icons/fc'
-import {
-  ArrowBackIcon,
-  ArrowForwardIcon,
-  Button,
-  Flex,
-  Skeleton,
-  Text,
-  useModal,
-  Link,
-  Overlay,
-} from '@pancakeswap/uikit'
+import { ArrowBackIcon, ArrowForwardIcon, Flex, Skeleton, Text, useModal, Link } from '@pancakeswap/uikit'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
 import { RefreshCreateGlobal } from 'components/Menu/GlobalSettings/SettingsModal'

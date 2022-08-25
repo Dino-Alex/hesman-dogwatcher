@@ -9,7 +9,6 @@ import { useProfileContract } from 'hooks/useContract'
 import { useCallWithGasPrice } from 'hooks/useCallWithGasPrice'
 import useCatchTxError from 'hooks/useCatchTxError'
 import { ToastDescriptionWithTx } from 'components/Toast'
-import { Contract } from '@ethersproject/contracts'
 import { Erc20 } from 'config/abi/types'
 
 interface PauseProfilePageProps extends InjectedModalProps {

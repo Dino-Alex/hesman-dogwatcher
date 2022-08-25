@@ -7,10 +7,8 @@ import {
   Text,
   Box,
   Heading,
-  Button,
   Card,
   Flex,
-  Breadcrumbs,
   Link as UIKitLink,
   LinkExternal,
   Spinner,
@@ -19,7 +17,6 @@ import {
 } from '@pancakeswap/uikit'
 import Page from 'components/Layout/Page'
 import { getBscScanLink } from 'utils'
-import truncateHash from 'utils/truncateHash'
 import useCMCLink from 'views/Info/hooks/useCMCLink'
 import { CurrencyLogo } from 'views/Info/components/CurrencyLogo'
 import { formatAmount } from 'utils/formatInfoNumbers'
@@ -34,16 +31,12 @@ import {
   useTokenTransactions,
 } from 'state/info/hooks'
 import PoolTable from 'views/Info/components/InfoTables/PoolsTable'
-import TransactionTable from 'views/Info/components/InfoTables/TransactionsTable'
 import { useWatchlistTokens } from 'state/user/hooks'
 import { ONE_HOUR_SECONDS } from 'config/constants/info'
 import { useTranslation } from '@pancakeswap/localization'
 import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
-import { Provider } from 'react-redux'
-import store from 'store'
 import { FetchCirculatingSupply, fetchTotalSuppy } from '../hooks/useTotalSupply'
 import TeamWalletTable from '../components/InfoTables/TeamWalletTable'
-import { productsReducer } from '../reducers/productReducers'
 import { getProductClient } from '../components/InfoTables/config'
 
 const ContentLayout = styled.div`

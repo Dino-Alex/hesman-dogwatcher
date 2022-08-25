@@ -42,17 +42,7 @@ import {
   getPredictionsV1Contract,
 } from 'utils/contractHelpers'
 import { getMulticallAddress, getPredictionsV1Address, getZapAddress } from 'utils/addressHelpers'
-import {
-  Erc20,
-  Erc20Bytes32,
-  Multicall,
-  Weth,
-  Cake,
-  Erc721collection,
-  CakeVaultV2,
-  CakeFlexibleSideVaultV2,
-  Zap,
-} from 'config/abi/types'
+import { Cake, Erc721collection, CakeVaultV2, CakeFlexibleSideVaultV2 } from 'config/abi/types'
 import zapAbi from 'config/abi/zap.json'
 
 // Imports below migrated from Exchange useContract.ts
@@ -65,8 +55,6 @@ import ERC20_ABI from '../config/abi/erc20.json'
 import WETH_ABI from '../config/abi/weth.json'
 import multiCallAbi from '../config/abi/Multicall.json'
 import { getContract, getProviderOrSigner } from '../utils'
-
-import { IPancakePair } from '../config/abi/types/IPancakePair'
 import { VaultKey } from '../state/types'
 
 /**

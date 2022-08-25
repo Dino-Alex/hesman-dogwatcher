@@ -1,6 +1,6 @@
-import { Button, Flex, Input, InputGroup, Text } from '@pancakeswap/uikit'
+import { Button, Flex, Input, Text } from '@pancakeswap/uikit'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 import { loginClient } from 'views/Info/components/InfoTables/config'
 

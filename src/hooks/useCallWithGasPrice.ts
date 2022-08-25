@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Contract, CallOverrides } from '@ethersproject/contracts'
+import { CallOverrides } from '@ethersproject/contracts'
 import { useGasPrice } from 'state/user/hooks'
 import get from 'lodash/get'
 import * as Sentry from '@sentry/react'

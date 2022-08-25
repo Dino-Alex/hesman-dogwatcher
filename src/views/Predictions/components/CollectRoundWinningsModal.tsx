@@ -18,7 +18,6 @@ import {
 } from '@pancakeswap/uikit'
 import { AnyAction, AsyncThunkAction } from '@reduxjs/toolkit'
 import { Token } from '@pancakeswap/sdk'
-import { Contract } from '@ethersproject/contracts'
 import { Erc20 } from 'config/abi/types'
 import { useWeb3React } from '@web3-react/core'
 import { REWARD_RATE } from 'state/predictions/config'

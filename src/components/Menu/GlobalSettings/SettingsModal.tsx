@@ -2,18 +2,7 @@ import { useState, createContext } from 'react'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
-import {
-  Text,
-  PancakeToggle,
-  Toggle,
-  Flex,
-  Modal,
-  InjectedModalProps,
-  ThemeSwitcher,
-  Box,
-  Button,
-  useModal,
-} from '@pancakeswap/uikit'
+import { Text, Flex, Modal, InjectedModalProps, ThemeSwitcher, Button, useModal } from '@pancakeswap/uikit'
 import {
   useAudioModeManager,
   useExpertModeManager,
@@ -26,10 +15,7 @@ import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import { useTranslation } from '@pancakeswap/localization'
 import useTheme from 'hooks/useTheme'
 import axios from 'axios'
-import QuestionHelper from '../../QuestionHelper'
-import TransactionSettings from './TransactionSettings'
 import ExpertModal from './ExpertModal'
-import GasSettings from './GasSettings'
 import { SettingsMode } from './types'
 
 const RefreshCreate = []
@@ -72,10 +58,6 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
   const [showExpertModeAcknowledgement, setShowExpertModeAcknowledgement] = useUserExpertModeAcknowledgementShow()
   const [expertMode, toggleExpertMode] = useExpertModeManager()
-  const [singleHopOnly, setSingleHopOnly] = useUserSingleHopOnly()
-  const [audioPlay, toggleSetAudioMode] = useAudioModeManager()
-  const [zapMode, toggleZapMode] = useZapModeManager()
-  const [subgraphHealth, setSubgraphHealth] = useSubgraphHealthIndicatorManager()
   const { onChangeRecipient } = useSwapActionHandlers()
 
   const { t } = useTranslation()
