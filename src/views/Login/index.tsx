@@ -1,6 +1,7 @@
 import { Button, Flex, Input, Text } from '@pancakeswap/uikit'
+import { key } from 'localforage'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { loginClient } from 'views/Info/components/InfoTables/config'
 
@@ -16,13 +17,26 @@ const Login = () => {
       const resp = await loginClient.post('', { name: userName, password: passWord }).then((response) => {
         setPosts([response.data, ...posts])
         localStorage.setItem('token', response.data.token)
-        router.push('/')
+        router.push('/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7')
       })
-      // onRefresh(false);
     } catch (error) {
       console.log(error)
     }
   }
+
+  useEffect(() => {
+    const listener = event => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        event.preventDefault();
+        handleSubmit(event)
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [userName, passWord]);
+
   return (
     <Container>
       <FormLogin>
@@ -46,7 +60,7 @@ const Login = () => {
                 <Text>Password</Text>
               </Flex>
               <Flex width="70%">
-                <Input value={passWord} onChange={(e) => setPassWord(e.target.value)} type="password" />
+                <Input id='myInputID' value={passWord} onChange={(e) => setPassWord(e.target.value)} type="password" />
               </Flex>
             </Flex>
           </Flex>
@@ -55,6 +69,7 @@ const Login = () => {
           </Flex>
         </Flex>
       </FormLogin>
+
     </Container>
   )
 }
@@ -72,5 +87,7 @@ const FormLogin = styled.div`
   width: 500px;
   height: 500px;
   border-style: 3px double red;
-  z-index: 1000;
+  @media screen and (max-width: 600px){
+    width: 90%;
+  }
 `

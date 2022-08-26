@@ -127,23 +127,48 @@ const DataRow = () => {
       {walletInfo.map((data, index) => {
         return (
           <ResponsiveGrid>
-            <FlexID width="4vw">
-              <Text>{index + 1}</Text>
-            </FlexID>
-            <FlexName width="25vw">
-              <Link href={getBscScanLink(data.address, 'address', chainId)} external>
-                {data.name}
-              </Link>
-            </FlexName>
-            <input type="hidden" value={data._id} />
-            <FlexAddress width="20vw">
-              <Link href={getBscScanLink(data.address, 'address', chainId)} external>
-                {sAccount(data.address)}
-              </Link>
-            </FlexAddress>
-            <FlexBalance width="12vw">
-              <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
-            </FlexBalance>
+            {tokenAuth ?
+              <>
+                <FlexID width="4vw">
+                  <Text>{index + 1}</Text>
+                </FlexID>
+                <FlexName width="25vw">
+                  <Link href={getBscScanLink(data.address, 'address', chainId)} external>
+                    {data.name}
+                  </Link>
+                </FlexName>
+                <input type="hidden" value={data._id} />
+                <FlexAddress width="20vw">
+                  <Link href={getBscScanLink(data.address, 'address', chainId)} external>
+                    {sAccount(data.address)}
+                  </Link>
+                </FlexAddress>
+                <FlexBalance width="12vw">
+                  <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
+                </FlexBalance>
+              </>
+              :
+              <>
+                <FlexIDV2 width="4vw">
+                  <Text>{index + 1}</Text>
+                </FlexIDV2>
+                <FlexNameV2 width="25vw">
+                  <Link href={getBscScanLink(data.address, 'address', chainId)} external>
+                    {data.name}
+                  </Link>
+                </FlexNameV2>
+                <input type="hidden" value={data._id} />
+                <FlexAddressV2 width="20vw">
+                  <Link href={getBscScanLink(data.address, 'address', chainId)} external>
+                    {sAccount(data.address)}
+                  </Link>
+                </FlexAddressV2>
+                <FlexBalanceV2 width="12vw">
+                  <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
+                </FlexBalanceV2>
+              </>
+
+            }
             {tokenAuth !== null ? (
               <>
                 <FlexAction>
@@ -208,15 +233,15 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   const sortedPools = useMemo(() => {
     return poolDatas
       ? poolDatas
-          .sort((a, b) => {
-            if (a && b) {
-              return a[sortField as keyof PoolData] > b[sortField as keyof PoolData]
-                ? (sortDirection ? -1 : 1) * 1
-                : (sortDirection ? -1 : 1) * -1
-            }
-            return -1
-          })
-          .slice(ITEMS_PER_INFO_TABLE_PAGE * (page - 1), page * ITEMS_PER_INFO_TABLE_PAGE)
+        .sort((a, b) => {
+          if (a && b) {
+            return a[sortField as keyof PoolData] > b[sortField as keyof PoolData]
+              ? (sortDirection ? -1 : 1) * 1
+              : (sortDirection ? -1 : 1) * -1
+          }
+          return -1
+        })
+        .slice(ITEMS_PER_INFO_TABLE_PAGE * (page - 1), page * ITEMS_PER_INFO_TABLE_PAGE)
       : []
   }, [page, poolDatas, sortDirection, sortField])
 
@@ -246,43 +271,87 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   return (
     <TableWrapper>
       <ResponsiveGrid>
-        <FlexID width="4vw">
-          <Text color="secondary" fontSize="12px" bold>
-            #
-          </Text>
-        </FlexID>
-        <FlexName width="25vw">
-          <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
-            {t('Name')}
-          </Text>
-        </FlexName>
-        <FlexAddress width="20vw">
-          <ClickableColumnHeader
-            color="secondary"
-            fontSize="12px"
-            bold
-            onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-            textTransform="uppercase"
-          >
-            {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
-          </ClickableColumnHeader>
-        </FlexAddress>
-        <FlexBalance width="12vw">
-          <ClickableColumnHeader
-            color="secondary"
-            fontSize="12px"
-            bold
-            onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-            textTransform="uppercase"
-          >
-            {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
-          </ClickableColumnHeader>
-        </FlexBalance>
-        <FlexAction width="12vw">
-          <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
-            {t('Action')}
-          </ClickableColumnHeader>
-        </FlexAction>
+        {tokenAuth ?
+          <>
+            <FlexID width="4vw">
+              <Text color="secondary" fontSize="12px" bold>
+                #
+              </Text>
+            </FlexID>
+            <FlexName width="25vw">
+              <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Name')}
+              </Text>
+            </FlexName>
+            <FlexAddress width="20vw">
+              <ClickableColumnHeader
+                color="secondary"
+                fontSize="12px"
+                bold
+                onClick={() => handleSort(SORT_FIELD.volumeUSD)}
+                textTransform="uppercase"
+              >
+                {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+              </ClickableColumnHeader>
+            </FlexAddress>
+            <FlexBalance width="12vw">
+              <ClickableColumnHeader
+                color="secondary"
+                fontSize="12px"
+                bold
+                onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+                textTransform="uppercase"
+              >
+                {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+              </ClickableColumnHeader>
+            </FlexBalance>
+            <FlexAction width="12vw">
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Action')}
+              </ClickableColumnHeader>
+            </FlexAction>
+          </>
+          :
+          <>
+            <FlexIDV2 width="4vw">
+              <Text color="secondary" fontSize="12px" bold>
+                #
+              </Text>
+            </FlexIDV2>
+            <FlexNameV2 width="25vw">
+              <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Name')}
+              </Text>
+            </FlexNameV2>
+            <FlexAddressV2 width="20vw">
+              <ClickableColumnHeader
+                color="secondary"
+                fontSize="12px"
+                bold
+                onClick={() => handleSort(SORT_FIELD.volumeUSD)}
+                textTransform="uppercase"
+              >
+                {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+              </ClickableColumnHeader>
+            </FlexAddressV2>
+            <FlexBalanceV2 width="12vw">
+              <ClickableColumnHeader
+                color="secondary"
+                fontSize="12px"
+                bold
+                onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+                textTransform="uppercase"
+              >
+                {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+              </ClickableColumnHeader>
+            </FlexBalanceV2>
+            <FlexActionV2 width="12vw">
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Action')}
+              </ClickableColumnHeader>
+            </FlexActionV2>
+          </>
+        }
       </ResponsiveGrid>
 
       <Break />
@@ -363,5 +432,35 @@ const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 20vw;
     margin: -15vw;
+  }
+`
+// No login
+const FlexNameV2 = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 40vw;
+  }
+`
+const FlexBalanceV2 = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 40vw;
+    margin-left: 40vw;
+  }
+
+`
+const FlexIDV2 = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
+`
+const FlexAddressV2 = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
+`
+const FlexActionV2 = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    display: none;
   }
 `
