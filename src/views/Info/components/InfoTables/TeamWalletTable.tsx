@@ -23,21 +23,21 @@ const ResponsiveGrid = styled.div`
   grid-gap: 1em;
   align-items: center;
   grid-template-columns: 20px 5fr 5fr 0fr 10fr;
-
   padding: 0 24px;
   @media screen and (max-width: 900px) {
     grid-template-columns: 20px 1.5fr repeat(3, 1fr);
     & :nth-child(4),
     & :nth-child(5) {
-      display: none;
+      /* display: none; */
     }
   }
   @media screen and (max-width: 500px) {
     grid-template-columns: 20px 1.5fr repeat(1, 1fr);
     & :nth-child(4),
-    & :nth-child(5),
-    & :nth-child(6),
-    & :nth-child(7) {
+    /* & :nth-child(5), */
+    /* & :nth-child(6), */
+    & :nth-child(7) 
+    {
       display: none;
     }
   }

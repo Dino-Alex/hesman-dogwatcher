@@ -61,14 +61,15 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
     checkValidate(value)
   }
   return (
-    <Modal title="Create Team Wallet" onDismiss={onDismiss}>
-      <Flex width="80vw" flexDirection="column" justifyContent="center" alignItems="center">
+    <CustomModal title="Create Team Wallet" onDismiss={onDismiss}>
+      <CustomFlex width="80vw" flexDirection="column" justifyContent="center" alignItems="center">
         <Flex width="50%" flexDirection="column" justifyContent="center" alignItems="center">
-          <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <Flex width="20%">
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center" >
+            <FlexInput width="20%">
               <Text color="primary">Name: </Text>
-            </Flex>
-            <Flex width="80%">
+            </FlexInput>
+
+            <FlexInput width="80%">
               <CustomInputGroup>
                 <Input
                   type="name"
@@ -79,13 +80,15 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                   color="primary"
                 />
               </CustomInputGroup>
-            </Flex>
-          </Flex>
-          <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <Flex width="20%">
+            </FlexInput>
+
+          </CustomFlexInput>
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInput width="20%">
               <Text color="primary">Address: </Text>
-            </Flex>
-            <Flex width="80%">
+            </FlexInput>
+
+            <FlexInput width="80%">
               <CustomInputGroup>
                 <Input
                   type="address"
@@ -95,13 +98,15 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                   color="primary"
                 />
               </CustomInputGroup>
-            </Flex>
-          </Flex>
-          <Flex mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <Flex width="20%">
+            </FlexInput>
+
+          </CustomFlexInput>
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInput width="20%">
               <Text color="primary">Limit: </Text>
-            </Flex>
-            <Flex width="80%">
+            </FlexInput>
+
+            <FlexInput width="80%">
               <CustomInputGroup>
                 <Input
                   type="number"
@@ -112,8 +117,8 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                   color="primary"
                 />
               </CustomInputGroup>
-            </Flex>
-          </Flex>
+            </FlexInput>
+          </CustomFlexInput>
         </Flex>
         <Flex mt="2rem">
           <Button
@@ -141,8 +146,8 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
             </Text>
           )}
         </Flex>
-      </Flex>
-    </Modal>
+      </CustomFlex>
+    </CustomModal>
   )
 }
 
@@ -151,4 +156,70 @@ export default ModalCreate
 const CustomInputGroup = styled(InputGroup)`
   background: 'primary';
   margin-left: 2rem;
+
+`
+const CustomFlex = styled(Flex)`
+  margin-bottom: 10rem;
+  width: 100%;
+  height: 100px;
+  padding-top: 10rem;
+`
+
+const CustomFlexInput = styled(Flex)`
+@media screen and (max-width: 600px){
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (min-width: 601px) and (max-width: 768px){
+  width: 600px;
+}
+@media screen and (min-width: 769px) and (max-width: 1024px){
+  width: 700px;
+  margin-top: 1rem;
+}
+@media screen and (min-width: 1025px) and (max-width: 1440px){
+  width: 700px;
+  margin-top: 1rem;
+}
+@media screen and (min-width: 1441px) and (max-width: 2556px){
+  width: 700px;
+  margin-top: 1rem;
+}
+`
+const FlexInput = styled(Flex)`
+@media screen and (max-width: 600px){
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: -20px;
+}
+`
+const CustomModal = styled(Modal)`
+  @media screen and (max-width: 600px){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    height: 80%;
+    margin-bottom: 5rem;
+    border-radius: 30px;
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 768px){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 70%;
+    margin-bottom: 5rem;
+    border-radius: 30px;
+  }
+
 `
