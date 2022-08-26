@@ -2,8 +2,10 @@ import React, { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import Flex from "../../../components/Box/Flex";
 import { LogoIcon, LogoWithTextIcon } from "../../../components/Svg";
-import { MenuContext } from "../context";
 import LogoDeltaLabs from "../../../components/Svg/Icons/LogoDeltaLabs";
+import LogoRunTogether from "../../../components/Svg/Icons/LogoRunTogether";
+import LogoDeltaLabsLine from "../../../components/Svg/Icons/LogoDeltaLabsLine";
+import { MenuContext } from "../context";
 
 interface Props {
   isDark: boolean;
@@ -49,9 +51,7 @@ const Logo: React.FC<React.PropsWithChildren<Props>> = ({ isDark, href }) => {
   const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
-      <LogoIcon className="mobile-icon" />
-      {/* <LogoWithTextIcon className="desktop-icon" isDark={isDark} /> */}
-      <LogoDeltaLabs className="desktop-icon" isDark={isDark} />
+      <LogoRunTogether className="desktop-icon" isDark={isDark} />
     </>
   );
 
