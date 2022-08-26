@@ -20,7 +20,7 @@ const Logo: React.FC<LogoProps> = ({ isDark, ...props }) => {
   </defs>
   </svg>
   :
-      <svg width="96" height="58" viewBox="0 0 96 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
+      <svg width="66" height="58" viewBox="0 0 96 58" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
   <rect y="0.5" width="96" height="57" fill="url(#pattern0)"/>
   <defs>
   <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
