@@ -67,11 +67,11 @@ function MyApp(props: AppProps) {
         />
         <meta name="description" content="Content V1" />
         <meta name="theme-color" content="#1FC7D4" />
-        <meta name="twitter:image" content="https://deltalabsjsc.com/wp-content/uploads/2022/07/Homepage.jpg" />
+        <meta name="twitter:image" content="https://image.thanhnien.vn/w1024/Uploaded/2022/xdrkxrvekx/2022_04_24/278949514-463984475521822-5992632726712348321-n-575.jpg" />
         <meta name="twitter:description" content="Content V2" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="🐶 Dog-Watcher" />
-        <title>Delta Labs</title>
+        <title>Run Together</title>
         {(Component as NextPageWithLayout).mp && (
           // eslint-disable-next-line @next/next/no-sync-scripts
           <script src="https://public.bnbstatic.com/static/js/mp-webview-sdk/webview-v1.0.0.min.js" id="mp-webview" />

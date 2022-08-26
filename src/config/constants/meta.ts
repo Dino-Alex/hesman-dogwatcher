@@ -3,7 +3,7 @@ import { ContextApi } from '@pancakeswap/localization'
 import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
-  title: 'Delta Labs',
+  title: 'Run Together',
   description: '',
   image: '',
 }
@@ -17,10 +17,10 @@ const getPathList = (t: ContextApi['t']): PathList => {
   return {
     paths: {
       '/': { title: t('Home') },
-      '/info': { title: t('Overview'), description: 'View statistics for Pancakeswap exchanges.' },
-      '/info/tokens': { title: t('Tokens'), description: 'View statistics for Pancakeswap exchanges.' },
+      '/info': { title: t('Overview'), description: '' },
+      '/info/tokens': { title: t('Tokens'), description: '' },
     },
-    defaultTitleSuffix: t('DeltaLabs'),
+    defaultTitleSuffix: t('Run Together'),
   }
 }
 

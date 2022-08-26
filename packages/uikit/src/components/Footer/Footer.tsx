@@ -32,15 +32,6 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
             <ThemeSwitcher isDark={isDark} toggleTheme={toggleTheme} />
           </Flex>
           <Flex width='200px' height='100px' order={[1, null, 2]} mb={["24px", null, "0"]} justifyContent="space-between" alignItems="center">
-            {/* <Button
-              as="a"
-              href="https://deltalabsjsc.com/"
-              target="_blank"
-              scale="sm"
-              endIcon={<ArrowForwardIcon color={lightColors.backgroundAlt} />}
-            >
-              Delta Labs
-            </Button> */}
             <StyledLink as="a" href="https://runtogether.net/" target="_blank">
             <svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <rect width="100" height="60" fill="url(#pattern0)"/>

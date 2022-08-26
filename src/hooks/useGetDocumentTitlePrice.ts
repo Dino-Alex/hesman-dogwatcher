@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 const useGetDocumentTitlePrice = () => {
   useEffect(() => {
-    document.title = `Delta Labs`
+    document.title = `Run Together`
   }, [])
 }
 export default useGetDocumentTitlePrice
