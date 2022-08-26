@@ -25,19 +25,18 @@ const ResponsiveGrid = styled.div`
   align-items: center;
   grid-template-columns: 20px 5fr 5fr 0fr 10fr;
   padding: 0 24px;
-  @media screen and (max-width: 900px) {
+  /* @media screen and (max-width: 900px) {
     grid-template-columns: 20px 1.5fr repeat(3, 1fr);
     & :nth-child(4),
     & :nth-child(5) {
-      /* display: none; */
     }
   }
   @media screen and (max-width: 500px) {
     grid-template-columns: 20px 1.5fr repeat(1, 1fr);
+    & :nth-child(3),
     & :nth-child(4),
-    /* & :nth-child(5), */
-    /* & :nth-child(6), */
-    & :nth-child(7) 
+
+    & :nth-child(7)
     {
       display: none;
     }
@@ -47,7 +46,7 @@ const ResponsiveGrid = styled.div`
     > *:nth-child(1) {
       display: none;
     }
-  }
+  } */
 `
 
 const SORT_FIELD = {
@@ -128,26 +127,26 @@ const DataRow = () => {
       {walletInfo.map((data, index) => {
         return (
           <ResponsiveGrid>
-            <Flex width="2vw">
+            <FlexID width="2vw">
               <Text>{index + 1}</Text>
-            </Flex>
-            <Flex width="20vw">
+            </FlexID>
+            <FlexName width="20vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {data.name}
               </Link>
-            </Flex>
+            </FlexName>
             <input type="hidden" value={data._id} />
-            <Flex width="20vw">
+            <FlexAddress width="20vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {sAccount(data.address)}
               </Link>
-            </Flex>
-            <Flex width="15vw">
+            </FlexAddress>
+            <FlexBalance width="15vw">
               <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
-            </Flex>
+            </FlexBalance>
             {tokenAuth !== null ? (
               <>
-                <Flex>
+                <FlexAction>
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Tooltip
                       placement="top"
@@ -170,7 +169,7 @@ const DataRow = () => {
                       </IconButton>
                     </Tooltip>
                   </Stack>
-                </Flex>
+                </FlexAction>
               </>
             ) : (
               <></>
@@ -247,17 +246,17 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   return (
     <TableWrapper>
       <ResponsiveGrid>
-        <Flex width="2vw">
+        <FlexID width="2vw">
           <Text color="secondary" fontSize="12px" bold>
             #
           </Text>
-        </Flex>
-        <Flex width="20vw">
+        </FlexID>
+        <FlexName width="20vw">
           <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
             {t('Name')}
           </Text>
-        </Flex>
-        <Flex width="20vw">
+        </FlexName>
+        <FlexAddress width="20vw">
           <ClickableColumnHeader
             color="secondary"
             fontSize="12px"
@@ -267,8 +266,8 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
           >
             {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
           </ClickableColumnHeader>
-        </Flex>
-        <Flex width="15vw">
+        </FlexAddress>
+        <FlexBalance width="15vw">
           <ClickableColumnHeader
             color="secondary"
             fontSize="12px"
@@ -278,12 +277,12 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
           >
             {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
           </ClickableColumnHeader>
-        </Flex>
-        <Flex width="15vw">
+        </FlexBalance>
+        <FlexAction width="15vw">
           <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
             {t('Action')}
           </ClickableColumnHeader>
-        </Flex>
+        </FlexAction>
       </ResponsiveGrid>
 
       <Break />
@@ -338,10 +337,36 @@ const CustomBox = styled(Box)`
   @media screen and (max-width: 600px) {
     width: 95%;
   }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 95%;
+
+`
+const FlexName = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 20vw;
   }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 95%;
+`
+const FlexBalance = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 20vw;
+    margin: 15vw;
   }
+
+`
+const FlexID = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
+`
+const FlexAddress = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+
+`
+const FlexAction = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 20vw;
+    margin: -15vw;
+  }
+
 `

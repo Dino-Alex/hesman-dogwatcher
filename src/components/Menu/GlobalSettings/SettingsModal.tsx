@@ -1,20 +1,15 @@
-import { useState, createContext } from 'react'
-import styled from 'styled-components'
-import { useRouter } from 'next/router'
-import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
-import { Text, Flex, Modal, InjectedModalProps, ThemeSwitcher, Button, useModal } from '@pancakeswap/uikit'
-import {
-  useAudioModeManager,
-  useExpertModeManager,
-  useSubgraphHealthIndicatorManager,
-  useUserExpertModeAcknowledgementShow,
-  useUserSingleHopOnly,
-  useZapModeManager,
-} from 'state/user/hooks'
-import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
 import { useTranslation } from '@pancakeswap/localization'
-import useTheme from 'hooks/useTheme'
+import { Button, Flex, InjectedModalProps, Modal, Text, ThemeSwitcher, useModal } from '@pancakeswap/uikit'
 import axios from 'axios'
+import useTheme from 'hooks/useTheme'
+import { useRouter } from 'next/router'
+import { createContext, useState } from 'react'
+import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
+import {
+  useExpertModeManager, useUserExpertModeAcknowledgementShow
+} from 'state/user/hooks'
+import styled from 'styled-components'
+import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ExpertModal from './ExpertModal'
 import { SettingsMode } from './types'
 
@@ -87,7 +82,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
 
   const tokenAuth = localStorage.getItem('token')
   return (
-    <Modal
+    <CustomModal
       title={t('Settings')}
       headerBackground="gradients.cardHeader"
       onDismiss={onDismiss}
@@ -117,8 +112,26 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
           </>
         )}
       </ScrollableContainer>
-    </Modal>
+    </CustomModal>
   )
 }
 
 export default SettingsModal
+
+const CustomModal = styled(Modal)`
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-bottom: 10rem;
+    border-radius: 30px;
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 15rem;
+    border-radius: 30px;
+  }
+`
