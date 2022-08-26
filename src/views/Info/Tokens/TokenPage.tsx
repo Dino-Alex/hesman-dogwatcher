@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect, useContext } from 'react'
 import { NextLinkFromReactRouter } from 'components/NextLink'
 import { Duration } from 'date-fns'
 import styled from 'styled-components'
@@ -31,10 +31,12 @@ import {
   useTokenTransactions,
 } from 'state/info/hooks'
 import PoolTable from 'views/Info/components/InfoTables/PoolsTable'
+import { RefreshCreateGlobal } from 'components/Menu/GlobalSettings/SettingsModal'
 import { useWatchlistTokens } from 'state/user/hooks'
 import { ONE_HOUR_SECONDS } from 'config/constants/info'
 import { useTranslation } from '@pancakeswap/localization'
 import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
+import { RefreshDeleteGlobal } from './Modal/ModalDelete'
 import { FetchCirculatingSupply, fetchTotalSuppy } from '../hooks/useTotalSupply'
 import TeamWalletTable from '../components/InfoTables/TeamWalletTable'
 import { getProductClient } from '../components/InfoTables/config'
@@ -64,6 +66,9 @@ const DEFAULT_TIME_WINDOW: Duration = { weeks: 1 }
 const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = ({ routeAddress }) => {
   const { isXs, isSm } = useMatchBreakpointsContext()
   const { t } = useTranslation()
+
+  const appContext = useContext(RefreshCreateGlobal)
+  const contextDelete = useContext(RefreshDeleteGlobal)
 
   // In case somebody pastes checksummed address into url (since GraphQL expects lowercase address)
   const address = routeAddress.toLowerCase()
@@ -107,7 +112,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       }
     }
     getSaleItems()
-  }, [])
+  }, [appContext.length, contextDelete.length])
 
   const [walletAddresses, setWalletAddresses] = useState([])
   const [walletInfo, setWalletInfo] = useState([])
@@ -119,7 +124,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       const addresses = response.data.products.map((wallet) => wallet.address)
       setWalletAddresses(addresses)
     })
-  }, [])
+  }, [appContext.length, contextDelete.length])
 
   useEffect(() => {
     const getCirculatingSupplyDisplay = async () => {
@@ -133,7 +138,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       }
     }
     getCirculatingSupplyDisplay()
-  }, [walletAddresses])
+  }, [walletAddresses, appContext.length, contextDelete.length, circulatingSupplyDisplay])
 
   return (
     // <Provider store={store}>
@@ -154,18 +159,6 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
           <>
             {/* Stuff on top */}
             <Flex justifyContent="space-between" mb="24px" flexDirection={['column', 'column', 'row']}>
-              {/* <Breadcrumbs mb="32px">
-                <NextLinkFromReactRouter to="/info">
-                  <Text color="primary">{t('Info')}</Text>
-                </NextLinkFromReactRouter>
-                <NextLinkFromReactRouter to="/info/tokens">
-                  <Text color="primary">{t('Tokens')}</Text>
-                </NextLinkFromReactRouter>
-                <Flex>
-                  <Text mr="8px">{tokenData.symbol}</Text>
-                  <Text>{`(${truncateHash(address)})`}</Text>
-                </Flex>
-              </Breadcrumbs> */}
               <Flex justifyContent={[null, null, 'flex-end']} mt={['8px', '8px', 0]}>
                 <LinkExternal mr="8px" color="primary" href={getBscScanLink(address, 'address')}>
                   {t('View on BscScan')}
@@ -202,18 +195,8 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   <Percent value={tokenData.priceUSDChange} fontWeight={600} />
                 </Flex>
               </Flex>
-              {/* <Flex>
-                <NextLinkFromReactRouter to={`/add/${address}`}>
-                  <Button mr="8px" variant="secondary">
-                    {t('Add Liquidity')}
-                  </Button>
-                </NextLinkFromReactRouter>
-                <NextLinkFromReactRouter to={`/swap?inputCurrency=${address}`}>
-                  <Button>{t('Trade')}</Button>
-                </NextLinkFromReactRouter>
-              </Flex> */}
+              
             </Flex>
-            {/* data on the right side of chart */}
             <ContentLayout>
               <Card>
                 <Box p="30px">

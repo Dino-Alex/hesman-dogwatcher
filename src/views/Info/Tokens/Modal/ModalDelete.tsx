@@ -1,7 +1,7 @@
 import { Button, Flex, Input, InputGroup, Modal, Text } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import axios from 'axios'
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 import styled from 'styled-components'
 import { addProductClient } from 'views/Info/components/InfoTables/config'
 
@@ -10,6 +10,10 @@ interface Proptype {
   onRefresh?: (newValue) => void
   ID?: any
 }
+
+const RefreshDelete = []
+
+export const RefreshDeleteGlobal = createContext(RefreshDelete)
 
 const ModalDelete: React.FC<Proptype> = ({ onDismiss, onRefresh, ID }) => {
   const tokenAuth = localStorage.getItem('token')
@@ -24,6 +28,7 @@ const ModalDelete: React.FC<Proptype> = ({ onDismiss, onRefresh, ID }) => {
     })
     onRefresh('Reset')
     onDismiss()
+    RefreshDelete.push('Delete')
     setPosts(
       posts.filter((post) => {
         return post.id !== ID

@@ -16,6 +16,7 @@ import { SettingsMode } from './types'
 const RefreshCreate = []
 
 export const RefreshCreateGlobal = createContext(RefreshCreate)
+
 const ScrollableContainer = styled(Flex)`
   flex-direction: column;
   height: auto;
@@ -66,18 +67,6 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
         setShowExpertModeAcknowledgement={setShowExpertModeAcknowledgement}
       />
     )
-  }
-
-  const handleExpertModeToggle = () => {
-    if (expertMode) {
-      onChangeRecipient(null)
-      toggleExpertMode()
-    } else if (!showExpertModeAcknowledgement) {
-      onChangeRecipient(null)
-      toggleExpertMode()
-    } else {
-      setShowConfirmExpertModal(true)
-    }
   }
 
   const tokenAuth = localStorage.getItem('token')

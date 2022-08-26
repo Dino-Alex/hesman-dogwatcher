@@ -1,23 +1,23 @@
-import React, { useCallback, useState, useMemo, useContext, useEffect, Fragment } from 'react'
-import { Box, IconButton, Stack, Tooltip } from '@mui/material'
-import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
-import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
-import styled from 'styled-components'
-import EditIcon from '@mui/icons-material/Edit'
 import ClearIcon from '@mui/icons-material/Clear'
-import { ArrowBackIcon, ArrowForwardIcon, Flex, Skeleton, Text, useModal, Link } from '@pancakeswap/uikit'
-import { PoolData } from 'state/info/types'
-import { useRouter } from 'next/router'
-import { RefreshCreateGlobal } from 'components/Menu/GlobalSettings/SettingsModal'
-import useTheme from 'hooks/useTheme'
-import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { getBscScanLink } from 'utils'
-import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
+import EditIcon from '@mui/icons-material/Edit'
+import { Box, IconButton, Stack, Tooltip } from '@mui/material'
 import { useTranslation } from '@pancakeswap/localization'
-import ModalDelete from 'views/Info/Tokens/Modal/ModalDelete'
-import { ClickableColumnHeader, TableWrapper, PageButtons, Arrow, Break } from './shared'
-import { getProductClient } from './config'
+import { ArrowBackIcon, ArrowForwardIcon, Flex, Link, Skeleton, Text, useModal } from '@pancakeswap/uikit'
+import { RefreshCreateGlobal } from 'components/Menu/GlobalSettings/SettingsModal'
+import { ITEMS_PER_INFO_TABLE_PAGE } from 'config/constants/info'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useRouter } from 'next/router'
+import React, { Fragment, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { PoolData } from 'state/info/types'
+import styled from 'styled-components'
+import { getBscScanLink } from 'utils'
+import { formatAmount } from 'utils/formatInfoNumbers'
+import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
+import ModalDelete, { RefreshDeleteGlobal } from 'views/Info/Tokens/Modal/ModalDelete'
+import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import { FetchTokenBalance } from '../../hooks/useTotalSupply'
+import { getProductClient } from './config'
+import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
 
 const ResponsiveGrid = styled.div`
   display: grid;
@@ -76,9 +76,9 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => (
   </>
 )
 const Refresh = []
+
 const DataRow = () => {
   const [walletInfo, setWalletInfo] = useState([])
-  const { isDark } = useTheme()
   const [walletAddresses, setWalletAddresses] = useState([])
   const [tokenBalances, setTokenBalances] = useState({ tokenBalanceVal: [0] })
   const tokenAuth = localStorage.getItem('token')
@@ -106,7 +106,7 @@ const DataRow = () => {
     return ''
   }
   const appContext = useContext(RefreshCreateGlobal)
-
+  
   useEffect(() => {
     getProductClient.get('').then((response) => {
       setWalletInfo(response.data.products)
@@ -144,7 +144,7 @@ const DataRow = () => {
                   </Link>
                 </FlexAddress>
                 <FlexBalance width="12vw">
-                  <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
+                  {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
                 </FlexBalance>
               </>
               :
@@ -164,7 +164,7 @@ const DataRow = () => {
                   </Link>
                 </FlexAddressV2>
                 <FlexBalanceV2 width="12vw">
-                  <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
+                  {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
                 </FlexBalanceV2>
               </>
 
@@ -413,6 +413,18 @@ const FlexBalance = styled(Flex)`
     width: 25vw;
     margin-left: 25vw;
   }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 20vw;
+    margin-left: 8vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 20vw;
+    margin-left: 8vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 20vw;
+    margin-left: -5vw;
+  }
 
 `
 const FlexID = styled(Flex)`
@@ -424,11 +436,23 @@ const FlexAddress = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 20vw;
+    margin-left: -15vw;
+  }
 `
 const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 10vw;
     margin-left: -7vw;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 20vw;
+    margin-left: -8vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 20vw;
+    margin-left: -10vw;
   }
 `
 // No login
@@ -443,7 +467,7 @@ const FlexBalanceV2 = styled(Flex)`
     margin-left: 13vw;
   @media screen and (max-width: 600px) {
     width: 40vw;
-    margin-left: 40vw;
+    margin-left: 45vw;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
