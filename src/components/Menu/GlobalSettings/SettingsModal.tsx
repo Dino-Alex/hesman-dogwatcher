@@ -103,9 +103,9 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                     <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
                   </Flex>
                 ) : (
-                  <>
+                  <Flex width="100%" flexDirection="row" justifyContent="center" alignItems='center'>
                     <Button onClick={() => handleClickLogIn()}>{t('LOGIN')}</Button>
-                  </>
+                  </Flex>
                 )}
               </Flex>
             </Flex>

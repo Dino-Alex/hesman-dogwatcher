@@ -10,6 +10,7 @@ const Login = () => {
   const [userName, setUserName] = useState('')
   const [passWord, setPassWord] = useState('')
   const [posts, setPosts] = useState([])
+  const [padding, setPadding] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -19,6 +20,7 @@ const Login = () => {
         localStorage.setItem('token', response.data.token)
         router.push('/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7')
       })
+      setPadding(true)
     } catch (error) {
       console.log(error)
     }
@@ -65,11 +67,10 @@ const Login = () => {
             </Flex>
           </Flex>
           <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
-            <Button onClick={handleSubmit}>Login</Button>
+            <Button onClick={handleSubmit} disabled={padding === true}>Login</Button>
           </Flex>
         </Flex>
       </FormLogin>
-
     </Container>
   )
 }

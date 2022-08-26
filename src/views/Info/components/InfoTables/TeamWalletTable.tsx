@@ -197,7 +197,8 @@ const DataRow = () => {
                 </FlexAction>
               </>
             ) : (
-              <></>
+              <>
+              </>
             )}
           </ResponsiveGrid>
         )
@@ -402,21 +403,17 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
 
 export default TeamWalletTable
 
-const CustomBox = styled(Box)`
-  @media screen and (max-width: 600px) {
-    width: 95%;
-  }
-`
 const FlexName = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 20vw;
+    width: 30vw;
   }
 `
 const FlexBalance = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 20vw;
-    margin: 15vw;
+    width: 25vw;
+    margin-left: 25vw;
   }
+
 `
 const FlexID = styled(Flex)`
   @media screen and (max-width: 600px) {
@@ -430,22 +427,40 @@ const FlexAddress = styled(Flex)`
 `
 const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 20vw;
-    margin: -15vw;
+    width: 10vw;
+    margin-left: -7vw;
   }
 `
 // No login
 const FlexNameV2 = styled(Flex)`
+  width: 34vw;
   @media screen and (max-width: 600px) {
     width: 40vw;
   }
 `
 const FlexBalanceV2 = styled(Flex)`
+    width: 20vw;
+    margin-left: 13vw;
   @media screen and (max-width: 600px) {
     width: 40vw;
     margin-left: 40vw;
   }
-
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 20vw;
+    margin-left: 13vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 20vw;
+    margin-left: 20vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1444px) {
+    width: 20vw;
+    margin-left: 13vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 20vw;
+    margin-left: -2vw;
+  }
 `
 const FlexIDV2 = styled(Flex)`
   @media screen and (max-width: 600px) {
@@ -454,13 +469,30 @@ const FlexIDV2 = styled(Flex)`
 
 `
 const FlexAddressV2 = styled(Flex)`
+    width: 20vw;
   @media screen and (max-width: 600px) {
     display: none;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 20vw;
+    margin-left: -5vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 20vw;
+    margin-left: -2vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1444px) {
+    width: 20vw;
+    margin-left: -6vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 20vw;
+    margin-left: -18vw;
   }
 
 `
 const FlexActionV2 = styled(Flex)`
-  @media screen and (max-width: 600px) {
     display: none;
+  @media screen and (max-width: 600px) {
   }
 `
