@@ -130,23 +130,23 @@ const DataRow = () => {
             <FlexID width="4vw">
               <Text>{index + 1}</Text>
             </FlexID>
-            <FlexName width="15vw">
+            <FlexName width="25vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {data.name}
               </Link>
             </FlexName>
             <input type="hidden" value={data._id} />
-            <FlexAddress width="20vw" justifyContent="center">
+            <FlexAddress width="20vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {sAccount(data.address)}
               </Link>
             </FlexAddress>
-            <FlexBalance width="12vw" justifyContent="flex-end">
+            <FlexBalance width="12vw">
               <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
             </FlexBalance>
             {tokenAuth !== null ? (
               <>
-                <FlexAction justifyContent="center">
+                <FlexAction>
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Tooltip
                       placement="top"
@@ -251,12 +251,12 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
             #
           </Text>
         </FlexID>
-        <FlexName width="12vw" justifyContent="center">
+        <FlexName width="25vw">
           <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
             {t('Name')}
           </Text>
         </FlexName>
-        <FlexAddress width="23vw" justifyContent="center">
+        <FlexAddress width="20vw">
           <ClickableColumnHeader
             color="secondary"
             fontSize="12px"
@@ -267,7 +267,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
             {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
           </ClickableColumnHeader>
         </FlexAddress>
-        <FlexBalance width="18vw" justifyContent="center">
+        <FlexBalance width="12vw">
           <ClickableColumnHeader
             color="secondary"
             fontSize="12px"
@@ -278,7 +278,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
             {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
           </ClickableColumnHeader>
         </FlexBalance>
-        <FlexAction width="12vw" justifyContent="center">
+        <FlexAction width="12vw">
           <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
             {t('Action')}
           </ClickableColumnHeader>
