@@ -62,14 +62,14 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
   }
   return (
     <CustomModal title="Create Team Wallet" onDismiss={onDismiss}>
-      <CustomFlex width="80vw" flexDirection="column" justifyContent="center" alignItems="center">
-        <Flex width="50%" flexDirection="column" justifyContent="center" alignItems="center">
-          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center" >
-            <FlexInput width="20%">
+      <CustomFlex width="35vw" flexDirection="column" justifyContent="center" alignItems="center">
+        <Flex width="100%" flexDirection="column" justifyContent="center" alignItems="center">
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInput width="10%">
               <Text color="primary">Name: </Text>
             </FlexInput>
 
-            <FlexInput width="80%">
+            <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
                   type="name"
@@ -81,14 +81,13 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                 />
               </CustomInputGroup>
             </FlexInput>
-
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="20%">
+            <FlexInput width="10%">
               <Text color="primary">Address: </Text>
             </FlexInput>
 
-            <FlexInput width="80%">
+            <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
                   type="address"
@@ -99,14 +98,13 @@ const ModalCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                 />
               </CustomInputGroup>
             </FlexInput>
-
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="20%">
+            <FlexInput width="10%">
               <Text color="primary">Limit: </Text>
             </FlexInput>
 
-            <FlexInput width="80%">
+            <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
                   type="number"
@@ -156,7 +154,6 @@ export default ModalCreate
 const CustomInputGroup = styled(InputGroup)`
   background: 'primary';
   margin-left: 2rem;
-
 `
 const CustomFlex = styled(Flex)`
   margin-bottom: 10rem;
@@ -166,41 +163,41 @@ const CustomFlex = styled(Flex)`
 `
 
 const CustomFlexInput = styled(Flex)`
-@media screen and (max-width: 600px){
-  width: 380px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-@media screen and (min-width: 601px) and (max-width: 768px){
-  width: 600px;
-}
-@media screen and (min-width: 769px) and (max-width: 1024px){
-  width: 700px;
-  margin-top: 1rem;
-}
-@media screen and (min-width: 1025px) and (max-width: 1440px){
-  width: 700px;
-  margin-top: 1rem;
-}
-@media screen and (min-width: 1441px) and (max-width: 2556px){
-  width: 700px;
-  margin-top: 1rem;
-}
+  @media screen and (max-width: 600px) {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 600px;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 700px;
+    margin-top: 1rem;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    width: 700px;
+    margin-top: 1rem;
+  }
+  @media screen and (min-width: 1441px) and (max-width: 2556px) {
+    width: 700px;
+    margin-top: 1rem;
+  }
 `
 const FlexInput = styled(Flex)`
-@media screen and (max-width: 600px){
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-left: -20px;
-}
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: -20px;
+  }
 `
 const CustomModal = styled(Modal)`
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -211,7 +208,7 @@ const CustomModal = styled(Modal)`
     border-radius: 30px;
   }
 
-  @media screen and (min-width: 601px) and (max-width: 768px){
+  @media screen and (min-width: 601px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -221,5 +218,4 @@ const CustomModal = styled(Modal)`
     margin-bottom: 5rem;
     border-radius: 30px;
   }
-
 `
