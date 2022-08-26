@@ -164,7 +164,7 @@ const CustomFlex = styled(Flex)`
 
 const CustomFlexInput = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 380px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -200,8 +200,6 @@ const CustomModal = styled(Modal)`
   @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 95%;
     height: 80%;
     margin-bottom: 5rem;
@@ -211,8 +209,6 @@ const CustomModal = styled(Modal)`
   @media screen and (min-width: 601px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 90%;
     height: 70%;
     margin-bottom: 5rem;
