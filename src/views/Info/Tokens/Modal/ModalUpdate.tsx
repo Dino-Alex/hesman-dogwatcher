@@ -71,34 +71,34 @@ const ModalUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) => {
   }
 
   return (
-    <CustomModal title="Update Team Wallet" onDismiss={onDismiss}>
-      <CustomFlex width="70vw" flexDirection="column" justifyContent="center" alignItems="center">
-        <Flex width="50%" flexDirection="column" justifyContent="center" alignItems="center">
+    <CustomModal title="Edit Team Wallet" onDismiss={onDismiss}>
+      <CustomFlex width="35vw" flexDirection="column" justifyContent="center" alignItems="center">
+        <Flex width="100%" flexDirection="column" justifyContent="center" alignItems="center">
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="20%">
+            <FlexInput width="10%">
               <Text color="primary">Name: </Text>
             </FlexInput>
-            <FlexInput width="80%">
+            <FlexInput width="62%">
               <CustomInputGroup>
                 <Input color="primary" value={name} onChange={(e) => setName(e.target.value)} />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="20%">
+            <FlexInput width="10%">
               <Text color="primary">Address: </Text>
             </FlexInput>
-            <FlexInput width="80%">
+            <FlexInput width="62%">
               <CustomInputGroup>
                 <Input color="primary" value={address} onChange={handleInputChangeAddress} />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="20%">
+            <FlexInput width="10%">
               <Text color="primary">Limit: </Text>
             </FlexInput>
-            <FlexInput width="80%">
+            <FlexInput width="62%">
               <CustomInputGroup>
                 <Input color="primary" value={limit} onChange={(e) => setLimit(parseFloat(e.target.value))} />
               </CustomInputGroup>
