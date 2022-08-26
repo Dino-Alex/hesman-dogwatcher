@@ -127,26 +127,26 @@ const DataRow = () => {
       {walletInfo.map((data, index) => {
         return (
           <ResponsiveGrid>
-            <FlexID width="2vw">
+            <FlexID width="4vw">
               <Text>{index + 1}</Text>
             </FlexID>
-            <FlexName width="20vw">
+            <FlexName width="15vw">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {data.name}
               </Link>
             </FlexName>
             <input type="hidden" value={data._id} />
-            <FlexAddress width="20vw">
+            <FlexAddress width="20vw" justifyContent="center">
               <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                 {sAccount(data.address)}
               </Link>
             </FlexAddress>
-            <FlexBalance width="15vw">
+            <FlexBalance width="12vw" justifyContent="flex-end">
               <Text>{new Intl.NumberFormat().format(tokenBalances.tokenBalanceVal[index])}</Text>
             </FlexBalance>
             {tokenAuth !== null ? (
               <>
-                <FlexAction>
+                <FlexAction justifyContent="center">
                   <Stack direction="row" justifyContent="center" alignItems="center">
                     <Tooltip
                       placement="top"
@@ -246,17 +246,17 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   return (
     <TableWrapper>
       <ResponsiveGrid>
-        <FlexID width="2vw">
+        <FlexID width="4vw">
           <Text color="secondary" fontSize="12px" bold>
             #
           </Text>
         </FlexID>
-        <FlexName width="20vw">
+        <FlexName width="12vw" justifyContent="center">
           <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
             {t('Name')}
           </Text>
         </FlexName>
-        <FlexAddress width="20vw">
+        <FlexAddress width="23vw" justifyContent="center">
           <ClickableColumnHeader
             color="secondary"
             fontSize="12px"
@@ -267,7 +267,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
             {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
           </ClickableColumnHeader>
         </FlexAddress>
-        <FlexBalance width="15vw">
+        <FlexBalance width="18vw" justifyContent="center">
           <ClickableColumnHeader
             color="secondary"
             fontSize="12px"
@@ -278,7 +278,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
             {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
           </ClickableColumnHeader>
         </FlexBalance>
-        <FlexAction width="15vw">
+        <FlexAction width="12vw" justifyContent="center">
           <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
             {t('Action')}
           </ClickableColumnHeader>
@@ -337,7 +337,6 @@ const CustomBox = styled(Box)`
   @media screen and (max-width: 600px) {
     width: 95%;
   }
-
 `
 const FlexName = styled(Flex)`
   @media screen and (max-width: 600px) {
@@ -349,24 +348,20 @@ const FlexBalance = styled(Flex)`
     width: 20vw;
     margin: 15vw;
   }
-
 `
 const FlexID = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
-
 `
 const FlexAddress = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
-
 `
 const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 20vw;
     margin: -15vw;
   }
-
 `
