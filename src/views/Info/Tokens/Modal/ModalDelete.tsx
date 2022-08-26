@@ -36,14 +36,14 @@ const ModalDelete: React.FC<Proptype> = ({ onDismiss, onRefresh, ID }) => {
   }
 
   return (
-    <Modal title="Delete" onDismiss={onDismiss}>
-      <Flex width="20vw" justifyContent="center" alignItems="center">
-        <Flex width="100%" justifyContent="space-around">
+    <CustomModal title="Delete" onDismiss={onDismiss}>
+      <CustomFlex width="20vw" justifyContent="center" alignItems="center">
+        <Flex width="100%" justifyContent="space-around" alignItems="center">
           <CustomButton onClick={deletePost}>Delete</CustomButton>
           <Button onClick={handleCancel}>Cancel</Button>
         </Flex>
-      </Flex>
-    </Modal>
+      </CustomFlex>
+    </CustomModal>
   )
 }
 
@@ -52,3 +52,25 @@ export default ModalDelete
 const CustomButton = styled(Button)`
   background-color: red;
 `
+const CustomModal = styled(Modal)`
+  @media screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin-bottom: 15rem;
+    border-radius: 30px;
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-bottom: 15rem;
+    border-radius: 30px;
+  }
+`
+const CustomFlex = styled(Flex)`
+  width: 100%;
+  height: 100%;
+`
+
