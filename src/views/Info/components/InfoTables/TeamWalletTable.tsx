@@ -3,7 +3,8 @@ import { Box, IconButton, Stack, Tooltip } from '@mui/material'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
 import ModalUpdate from 'views/Info/Tokens/Modal/ModalUpdate'
 import styled from 'styled-components'
-import { FcDataBackup, FcDeleteDatabase } from 'react-icons/fc'
+import EditIcon from '@mui/icons-material/Edit'
+import ClearIcon from '@mui/icons-material/Clear'
 import { ArrowBackIcon, ArrowForwardIcon, Flex, Skeleton, Text, useModal, Link } from '@pancakeswap/uikit'
 import { PoolData } from 'state/info/types'
 import { useRouter } from 'next/router'
@@ -155,7 +156,7 @@ const DataRow = () => {
                       onClickCapture={() => setUpdate(data._id)}
                     >
                       <IconButton color="primary" aria-label="delete" size="large">
-                        <FcDataBackup />
+                        <EditIcon />
                       </IconButton>
                     </Tooltip>
                     <Tooltip
@@ -165,7 +166,7 @@ const DataRow = () => {
                       onClickCapture={() => setIdDelete(data._id)}
                     >
                       <IconButton color="primary" size="large">
-                        <FcDeleteDatabase />
+                        <ClearIcon />
                       </IconButton>
                     </Tooltip>
                   </Stack>

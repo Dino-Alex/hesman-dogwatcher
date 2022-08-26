@@ -1,26 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { baseColors, darkColors, lightColors } from "../../theme/colors";
-import { Flex, Box } from "../Box";
-import { Link } from "../Link";
+import { Flex } from "../Box";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 import {
-  StyledFooter,
-  StyledIconMobileContainer,
-  StyledList,
-  StyledListItem,
-  StyledText,
-  StyledSocialLinks,
-  StyledToolsContainer,
+  StyledToolsContainer
 } from "./styles";
 import { FooterProps } from "./types";
-import { ThemeSwitcher } from "../ThemeSwitcher";
-import LangSelector from "../LangSelector/LangSelector";
-import CakePrice from "../CakePrice/CakePrice";
-import { LogoWithTextIcon, ArrowForwardIcon } from "../Svg";
-import { Button } from "../Button";
-import { Colors } from "../..";
-import LogoDeltaLabs from "../Svg/Icons/LogoDeltaLabs";
-import LogoDeltaLabsLine from "../Svg/Icons/LogoDeltaLabsLine";
 
 const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
   items,
