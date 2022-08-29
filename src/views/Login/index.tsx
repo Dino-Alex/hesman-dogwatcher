@@ -25,6 +25,9 @@ const Login = () => {
       console.log(error)
     }
   }
+  function handleBack() {
+    router.push('/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7')
+  }
 
   useEffect(() => {
     const listener = event => {
@@ -66,8 +69,9 @@ const Login = () => {
               </Flex>
             </Flex>
           </Flex>
-          <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
+          <Flex mt="5rem" width="100%" justifyContent="space-around" alignItems="center">
             <Button onClick={handleSubmit} disabled={padding === true}>Login</Button>
+            <ButtonBack onClick={handleBack} disabled={padding === true}>Back</ButtonBack>
           </Flex>
         </Flex>
       </FormLogin>
@@ -91,4 +95,7 @@ const FormLogin = styled.div`
   @media screen and (max-width: 600px){
     width: 90%;
   }
+`
+const ButtonBack = styled(Button)`
+  background: red;
 `

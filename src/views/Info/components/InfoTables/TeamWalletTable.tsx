@@ -172,7 +172,7 @@ const DataRow = () => {
             {tokenAuth !== null ? (
               <>
                 <FlexAction>
-                  <Stack direction="row" justifyContent="center" alignItems="center">
+                  <Flex justifyContent="center" alignItems="center">
                     <Tooltip
                       placement="top"
                       title="Update"
@@ -188,12 +188,15 @@ const DataRow = () => {
                       title="Delete"
                       onClick={handleClickDel}
                       onClickCapture={() => setIdDelete(data._id)}
+                      sx={{
+                        marginLeft: '-1rem'                     
+                     }}
                     >
                       <IconButton color="primary" size="large">
                         <ClearIcon />
                       </IconButton>
                     </Tooltip>
-                  </Stack>
+                  </Flex>
                 </FlexAction>
               </>
             ) : (
@@ -306,11 +309,11 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
                 {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
               </ClickableColumnHeader>
             </FlexBalance>
-            <FlexAction width="12vw">
+            <FlexActionTitle width="12vw">
               <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Action')}
               </ClickableColumnHeader>
-            </FlexAction>
+            </FlexActionTitle>
           </>
           :
           <>
@@ -405,13 +408,14 @@ export default TeamWalletTable
 
 const FlexName = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 30vw;
+    width: 40vw;
   }
 `
 const FlexBalance = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 25vw;
-    margin-left: 25vw;
+    margin-left: 33vw;
+
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
@@ -444,7 +448,23 @@ const FlexAddress = styled(Flex)`
 const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 10vw;
-    margin-left: -7vw;
+    margin-left: -10vw;
+    gap: 10rem;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 20vw;
+    margin-left: -8vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 20vw;
+    margin-left: -10vw;
+  }
+`
+
+const FlexActionTitle = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 10vw;
+    margin-left: -5vw;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
