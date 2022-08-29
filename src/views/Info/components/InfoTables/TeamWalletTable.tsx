@@ -459,15 +459,15 @@ const FlexAction = styled(Flex)`
 const FlexNameV2 = styled(Flex)`
   width: 34vw;
   @media screen and (max-width: 600px) {
-    width: 40vw;
+    width: 55vw;
   }
 `
 const FlexBalanceV2 = styled(Flex)`
     width: 20vw;
     margin-left: 13vw;
   @media screen and (max-width: 600px) {
-    width: 40vw;
-    margin-left: 45vw;
+    width: 20vw;
+    margin-left: 50vw;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
