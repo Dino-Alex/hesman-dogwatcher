@@ -138,7 +138,8 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       }
     }
     getCirculatingSupplyDisplay()
-  }, [walletAddresses, appContext.length, contextDelete.length, circulatingSupplyDisplay])
+  // }, [walletAddresses, appContext.length, contextDelete.length, circulatingSupplyDisplay])
+}, [walletAddresses, appContext.length, contextDelete.length])
 
   return (
     // <Provider store={store}>

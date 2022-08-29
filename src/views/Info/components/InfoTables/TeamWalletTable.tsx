@@ -423,11 +423,11 @@ const FlexBalance = styled(Flex)`
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
-    margin-left: 8vw;
+    margin-left: 10vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -5vw;
+    margin-left: 5vw;
   }
 
 `
@@ -442,22 +442,25 @@ const FlexAddress = styled(Flex)`
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -15vw;
+    margin-left: -5vw;
   }
 `
 const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 10vw;
     margin-left: -10vw;
-    gap: 10rem;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
     margin-left: -8vw;
   }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 20vw;
+    margin-left: -1vw;
+  }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -10vw;
+    margin-left: -5vw;
   }
 `
 
@@ -468,11 +471,15 @@ const FlexActionTitle = styled(Flex)`
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
-    margin-left: -8vw;
+    margin-left: -5vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 20vw;
+    margin-left: 0vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -10vw;
+    margin-left: -4vw;
   }
 `
 // No login
@@ -502,8 +509,8 @@ const FlexBalanceV2 = styled(Flex)`
     margin-left: 13vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -2vw;
+    width: 5vw;
+    margin-left: 15vw;
   }
 `
 const FlexIDV2 = styled(Flex)`
@@ -513,7 +520,6 @@ const FlexIDV2 = styled(Flex)`
 
 `
 const FlexAddressV2 = styled(Flex)`
-    width: 20vw;
   @media screen and (max-width: 600px) {
     display: none;
   }
@@ -531,7 +537,7 @@ const FlexAddressV2 = styled(Flex)`
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -18vw;
+    margin-left: -6vw;
   }
 
 `
