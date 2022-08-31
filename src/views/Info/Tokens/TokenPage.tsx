@@ -169,7 +169,7 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                     <Image src="/images/CMC-logo.svg" height={22} width={22} alt={t('View token on CoinMarketCap')} />
                   </StyledCMCLink>
                 )}
-                <SaveIcon fill={watchlistTokens.includes(address)} onClick={() => addWatchlistToken(address)} />
+                {/* <SaveIcon fill={watchlistTokens.includes(address)} onClick={() => addWatchlistToken(address)} /> */}
               </Flex>
             </Flex>
             <Flex justifyContent="space-between" flexDirection={['column', 'column', 'column', 'row']}>
