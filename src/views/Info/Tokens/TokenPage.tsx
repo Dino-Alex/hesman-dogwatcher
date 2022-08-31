@@ -138,8 +138,8 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
       }
     }
     getCirculatingSupplyDisplay()
-  // }, [walletAddresses, appContext.length, contextDelete.length, circulatingSupplyDisplay])
-}, [walletAddresses, appContext.length, contextDelete.length])
+    // }, [walletAddresses, appContext.length, contextDelete.length, circulatingSupplyDisplay])
+  }, [walletAddresses, appContext.length, contextDelete.length])
 
   return (
     // <Provider store={store}>
@@ -175,7 +175,8 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
             <Flex justifyContent="space-between" flexDirection={['column', 'column', 'column', 'row']}>
               <Flex flexDirection="column" mb={['8px', null]}>
                 <Flex alignItems="center">
-                  <CurrencyLogo size="32px" address={address} />
+                  <img src="/images/Run_Logo.svg" alt="Token Run" />
+                  {/* <CurrencyLogo size="32px" address={address} /> */}
                   <Text
                     ml="12px"
                     bold
@@ -196,7 +197,6 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                   <Percent value={tokenData.priceUSDChange} fontWeight={600} />
                 </Flex>
               </Flex>
-              
             </Flex>
             <ContentLayout>
               <Card>
