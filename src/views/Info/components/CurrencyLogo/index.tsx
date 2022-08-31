@@ -50,7 +50,7 @@ export const DoubleCurrencyLogo: React.FC<React.PropsWithChildren<DoubleCurrency
 }) => {
   return (
     <DoubleCurrencyWrapper>
-      {address0 && <CurrencyLogo address={address0} size={`${size.toString()}px`} />}
+      {address0 && <img src="/images/Run_Logo.svg" alt="Token Run" width="16" />}
       {address1 && <CurrencyLogo address={address1} size={`${size.toString()}px`} />}
     </DoubleCurrencyWrapper>
   )
