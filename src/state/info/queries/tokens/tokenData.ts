@@ -167,6 +167,7 @@ const useFetchedTokenDatas = (tokenAddresses: string[]): TokenDatas => {
           const priceUSDChange = getPercentChange(priceUSD, priceUSDOneDay)
           const priceUSDChangeWeek = getPercentChange(priceUSD, priceUSDWeek)
           const txCount = getAmountChange(current?.totalTransactions, oneDay?.totalTransactions)
+          const txCountAll = getAmountChange(current?.totalTransactions, 0)
 
           accum[address] = {
             exists: !!current,
@@ -177,6 +178,7 @@ const useFetchedTokenDatas = (tokenAddresses: string[]): TokenDatas => {
             volumeUSDChange,
             volumeUSDWeek,
             txCount,
+            txCountAll,
             liquidityUSD,
             liquidityUSDChange,
             liquidityToken,

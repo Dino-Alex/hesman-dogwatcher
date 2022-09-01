@@ -120,6 +120,7 @@ export type TokenData = {
   volumeUSDChange: number
   volumeUSDWeek: number
   txCount: number
+  txCountAll: number
 
   liquidityToken: number
   liquidityUSD: number

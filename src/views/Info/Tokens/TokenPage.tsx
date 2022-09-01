@@ -224,12 +224,21 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
                     ${formatAmount(tokenData.volumeUSDWeek)}
                   </Text>
 
-                  <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
+                  {/* <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Transactions 24H')}
                   </Text>
                   <Text bold fontSize="15px">
                     {formatAmount(tokenData.txCount, { isInteger: true })}
+                  </Text> */}
+
+                  <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
+                    {t('24H / Total transactions')}
                   </Text>
+                  <Text bold fontSize="15px">
+                    {formatAmount(tokenData.txCount, { isInteger: true })} /{' '}
+                    {formatAmount(tokenData.txCountAll, { isInteger: true })}
+                  </Text>
+
                   <Text mt="24px" bold color="secondary" fontSize="12px" textTransform="uppercase">
                     {t('Total Supply')}
                   </Text>
