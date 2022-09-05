@@ -39,6 +39,7 @@ import ChartCard from 'views/Info/components/InfoCharts/ChartCard'
 import { RefreshDeleteGlobal } from './Modal/ModalDelete'
 import { FetchCirculatingSupply, fetchTotalSuppy } from '../hooks/useTotalSupply'
 import TeamWalletTable from '../components/InfoTables/TeamWalletTable'
+import TrackingWalletTable from '../components/InfoTables/TrackingWalletTable'
 import { getProductClient } from '../components/InfoTables/config'
 
 const ContentLayout = styled.div`
@@ -269,6 +270,12 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
             </Heading>
 
             <TeamWalletTable poolDatas={poolDatas} />
+
+            <Heading scale="lg" mb="16px" mt="40px">
+              {t('Tracking Wallets')}
+            </Heading>
+
+            <TrackingWalletTable poolDatas={poolDatas} />
 
             <Heading scale="lg" mb="16px" mt="40px">
               {t('Pools')}

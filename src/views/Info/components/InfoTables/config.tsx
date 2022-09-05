@@ -17,3 +17,17 @@ export const getSingleProductClient = axios.create({
 export const loginClient = axios.create({
   baseURL: 'https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/login',
 })
+
+export const getTrackingClient = axios.create({
+  baseURL: 'http://localhost:4000/api/v1/trackings',
+})
+
+export const addTrackingClient = 'http://localhost:4000/api/v1/admin/tracking/new'
+
+export const deleteTrackingClient = 'http://localhost:4000/api/v1/admin/tracking/'
+
+export const updateTrackingClient = 'http://localhost:4000/api/v1/admin/tracking/'
+
+export const getSingleTrackingClient = axios.create({
+  baseURL: 'http://localhost:4000/api/v1/tracking/',
+})

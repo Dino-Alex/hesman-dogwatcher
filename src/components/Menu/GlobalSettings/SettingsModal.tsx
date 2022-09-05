@@ -5,11 +5,10 @@ import useTheme from 'hooks/useTheme'
 import { useRouter } from 'next/router'
 import { createContext, useState } from 'react'
 import { useSwapActionHandlers } from 'state/swap/useSwapActionHandlers'
-import {
-  useExpertModeManager, useUserExpertModeAcknowledgementShow
-} from 'state/user/hooks'
+import { useExpertModeManager, useUserExpertModeAcknowledgementShow } from 'state/user/hooks'
 import styled from 'styled-components'
 import ModalCreate from 'views/Info/Tokens/Modal/ModalCreate'
+import ModalTrackingCreate from 'views/Info/Tokens/Modal/ModalTrackingCreate'
 import ExpertModal from './ExpertModal'
 import { SettingsMode } from './types'
 
@@ -50,7 +49,10 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
     setLogOut(false)
   }
 
-  const [handleClickCreate] = useModal(<ModalCreate onRefresh={(newValue) => RefreshCreate.push(newValue)} />)
+  const [handleClickTeamCreate] = useModal(<ModalCreate onRefresh={(newValue) => RefreshCreate.push(newValue)} />)
+  const [handleClickTrackingCreate] = useModal(
+    <ModalTrackingCreate onRefresh={(newValue) => RefreshCreate.push(newValue)} />,
+  )
   const [showConfirmExpertModal, setShowConfirmExpertModal] = useState(false)
   const [showExpertModeAcknowledgement, setShowExpertModeAcknowledgement] = useUserExpertModeAcknowledgementShow()
   const [expertMode, toggleExpertMode] = useExpertModeManager()
@@ -87,12 +89,17 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
               </Flex>
               <Flex>
                 {tokenAuth !== null && isLogOut ? (
-                  <Flex width="100%" flexDirection="row" justifyContent="space-around">
-                    <Button onClick={() => handleClickCreate()}>{t('Create')}</Button>
-                    <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
+                  <Flex width="100%" flexDirection="column" justifyContent="space-around">
+                    <FlexCreate width="100%" flexDirection="row" justifyContent="space-around">
+                      <Button onClick={() => handleClickTeamCreate()}>{t('Create Team')}</Button>
+                      <Button onClick={() => handleClickTrackingCreate()}>{t('Create Tracking')}</Button>
+                    </FlexCreate>
+                    <Flex mt="1rem" justifyContent="center">
+                      <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
+                    </Flex>
                   </Flex>
                 ) : (
-                  <Flex width="100%" flexDirection="row" justifyContent="center" alignItems='center'>
+                  <Flex width="100%" flexDirection="row" justifyContent="center" alignItems="center">
                     <Button onClick={() => handleClickLogIn()}>{t('LOGIN')}</Button>
                   </Flex>
                 )}
@@ -123,4 +130,7 @@ const CustomModal = styled(Modal)`
     margin-bottom: 15rem;
     border-radius: 30px;
   }
+`
+const FlexCreate = styled(Flex)`
+  gap: 20px;
 `
