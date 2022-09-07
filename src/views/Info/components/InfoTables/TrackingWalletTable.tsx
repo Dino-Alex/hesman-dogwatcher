@@ -306,7 +306,7 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                   onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
                   textTransform="uppercase"
                 >
-                  {t('Stake Token')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                  {t('RUN')} {arrow(SORT_FIELD.volumeUSDWeek)}
                 </ClickableColumnHeader>
               </FlexBalance>
               <FlexReward>
@@ -317,7 +317,7 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                   onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
                   textTransform="uppercase"
                 >
-                  {t('Reward Token')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                  {t('BUSD')} {arrow(SORT_FIELD.volumeUSDWeek)}
                 </ClickableColumnHeader>
               </FlexReward>
             </Flex>
@@ -359,7 +359,7 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                   onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
                   textTransform="uppercase"
                 >
-                  {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                  {t('RUN')} {arrow(SORT_FIELD.volumeUSDWeek)}
                 </ClickableColumnHeader>
               </FlexBalanceV2>
               <FlexRewardV2>
@@ -370,7 +370,7 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                   onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
                   textTransform="uppercase"
                 >
-                  {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                  {t('BUSD')} {arrow(SORT_FIELD.volumeUSDWeek)}
                 </ClickableColumnHeader>
               </FlexRewardV2>
             </Flex>
