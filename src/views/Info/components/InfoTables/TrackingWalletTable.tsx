@@ -25,28 +25,6 @@ const ResponsiveGrid = styled.div`
   align-items: center;
   grid-template-columns: 20px 5fr 5fr 0fr 10fr;
   padding: 0 24px;
-  /* @media screen and (max-width: 900px) {
-    grid-template-columns: 20px 1.5fr repeat(3, 1fr);
-    & :nth-child(4),
-    & :nth-child(5) {
-    }
-  }
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 20px 1.5fr repeat(1, 1fr);
-    & :nth-child(3),
-    & :nth-child(4),
-
-    & :nth-child(7)
-    {
-      display: none;
-    }
-  }
-  @media screen and (max-width: 480px) {
-    grid-template-columns: 2.5fr repeat(1, 1fr);
-    > *:nth-child(1) {
-      display: none;
-    }
-  } */
 `
 
 const SORT_FIELD = {
@@ -552,11 +530,14 @@ const FlexAction = styled(Flex)`
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
-    margin-left: -1vw;
+    margin-left: 0vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1444px) {
+    margin-left: -4vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 10vw;
-    margin-left: 1vw;
+    margin-left: 0vw;
   }
 `
 
@@ -573,14 +554,14 @@ const FlexActionTitle = styled(Flex)`
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
-    margin-left: 0vw;
+    margin-left: -3vw;
   }
   @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    margin-left: 1vw;
+    margin-left: -3vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 10vw;
-    margin-left: 2vw;
+    margin-left: 1vw;
   }
 `
 // No login
