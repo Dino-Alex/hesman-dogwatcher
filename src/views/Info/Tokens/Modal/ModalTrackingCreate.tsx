@@ -13,19 +13,20 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [limit, setLimit] = useState(1)
-  const [stakeToken, setStakeToken ] = useState('')
+  const [stakeToken, setStakeToken] = useState('')
   const [rewardToken, setRewardTtoken] = useState('')
   const [posts, setPosts] = useState([])
 
   const tokenAuth = localStorage.getItem('token')
-
+  console.log('Stake Token: ', stakeToken)
+  console.log('Reward Token: ', rewardToken)
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const resp = await axios
         .post(
           addTrackingClient,
-          { name, address, limit },
+          { name, address, limit, stakeToken, rewardToken },
           {
             headers: {
               'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                 <Input
                   type="name"
                   name="name"
-                  placeholder="enter an name"
+                  placeholder="Enter a name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   color="primary"
@@ -102,7 +103,7 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                 <Input
                   type="address"
                   name="address"
-                  placeholder="enter an address"
+                  placeholder="Enter an address"
                   onChange={handleInputChangeAddress}
                   color="primary"
                 />
@@ -118,7 +119,7 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                 <Input
                   type="number"
                   name="limit"
-                  placeholder="enter an limit"
+                  placeholder="Enter limit"
                   value={limit}
                   onChange={(e) => setLimit(parseFloat(e.target.value))}
                   color="primary"
@@ -135,7 +136,7 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                 <Input
                   type="address"
                   name="address"
-                  placeholder="enter an Stake Token"
+                  placeholder="Enter Stake Token"
                   onChange={handleInputChangeStakeToken}
                   color="primary"
                 />
@@ -144,17 +145,17 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
             <FlexInputText width="10%">
-                <Text color="primary">Reward Token: </Text>
+              <Text color="primary">Reward Token: </Text>
             </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
-                    type="address"
-                    name="address"
-                    placeholder="enter an Reward Token"
-                    onChange={handleInputChangeRewardToken}
-                    color="primary"
-                  />
+                  type="address"
+                  name="address"
+                  placeholder="Enter Reward Token"
+                  onChange={handleInputChangeRewardToken}
+                  color="primary"
+                />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
@@ -163,7 +164,15 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
           <Button
             type="submit"
             onClick={handleSubmit}
-            disabled={Number.isNaN(limit) !== false || limit <= 0 || name === '' || address === '' || check !== 0}
+            disabled={
+              Number.isNaN(limit) !== false ||
+              limit <= 0 ||
+              name === '' ||
+              address === '' ||
+              check !== 0 ||
+              stakeToken === '' ||
+              rewardToken === ''
+            }
           >
             Create
           </Button>

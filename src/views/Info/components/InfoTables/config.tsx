@@ -33,5 +33,5 @@ export const getSingleTrackingClient = axios.create({
 })
 
 export const getTrackingByAddress = axios.create({
-  baseURL: 'https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/trackingByAddress/',
+  baseURL: 'http://localhost:4000/api/v1/trackingByAddress/',
 })

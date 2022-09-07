@@ -15,7 +15,7 @@ import { formatAmount } from 'utils/formatInfoNumbers'
 import ModalTrackingCreate from 'views/Info/Tokens/Modal/ModalTrackingCreate'
 import ModalTrackingDelete from 'views/Info/Tokens/Modal/ModalTrackingDelete'
 import ModalTrackingUpdate from 'views/Info/Tokens/Modal/ModalTrackingUpdate'
-import { FetchTokenBalance } from '../../hooks/useTotalSupply'
+import { FetchStakeBalance, FetchRewardBalance } from '../../hooks/useTokenBalance'
 import { getTrackingClient } from './config'
 import { Arrow, Break, ClickableColumnHeader, PageButtons, TableWrapper } from './shared'
 
@@ -58,7 +58,10 @@ const Refresh = []
 const DataRow = () => {
   const [walletInfo, setWalletInfo] = useState([])
   const [walletAddresses, setWalletAddresses] = useState([])
-  const [tokenBalances, setTokenBalances] = useState({ tokenBalanceVal: [0] })
+  const [stakeAddr, setStakeAddress] = useState([])
+  const [rewardAddr, setRewardAddress] = useState([])
+  const [stakeBalances, setStakeBalances] = useState({ tokenBalanceVal: [0] })
+  const [rewardBalances, setRewardBalances] = useState({ tokenBalanceVal: [0] })
   const tokenAuth = localStorage.getItem('token')
 
   const { chainId } = useActiveWeb3React()
@@ -67,8 +70,10 @@ const DataRow = () => {
     const getSaleItems = async () => {
       try {
         if (walletAddresses.length > 0) {
-          const result = await FetchTokenBalance(walletAddresses)
-          setTokenBalances(result)
+          const resultStake = await FetchStakeBalance(walletAddresses, stakeAddr)
+          setStakeBalances(resultStake)
+          const resultReward = await FetchRewardBalance(walletAddresses, rewardAddr)
+          setRewardBalances(resultReward)
         }
       } catch (e) {
         console.log(e)
@@ -89,7 +94,11 @@ const DataRow = () => {
     getTrackingClient.get('').then((response) => {
       setWalletInfo(response.data.trackings)
       const addresses = response.data.trackings.map((wallet) => wallet.address)
+      const stakeToken = response.data.trackings.map((wallet) => wallet.stakeToken)
+      const rewardToken = response.data.trackings.map((wallet) => wallet.rewardToken)
       setWalletAddresses(addresses)
+      setStakeAddress(stakeToken)
+      setRewardAddress(rewardToken)
     })
   }, [Refresh.length, appContext.length])
 
@@ -125,14 +134,14 @@ const DataRow = () => {
                     {sAccount(data.address)}
                   </Link>
                 </FlexAddress>
-               <Flex>
-                <FlexBalance width="10vw">
-                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                <Flex>
+                  <FlexBalance width="10vw">
+                    {formatAmount(Math.round(stakeBalances.tokenBalanceVal[index]), { isInteger: true })}
                   </FlexBalance>
                   <FlexReward width="10vw">
-                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                    {formatAmount(Math.round(rewardBalances.tokenBalanceVal[index]), { isInteger: true })}
                   </FlexReward>
-               </Flex>
+                </Flex>
               </>
             ) : (
               <>
@@ -152,11 +161,11 @@ const DataRow = () => {
                 </FlexAddressV2>
                 <Flex>
                   <FlexBalanceV2 width="12vw">
-                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                    {formatAmount(Math.round(stakeBalances.tokenBalanceVal[index]), { isInteger: true })}
                   </FlexBalanceV2>
                   <FlexRewardV2 width="12vw">
-                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
-                </FlexRewardV2>
+                    {formatAmount(Math.round(rewardBalances.tokenBalanceVal[index]), { isInteger: true })}
+                  </FlexRewardV2>
                 </Flex>
               </>
             )}
@@ -465,19 +474,16 @@ const FlexBalance = styled(Flex)`
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 6vw;
     margin-left: 1vw;
-    
   }
 `
 const FlexReward = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 25vw;
     margin-left: 2vw;
-
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 100px;
     margin-left: 5vw;
-
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 15vw;

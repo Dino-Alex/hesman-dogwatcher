@@ -14,8 +14,8 @@ interface Proptype {
 const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) => {
   const [name, setName] = useState<string>('')
   const [address, setAddress] = useState('')
-  const [stakeToken, setStakeToken ] = useState('')
-  const [rewardToken, setRewardTtoken] = useState('')
+  const [stakeToken, setStakeToken] = useState('')
+  const [rewardToken, setRewardToken] = useState('')
   const [limit, setLimit] = useState(1)
   const [posts, setPosts] = useState([])
   const [walletInfo, setWalletInfo] = useState('')
@@ -28,6 +28,8 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
         setName(response.data.tracking.name)
         setAddress(response.data.tracking.address)
         setLimit(response.data.tracking.limit)
+        setStakeToken(response.data.tracking.stakeToken)
+        setRewardToken(response.data.tracking.rewardToken)
       }
     })
   }, [walletInfo])
@@ -35,7 +37,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
   const updatePost = async () => {
     await axios.put(
       `http://localhost:4000/api/v1/admin/tracking/${id}`,
-      { name, address, limit },
+      { name, address, limit, stakeToken, rewardToken },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
 
   const handleInputChangeRewardToken = (e) => {
     const value = e.target.value
-    setRewardTtoken(value)
+    setRewardToken(value)
     checkValidate(value)
   }
 
@@ -124,7 +126,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
             </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
-                <Input color="primary" value={address} onChange={handleInputChangeStakeToken} />
+                <Input color="primary" value={stakeToken} onChange={handleInputChangeStakeToken} />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
@@ -134,7 +136,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
             </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
-                <Input color="primary" value={address} onChange={handleInputChangeRewardToken} />
+                <Input color="primary" value={rewardToken} onChange={handleInputChangeRewardToken} />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
@@ -142,7 +144,15 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
         <Flex mt="2rem">
           <Button
             onClick={updatePost}
-            disabled={Number.isNaN(limit) !== false || limit <= 0 || name === '' || address === '' || check !== 0}
+            disabled={
+              Number.isNaN(limit) !== false ||
+              limit <= 0 ||
+              name === '' ||
+              address === '' ||
+              check !== 0 ||
+              stakeToken === '' ||
+              rewardToken === ''
+            }
           >
             Update
           </Button>
