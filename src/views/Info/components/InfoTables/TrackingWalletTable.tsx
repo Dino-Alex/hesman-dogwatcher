@@ -136,20 +136,25 @@ const DataRow = () => {
                 <FlexID width="4vw">
                   <Text>{index + 1}</Text>
                 </FlexID>
-                <FlexName width="25vw">
+                <FlexName width="20vw">
                   <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                     {data.name}
                   </Link>
                 </FlexName>
                 <input type="hidden" value={data._id} />
-                <FlexAddress width="20vw">
+                <FlexAddress>
                   <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                     {sAccount(data.address)}
                   </Link>
                 </FlexAddress>
-                <FlexBalance width="12vw">
-                  {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
-                </FlexBalance>
+               <Flex>
+                <FlexBalance width="10vw">
+                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                  </FlexBalance>
+                  <FlexReward width="10vw">
+                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                  </FlexReward>
+               </Flex>
               </>
             ) : (
               <>
@@ -167,9 +172,14 @@ const DataRow = () => {
                     {sAccount(data.address)}
                   </Link>
                 </FlexAddressV2>
-                <FlexBalanceV2 width="12vw">
-                  {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
-                </FlexBalanceV2>
+                <Flex>
+                  <FlexBalanceV2 width="12vw">
+                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                  </FlexBalanceV2>
+                  <FlexRewardV2 width="12vw">
+                    {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
+                </FlexRewardV2>
+                </Flex>
               </>
             )}
             {tokenAuth !== null ? (
@@ -279,17 +289,17 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
       <ResponsiveGrid>
         {tokenAuth ? (
           <>
-            <FlexID width="4vw">
+            <FlexID>
               <Text color="secondary" fontSize="12px" bold>
                 #
               </Text>
             </FlexID>
-            <FlexName width="25vw">
+            <FlexName>
               <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Name')}
               </Text>
             </FlexName>
-            <FlexAddress width="20vw">
+            <FlexAddress>
               <ClickableColumnHeader
                 color="secondary"
                 fontSize="12px"
@@ -297,21 +307,34 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                 onClick={() => handleSort(SORT_FIELD.volumeUSD)}
                 textTransform="uppercase"
               >
-                {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+                {t('Pool Address')} {arrow(SORT_FIELD.volumeUSD)}
               </ClickableColumnHeader>
             </FlexAddress>
-            <FlexBalance width="12vw">
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                textTransform="uppercase"
-              >
-                {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
-              </ClickableColumnHeader>
-            </FlexBalance>
-            <FlexActionTitle width="12vw">
+            <Flex>
+              <FlexBalance>
+                <ClickableColumnHeader
+                  color="secondary"
+                  fontSize="12px"
+                  bold
+                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+                  textTransform="uppercase"
+                >
+                  {t('Stake Token')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                </ClickableColumnHeader>
+              </FlexBalance>
+              <FlexReward>
+                <ClickableColumnHeader
+                  color="secondary"
+                  fontSize="12px"
+                  bold
+                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+                  textTransform="uppercase"
+                >
+                  {t('Reward Token')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                </ClickableColumnHeader>
+              </FlexReward>
+            </Flex>
+            <FlexActionTitle>
               <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Action')}
               </ClickableColumnHeader>
@@ -319,17 +342,17 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
           </>
         ) : (
           <>
-            <FlexIDV2 width="4vw">
+            <FlexIDV2>
               <Text color="secondary" fontSize="12px" bold>
                 #
               </Text>
             </FlexIDV2>
-            <FlexNameV2 width="25vw">
+            <FlexNameV2>
               <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Name')}
               </Text>
             </FlexNameV2>
-            <FlexAddressV2 width="20vw">
+            <FlexAddressV2>
               <ClickableColumnHeader
                 color="secondary"
                 fontSize="12px"
@@ -337,21 +360,34 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                 onClick={() => handleSort(SORT_FIELD.volumeUSD)}
                 textTransform="uppercase"
               >
-                {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+                {t('Pool Address')} {arrow(SORT_FIELD.volumeUSD)}
               </ClickableColumnHeader>
             </FlexAddressV2>
-            <FlexBalanceV2 width="12vw">
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                textTransform="uppercase"
-              >
-                {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
-              </ClickableColumnHeader>
-            </FlexBalanceV2>
-            <FlexActionV2 width="12vw">
+            <Flex>
+              <FlexBalanceV2>
+                <ClickableColumnHeader
+                  color="secondary"
+                  fontSize="12px"
+                  bold
+                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+                  textTransform="uppercase"
+                >
+                  {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                </ClickableColumnHeader>
+              </FlexBalanceV2>
+              <FlexRewardV2>
+                <ClickableColumnHeader
+                  color="secondary"
+                  fontSize="12px"
+                  bold
+                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
+                  textTransform="uppercase"
+                >
+                  {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                </ClickableColumnHeader>
+              </FlexRewardV2>
+            </Flex>
+            <FlexActionV2>
               <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Action')}
               </ClickableColumnHeader>
@@ -409,26 +445,72 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
 export default TrackingWalletTable
 
 const FlexName = styled(Flex)`
-  @media screen and (max-width: 600px) {
-    width: 40vw;
+  @media screen and (max-width: 420px) {
+    width: 25vw;
+  }
+  @media screen and (min-width: 421px) and (max-width: 600px) {
+    width: 35vw;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 150px;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 22vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    width: 22vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 10vw;
   }
 `
 const FlexBalance = styled(Flex)`
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 420px) {
+    width: 23vw;
+    margin-left: 20vw;
+  }
+  @media screen and (min-width: 421px) and (max-width: 600px) {
     width: 25vw;
-    margin-left: 33vw;
+    margin-left: 25vw;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: 8vw;
+    width: 100px;
+    margin-left: 5vw;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
-    margin-left: 10vw;
+    width: 15vw;
+    margin-left: 1vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    width: 13vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
+    width: 6vw;
+    margin-left: 1vw;
+  }
+`
+const FlexReward = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 25vw;
+    margin-left: 2vw;
+
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 100px;
     margin-left: 5vw;
+
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 15vw;
+    margin-left: 1vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    width: 13vw;
+    margin-left: 1vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 6vw;
+    margin-left: 1vw;
   }
 `
 const FlexID = styled(Flex)`
@@ -440,46 +522,65 @@ const FlexAddress = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 150px;
+    margin-left: 5vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 22vw;
+    margin-left: 1vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    width: 16vw;
+    margin-left: 1vw;
+  }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -5vw;
+    width: 10vw;
+    margin-left: 1vw;
   }
 `
 const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 10vw;
-    margin-left: -10vw;
+    margin-left: -5vw;
+    display: none;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: -8vw;
+    width: 70px;
+    margin-left: 0vw;
+    display: none;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
     margin-left: -1vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -5vw;
+    width: 10vw;
+    margin-left: 1vw;
   }
 `
 
 const FlexActionTitle = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 10vw;
-    margin-left: -5vw;
+    width: 17vw;
+    margin-left: 0vw;
+    display: none;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: -5vw;
+    width: 60px;
+    margin-left: 2vw;
+    display: none;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
     margin-left: 0vw;
   }
+  @media screen and (min-width: 1025px) and (max-width: 1444px) {
+    margin-left: 1vw;
+  }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -4vw;
+    width: 10vw;
+    margin-left: 2vw;
   }
 `
 // No login
@@ -494,23 +595,47 @@ const FlexBalanceV2 = styled(Flex)`
   margin-left: 13vw;
   @media screen and (max-width: 600px) {
     width: 20vw;
-    margin-left: 50vw;
-  }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: 13vw;
-  }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
     margin-left: 20vw;
   }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 15vw;
+    margin-left: 5vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 10vw;
+    margin-left: 10vw;
+  }
   @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    width: 20vw;
-    margin-left: 13vw;
+    width: 10vw;
+    margin-left: 5vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 5vw;
-    margin-left: 15vw;
+    margin-left: -7vw;
+  }
+`
+const FlexRewardV2 = styled(Flex)`
+  width: 20vw;
+  margin-left: 13vw;
+  @media screen and (max-width: 600px) {
+    width: 20vw;
+    margin-left: 10vw;
+  }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 15vw;
+    margin-left: 5vw;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    width: 10vw;
+    margin-left: 10vw;
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1444px) {
+    width: 7vw;
+    margin-left: 2vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 5vw;
+    margin-left: 2vw;
   }
 `
 const FlexIDV2 = styled(Flex)`
@@ -524,19 +649,19 @@ const FlexAddressV2 = styled(Flex)`
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
-    margin-left: -5vw;
+    margin-left: -15vw;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
-    margin-left: -2vw;
+    margin-left: -10vw;
   }
   @media screen and (min-width: 1025px) and (max-width: 1444px) {
     width: 20vw;
-    margin-left: -6vw;
+    margin-left: -5vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -6vw;
+    margin-left: -17vw;
   }
 `
 const FlexActionV2 = styled(Flex)`

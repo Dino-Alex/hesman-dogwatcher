@@ -25,6 +25,7 @@ const ResponsiveGrid = styled.div`
   align-items: center;
   grid-template-columns: 20px 5fr 5fr 0fr 10fr;
   padding: 0 24px;
+  overflow: hidden;
   /* @media screen and (max-width: 900px) {
     grid-template-columns: 20px 1.5fr repeat(3, 1fr);
     & :nth-child(4),
@@ -408,18 +409,17 @@ export default TeamWalletTable
 
 const FlexName = styled(Flex)`
   @media screen and (max-width: 600px) {
-    width: 40vw;
+    width: 50vw;
   }
 `
 const FlexBalance = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 25vw;
-    margin-left: 33vw;
-
+    margin-left: 50vw;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
-    margin-left: 8vw;
+    margin-left: 15vw;
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
@@ -440,6 +440,10 @@ const FlexAddress = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    width: 25vw;
+    margin-left: 2rem;
+  }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
     margin-left: -5vw;
@@ -449,10 +453,13 @@ const FlexAction = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 10vw;
     margin-left: -10vw;
+    display: none;
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
     margin-left: -8vw;
+    display: none;
+
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
@@ -468,10 +475,14 @@ const FlexActionTitle = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 10vw;
     margin-left: -5vw;
+    display: none;
+
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
     margin-left: -5vw;
+    display: none;
+
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
