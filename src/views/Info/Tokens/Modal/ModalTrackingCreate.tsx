@@ -13,6 +13,8 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
   const [name, setName] = useState('')
   const [address, setAddress] = useState('')
   const [limit, setLimit] = useState(1)
+  const [stakeToken, setStakeToken ] = useState('')
+  const [rewardToken, setRewardTtoken] = useState('')
   const [posts, setPosts] = useState([])
 
   const tokenAuth = localStorage.getItem('token')
@@ -60,15 +62,24 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
     setAddress(value)
     checkValidate(value)
   }
+  const handleInputChangeStakeToken = (e) => {
+    const value = e.target.value
+    setStakeToken(value)
+    checkValidate(value)
+  }
+  const handleInputChangeRewardToken = (e) => {
+    const value = e.target.value
+    setRewardTtoken(value)
+    checkValidate(value)
+  }
   return (
     <CustomModal title="Create Tracking Wallet" onDismiss={onDismiss}>
       <CustomFlex width="35vw" flexDirection="column" justifyContent="center" alignItems="center">
         <Flex width="100%" flexDirection="column" justifyContent="center" alignItems="center">
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="10%">
+            <FlexInputText width="10%">
               <Text color="primary">Name: </Text>
-            </FlexInput>
-
+            </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
@@ -83,10 +94,9 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
             </FlexInput>
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="10%">
+            <FlexInputText width="10%">
               <Text color="primary">Address: </Text>
-            </FlexInput>
-
+            </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
@@ -100,10 +110,9 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
             </FlexInput>
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="10%">
+            <FlexInputText width="10%">
               <Text color="primary">Limit: </Text>
-            </FlexInput>
-
+            </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input
@@ -114,6 +123,38 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
                   onChange={(e) => setLimit(parseFloat(e.target.value))}
                   color="primary"
                 />
+              </CustomInputGroup>
+            </FlexInput>
+          </CustomFlexInput>
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInputText width="10%">
+              <Text color="primary">Stake Token : </Text>
+            </FlexInputText>
+            <FlexInput width="62%">
+              <CustomInputGroup>
+                <Input
+                  type="address"
+                  name="address"
+                  placeholder="enter an Stake Token"
+                  onChange={handleInputChangeStakeToken}
+                  color="primary"
+                />
+              </CustomInputGroup>
+            </FlexInput>
+          </CustomFlexInput>
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInputText width="10%">
+                <Text color="primary">Reward Token: </Text>
+            </FlexInputText>
+            <FlexInput width="62%">
+              <CustomInputGroup>
+                <Input
+                    type="address"
+                    name="address"
+                    placeholder="enter an Reward Token"
+                    onChange={handleInputChangeRewardToken}
+                    color="primary"
+                  />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
@@ -159,7 +200,7 @@ const CustomFlex = styled(Flex)`
   margin-bottom: 10rem;
   width: 100%;
   height: 100px;
-  padding-top: 10rem;
+  padding-top: 13rem;
 `
 
 const CustomFlexInput = styled(Flex)`
@@ -187,6 +228,17 @@ const CustomFlexInput = styled(Flex)`
   }
 `
 const FlexInput = styled(Flex)`
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: -20px;
+  }
+`
+const FlexInputText = styled(Flex)`
+  width: 20%;
   @media screen and (max-width: 600px) {
     width: 90%;
     display: flex;

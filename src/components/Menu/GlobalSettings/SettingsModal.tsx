@@ -87,12 +87,12 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                 <Text>{t('Dark mode')}</Text>
                 <ThemeSwitcher isDark={isDark} toggleTheme={() => setTheme(isDark ? 'light' : 'dark')} />
               </Flex>
-              <Flex>
+              <FlexCustom>
                 {tokenAuth !== null && isLogOut ? (
                   <Flex width="100%" flexDirection="column" justifyContent="space-around">
                     <FlexCreate width="100%" flexDirection="row" justifyContent="space-around">
-                      <Button onClick={() => handleClickTeamCreate()}>{t('Create Team')}</Button>
-                      <Button onClick={() => handleClickTrackingCreate()}>{t('Create Tracking')}</Button>
+                      <CustomButton onClick={() => handleClickTeamCreate()}>{t('Create Team')}</CustomButton>
+                      <CustomButton onClick={() => handleClickTrackingCreate()}>{t('Create Tracking')}</CustomButton>
                     </FlexCreate>
                     <Flex mt="1rem" justifyContent="center">
                       <Button onClick={() => handleClickLogOut()}>{t('LOGOUT')}</Button>
@@ -103,7 +103,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                     <Button onClick={() => handleClickLogIn()}>{t('LOGIN')}</Button>
                   </Flex>
                 )}
-              </Flex>
+              </FlexCustom>
             </Flex>
           </>
         )}
@@ -133,4 +133,17 @@ const CustomModal = styled(Modal)`
 `
 const FlexCreate = styled(Flex)`
   gap: 20px;
+`
+const FlexCustom = styled(Flex)`
+@media screen and (max-width: 600px) {
+    display: none;
+  }
+
+  @media screen and (min-width: 601px) and (max-width: 768px) {
+    display: none;
+  }
+
+`
+const CustomButton = styled(Button)`
+  width: 150px;
 `

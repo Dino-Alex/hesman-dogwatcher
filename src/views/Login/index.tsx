@@ -51,7 +51,7 @@ const Login = () => {
           </Flex>
           <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
             <Flex width="100%" justifyContent="center" alignItems="center">
-              <Flex width="30%">
+              <Flex width="20%">
                 <Text>Username</Text>
               </Flex>
               <Flex width="70%">
@@ -61,7 +61,7 @@ const Login = () => {
           </Flex>
           <Flex mt="5rem" width="100%" justifyContent="center" alignItems="center">
             <Flex width="100%" justifyContent="center" alignItems="center">
-              <Flex width="30%">
+              <Flex width="20%">
                 <Text>Password</Text>
               </Flex>
               <Flex width="70%">
