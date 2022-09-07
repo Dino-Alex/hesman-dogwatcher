@@ -439,7 +439,7 @@ const FlexName = styled(Flex)`
     width: 22vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 10vw;
+    width: 20vw;
   }
 `
 const FlexBalance = styled(Flex)`
@@ -465,6 +465,7 @@ const FlexBalance = styled(Flex)`
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 6vw;
     margin-left: 1vw;
+    
   }
 `
 const FlexReward = styled(Flex)`
@@ -513,7 +514,7 @@ const FlexAddress = styled(Flex)`
     margin-left: 1vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 10vw;
+    width: 20vw;
     margin-left: 1vw;
   }
 `
@@ -537,7 +538,7 @@ const FlexAction = styled(Flex)`
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 10vw;
-    margin-left: 0vw;
+    margin-left: 2vw;
   }
 `
 
@@ -560,8 +561,8 @@ const FlexActionTitle = styled(Flex)`
     margin-left: -3vw;
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 10vw;
-    margin-left: 1vw;
+    width: 7vw;
+    margin-left: 3vw;
   }
 `
 // No login
@@ -569,6 +570,9 @@ const FlexNameV2 = styled(Flex)`
   width: 34vw;
   @media screen and (max-width: 600px) {
     width: 55vw;
+  }
+  @media screen and (min-width: 1445px) and (max-width: 2560px) {
+    width: 25vw;
   }
 `
 const FlexBalanceV2 = styled(Flex)`
@@ -592,7 +596,7 @@ const FlexBalanceV2 = styled(Flex)`
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 5vw;
-    margin-left: -7vw;
+    margin-left: 0vw;
   }
 `
 const FlexRewardV2 = styled(Flex)`
@@ -616,7 +620,7 @@ const FlexRewardV2 = styled(Flex)`
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 5vw;
-    margin-left: 2vw;
+    margin-left: 7vw;
   }
 `
 const FlexIDV2 = styled(Flex)`
@@ -642,7 +646,7 @@ const FlexAddressV2 = styled(Flex)`
   }
   @media screen and (min-width: 1445px) and (max-width: 2560px) {
     width: 20vw;
-    margin-left: -17vw;
+    margin-left: 3vw;
   }
 `
 const FlexActionV2 = styled(Flex)`
