@@ -14,6 +14,8 @@ interface Proptype {
 const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) => {
   const [name, setName] = useState<string>('')
   const [address, setAddress] = useState('')
+  const [stakeToken, setStakeToken ] = useState('')
+  const [rewardToken, setRewardTtoken] = useState('')
   const [limit, setLimit] = useState(1)
   const [posts, setPosts] = useState([])
   const [walletInfo, setWalletInfo] = useState('')
@@ -70,14 +72,26 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
     checkValidate(value)
   }
 
+  const handleInputChangeStakeToken = (e) => {
+    const value = e.target.value
+    setStakeToken(value)
+    checkValidate(value)
+  }
+
+  const handleInputChangeRewardToken = (e) => {
+    const value = e.target.value
+    setRewardTtoken(value)
+    checkValidate(value)
+  }
+
   return (
     <CustomModal title="Edit Tracking Wallet" onDismiss={onDismiss}>
       <CustomFlex width="35vw" flexDirection="column" justifyContent="center" alignItems="center">
         <Flex width="100%" flexDirection="column" justifyContent="center" alignItems="center">
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="10%">
+            <FlexInputText width="10%">
               <Text color="primary">Name: </Text>
-            </FlexInput>
+            </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input color="primary" value={name} onChange={(e) => setName(e.target.value)} />
@@ -85,9 +99,9 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
             </FlexInput>
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="10%">
+            <FlexInputText width="10%">
               <Text color="primary">Address: </Text>
-            </FlexInput>
+            </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input color="primary" value={address} onChange={handleInputChangeAddress} />
@@ -95,12 +109,32 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
             </FlexInput>
           </CustomFlexInput>
           <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
-            <FlexInput width="10%">
+            <FlexInputText width="10%">
               <Text color="primary">Limit: </Text>
-            </FlexInput>
+            </FlexInputText>
             <FlexInput width="62%">
               <CustomInputGroup>
                 <Input color="primary" value={limit} onChange={(e) => setLimit(parseFloat(e.target.value))} />
+              </CustomInputGroup>
+            </FlexInput>
+          </CustomFlexInput>
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInputText width="10%">
+              <Text color="primary">Stake Token: </Text>
+            </FlexInputText>
+            <FlexInput width="62%">
+              <CustomInputGroup>
+                <Input color="primary" value={address} onChange={handleInputChangeStakeToken} />
+              </CustomInputGroup>
+            </FlexInput>
+          </CustomFlexInput>
+          <CustomFlexInput mt="2rem" width="100%" justifyContent="center" alignItems="center">
+            <FlexInputText width="10%">
+              <Text color="primary">Reward Token: </Text>
+            </FlexInputText>
+            <FlexInput width="62%">
+              <CustomInputGroup>
+                <Input color="primary" value={address} onChange={handleInputChangeRewardToken} />
               </CustomInputGroup>
             </FlexInput>
           </CustomFlexInput>
@@ -198,5 +232,16 @@ const CustomModal = styled(Modal)`
     height: 70%;
     margin-bottom: 5rem;
     border-radius: 30px;
+  }
+`
+const FlexInputText = styled(Flex)`
+  width: 20%;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: -20px;
   }
 `
