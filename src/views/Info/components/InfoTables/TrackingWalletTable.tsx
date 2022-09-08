@@ -528,7 +528,7 @@ const FlexAction = styled(Flex)`
   }
   @media screen and (min-width: 1440px) {
     width: 70px;
-    margin-left: -2vw;
+    margin-left: -4vw;
   }
 `
 
@@ -549,7 +549,7 @@ const FlexActionTitle = styled(Flex)`
   }
   @media screen and (min-width: 1440px) {
     width: 70px;
-    margin-left: -1vw;
+    margin-left: -3vw;
   }
 `
 // No login

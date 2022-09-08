@@ -467,7 +467,7 @@ const FlexAction = styled(Flex)`
   }
   @media screen and (min-width: 1440px) {
     width: 70px;
-    margin-left: -5vw;
+    margin-left: -6vw;
   }
 `
 

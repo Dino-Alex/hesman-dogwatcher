@@ -36,7 +36,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
 
   const updatePost = async () => {
     await axios.put(
-      `http://localhost:4000/api/v1/admin/tracking/${id}`,
+      `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/tracking/${id}`,
       { name, address, limit, stakeToken, rewardToken },
       {
         headers: {

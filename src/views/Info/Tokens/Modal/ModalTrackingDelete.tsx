@@ -19,7 +19,7 @@ const ModalTrackingDelete: React.FC<Proptype> = ({ onDismiss, onRefresh, ID }) =
   const [posts, setPosts] = useState([])
 
   const deletePost = async () => {
-    await axios.delete(`http://localhost:4000/api/v1/admin/tracking/${ID}`, {
+    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/tracking/${ID}`, {
       headers: {
         'Content-Type': 'application/json',
         token: `${tokenAuth}`,
