@@ -515,11 +515,11 @@ const FlexBalanceV2 = styled(Flex)`
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
-    margin-left: 20vw;
+    margin-left: 13vw;
   }
   @media screen and (min-width: 1440px) {
     width: 130px;
-    margin-left: 5vw;
+    margin-left: 2vw;
   }
 `
 const FlexIDV2 = styled(Flex)`
