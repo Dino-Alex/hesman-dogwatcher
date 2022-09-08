@@ -444,11 +444,9 @@ const FlexName = styled(Flex)`
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 22vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1440px) {
-    width: 22vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
+  @media screen and (min-width: 1440px) {
+    width: 400px;
+    margin-left: 0vw;
   }
 `
 const FlexBalance = styled(Flex)`
@@ -468,12 +466,9 @@ const FlexBalance = styled(Flex)`
     width: 15vw;
     margin-left: 1vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1440px) {
-    width: 13vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 6vw;
-    margin-left: 1vw;
+  @media screen and (min-width: 1440px) {
+    width: 150px;
+    margin-left: 0vw;
   }
 `
 const FlexReward = styled(Flex)`
@@ -489,13 +484,9 @@ const FlexReward = styled(Flex)`
     width: 15vw;
     margin-left: 1vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1440px) {
-    width: 13vw;
-    margin-left: 1vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 6vw;
-    margin-left: 1vw;
+  @media screen and (min-width: 1440px) {
+    width: 150px;
+    margin-left: 0vw;
   }
 `
 const FlexID = styled(Flex)`
@@ -515,13 +506,9 @@ const FlexAddress = styled(Flex)`
     width: 22vw;
     margin-left: 1vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1440px) {
-    width: 16vw;
-    margin-left: 1vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: 1vw;
+  @media screen and (min-width: 1440px) {
+    width: 250px;
+    margin-left: 0vw;
   }
 `
 const FlexAction = styled(Flex)`
@@ -539,12 +526,9 @@ const FlexAction = styled(Flex)`
     width: 20vw;
     margin-left: 0vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    margin-left: -4vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 10vw;
-    margin-left: 2vw;
+  @media screen and (min-width: 1440px) {
+    width: 70px;
+    margin-left: -2vw;
   }
 `
 
@@ -563,12 +547,9 @@ const FlexActionTitle = styled(Flex)`
     width: 20vw;
     margin-left: -3vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    margin-left: -3vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 7vw;
-    margin-left: 3vw;
+  @media screen and (min-width: 1440px) {
+    width: 70px;
+    margin-left: -1vw;
   }
 `
 // No login
@@ -577,8 +558,9 @@ const FlexNameV2 = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 55vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 25vw;
+  @media screen and (min-width: 1440px) {
+    width: 400px;
+    margin-left: 0vw;
   }
 `
 const FlexBalanceV2 = styled(Flex)`
@@ -600,8 +582,8 @@ const FlexBalanceV2 = styled(Flex)`
     width: 10vw;
     margin-left: 3vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 5vw;
+  @media screen and (min-width: 1440px) {
+    width: 150px;
     margin-left: 0vw;
   }
 `
@@ -624,9 +606,9 @@ const FlexRewardV2 = styled(Flex)`
     width: 7vw;
     margin-left: 2vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 5vw;
-    margin-left: 7vw;
+  @media screen and (min-width: 1440px) {
+    width: 100px;
+    margin-left: 1vw;
   }
 `
 const FlexIDV2 = styled(Flex)`
@@ -646,13 +628,9 @@ const FlexAddressV2 = styled(Flex)`
     width: 20vw;
     margin-left: -10vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    width: 20vw;
-    margin-left: -5vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: 3vw;
+  @media screen and (min-width: 1440px) {
+    width: 350px;
+    margin-left: 0vw;
   }
 `
 const FlexActionV2 = styled(Flex)`

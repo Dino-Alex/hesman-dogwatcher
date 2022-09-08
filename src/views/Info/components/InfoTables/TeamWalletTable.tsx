@@ -107,7 +107,7 @@ const DataRow = () => {
     return ''
   }
   const appContext = useContext(RefreshCreateGlobal)
-  
+
   useEffect(() => {
     getProductClient.get('').then((response) => {
       setWalletInfo(response.data.products)
@@ -128,7 +128,7 @@ const DataRow = () => {
       {walletInfo.map((data, index) => {
         return (
           <ResponsiveGrid>
-            {tokenAuth ?
+            {tokenAuth ? (
               <>
                 <FlexID width="4vw">
                   <Text>{index + 1}</Text>
@@ -148,7 +148,7 @@ const DataRow = () => {
                   {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
                 </FlexBalance>
               </>
-              :
+            ) : (
               <>
                 <FlexIDV2 width="4vw">
                   <Text>{index + 1}</Text>
@@ -168,8 +168,7 @@ const DataRow = () => {
                   {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
                 </FlexBalanceV2>
               </>
-
-            }
+            )}
             {tokenAuth !== null ? (
               <>
                 <FlexAction>
@@ -190,8 +189,8 @@ const DataRow = () => {
                       onClick={handleClickDel}
                       onClickCapture={() => setIdDelete(data._id)}
                       sx={{
-                        marginLeft: '-1rem'                     
-                     }}
+                        marginLeft: '-1rem',
+                      }}
                     >
                       <IconButton color="primary" size="large">
                         <ClearIcon />
@@ -201,8 +200,7 @@ const DataRow = () => {
                 </FlexAction>
               </>
             ) : (
-              <>
-              </>
+              <></>
             )}
           </ResponsiveGrid>
         )
@@ -238,15 +236,15 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   const sortedPools = useMemo(() => {
     return poolDatas
       ? poolDatas
-        .sort((a, b) => {
-          if (a && b) {
-            return a[sortField as keyof PoolData] > b[sortField as keyof PoolData]
-              ? (sortDirection ? -1 : 1) * 1
-              : (sortDirection ? -1 : 1) * -1
-          }
-          return -1
-        })
-        .slice(ITEMS_PER_INFO_TABLE_PAGE * (page - 1), page * ITEMS_PER_INFO_TABLE_PAGE)
+          .sort((a, b) => {
+            if (a && b) {
+              return a[sortField as keyof PoolData] > b[sortField as keyof PoolData]
+                ? (sortDirection ? -1 : 1) * 1
+                : (sortDirection ? -1 : 1) * -1
+            }
+            return -1
+          })
+          .slice(ITEMS_PER_INFO_TABLE_PAGE * (page - 1), page * ITEMS_PER_INFO_TABLE_PAGE)
       : []
   }, [page, poolDatas, sortDirection, sortField])
 
@@ -276,7 +274,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
   return (
     <TableWrapper>
       <ResponsiveGrid>
-        {tokenAuth ?
+        {tokenAuth ? (
           <>
             <FlexID width="4vw">
               <Text color="secondary" fontSize="12px" bold>
@@ -316,7 +314,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
               </ClickableColumnHeader>
             </FlexActionTitle>
           </>
-          :
+        ) : (
           <>
             <FlexIDV2 width="4vw">
               <Text color="secondary" fontSize="12px" bold>
@@ -356,7 +354,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
               </ClickableColumnHeader>
             </FlexActionV2>
           </>
-        }
+        )}
       </ResponsiveGrid>
 
       <Break />
@@ -411,6 +409,10 @@ const FlexName = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 50vw;
   }
+  @media screen and (min-width: 1440px) {
+    width: 400px;
+    margin-left: 0vw;
+  }
 `
 const FlexBalance = styled(Flex)`
   @media screen and (max-width: 600px) {
@@ -425,11 +427,10 @@ const FlexBalance = styled(Flex)`
     width: 20vw;
     margin-left: 10vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
+  @media screen and (min-width: 1440px) {
+    width: 250px;
     margin-left: 5vw;
   }
-
 `
 const FlexID = styled(Flex)`
   @media screen and (max-width: 600px) {
@@ -444,9 +445,9 @@ const FlexAddress = styled(Flex)`
     width: 25vw;
     margin-left: 2rem;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -5vw;
+  @media screen and (min-width: 1440px) {
+    width: 250px;
+    margin-left: 0vw;
   }
 `
 const FlexAction = styled(Flex)`
@@ -459,14 +460,13 @@ const FlexAction = styled(Flex)`
     width: 20vw;
     margin-left: -8vw;
     display: none;
-
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
     margin-left: -1vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
+  @media screen and (min-width: 1440px) {
+    width: 70px;
     margin-left: -5vw;
   }
 `
@@ -476,21 +476,19 @@ const FlexActionTitle = styled(Flex)`
     width: 10vw;
     margin-left: -5vw;
     display: none;
-
   }
   @media screen and (min-width: 601px) and (max-width: 768px) {
     width: 20vw;
     margin-left: -5vw;
     display: none;
-
   }
   @media screen and (min-width: 769px) and (max-width: 1024px) {
     width: 20vw;
     margin-left: 0vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -4vw;
+  @media screen and (min-width: 1440px) {
+    width: 70px;
+    margin-left: -5vw;
   }
 `
 // No login
@@ -499,10 +497,14 @@ const FlexNameV2 = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 55vw;
   }
+  @media screen and (min-width: 1440px) {
+    width: 400px;
+    margin-left: 0vw;
+  }
 `
 const FlexBalanceV2 = styled(Flex)`
-    width: 20vw;
-    margin-left: 13vw;
+  width: 20vw;
+  margin-left: 13vw;
   @media screen and (max-width: 600px) {
     width: 20vw;
     margin-left: 50vw;
@@ -515,20 +517,15 @@ const FlexBalanceV2 = styled(Flex)`
     width: 20vw;
     margin-left: 20vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    width: 20vw;
-    margin-left: 13vw;
-  }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 5vw;
-    margin-left: 12vw;
+  @media screen and (min-width: 1440px) {
+    width: 130px;
+    margin-left: 5vw;
   }
 `
 const FlexIDV2 = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
-
 `
 const FlexAddressV2 = styled(Flex)`
   @media screen and (max-width: 600px) {
@@ -542,18 +539,13 @@ const FlexAddressV2 = styled(Flex)`
     width: 20vw;
     margin-left: -2vw;
   }
-  @media screen and (min-width: 1025px) and (max-width: 1444px) {
-    width: 20vw;
-    margin-left: -6vw;
+  @media screen and (min-width: 1440px) {
+    width: 400px;
+    margin-left: 0vw;
   }
-  @media screen and (min-width: 1445px) and (max-width: 2560px) {
-    width: 20vw;
-    margin-left: -6vw;
-  }
-
 `
 const FlexActionV2 = styled(Flex)`
-    display: none;
+  display: none;
   @media screen and (max-width: 600px) {
   }
 `
