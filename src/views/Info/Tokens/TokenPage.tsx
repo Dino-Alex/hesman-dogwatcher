@@ -271,11 +271,11 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
 
             <TeamWalletTable poolDatas={poolDatas} />
 
-            {/* <Heading scale="lg" mb="16px" mt="40px">
+            <Heading scale="lg" mb="16px" mt="40px">
               {t('Tracking Wallets')}
             </Heading>
 
-            <TrackingWalletTable poolDatas={poolDatas} /> */}
+            <TrackingWalletTable poolDatas={poolDatas} />
 
             <Heading scale="lg" mb="16px" mt="40px">
               {t('Pools')}

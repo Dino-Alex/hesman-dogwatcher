@@ -411,6 +411,12 @@ const FlexName = styled(Flex)`
   @media screen and (max-width: 400px) {
     width: 200px;
   }
+  @media screen and (max-width: 340px) {
+    width: 100px;
+  }
+  @media screen and (max-width: 319px) {
+    display: none;
+  }
 `
 const FlexAddress = styled(Flex)`
 @media screen and (min-width: 2560px) {
@@ -423,7 +429,7 @@ const FlexAddress = styled(Flex)`
   }
   @media screen and (max-width: 1440px) {
     width: 350px;
-    margin-left: 3rem;
+    margin-left: 1rem;
   }
   @media screen and (max-width: 1024px) {
     width: 250px;
@@ -431,7 +437,7 @@ const FlexAddress = styled(Flex)`
   }
   @media screen and (max-width: 900px) {
     width: 220px;
-    margin-left: 2rem;
+    margin-left: 0rem;
   }
   @media screen and (max-width: 840px) {
     width: 220px;
@@ -443,33 +449,34 @@ const FlexAddress = styled(Flex)`
 const FlexBalance = styled(Flex)`
  @media screen and (min-width: 2560px) {
     width: 70px;
-    margin-left: 3rem;
+    margin-left: -2rem;
   }
  @media screen and (max-width: 2560px) {
     width: 70px;
-    margin-left: 3rem;
+    margin-left: -2rem;
   }
  @media screen and (max-width: 1440px) {
     width: 70px;
-    margin-left: 3rem;
+    margin-left: -2rem;
   }
   @media screen and (max-width: 1024px) {
     width: 70px;
-    margin-left: 3rem;
+    margin-left: 2rem;
   }
   @media screen and (max-width: 900px) {
     width: 70px;
     position: absolute;
-    right: 40px;
+    right: 80px;
   }
   @media screen and (max-width: 600px) {
     width: 70px;
     position: absolute;
-    right: 30px;
+    right: 40px;
   }
   @media screen and (max-width: 400px) {
     width: 70px;
-    margin-left: 12rem;
+    position: absolute;
+    right: 25px;
   }
 `
 
@@ -477,22 +484,22 @@ const FlexAction = styled(Flex)`
  @media screen and (min-width: 2560px) {
     width: 80px;
     position: absolute;
-    right: 40px;
+    right: 70px;
   }
  @media screen and (max-width: 2560px) {
     width: 80px;
     position: absolute;
-    right: 40px;
+    right: 70px;
   }
   @media screen and (max-width: 1440px) {
     width: 80px;
     position: absolute;
-    right: 40px;
+    right: 60px;
   }
   @media screen and (max-width: 1024px) {
     width: 80px;
     position: absolute;
-    right: 40px;
+    right: 50px;
   }
   @media screen and (max-width: 900px) {
     width: 80px;
@@ -509,22 +516,22 @@ const FlexActionTitle = styled(Flex)`
 @media screen and (min-width: 2560px) {
     width: 80px;
     position: absolute;
-    right: 20px;
+    right: 50px;
   }
   @media screen and (max-width: 2560px) {
     width: 80px;
     position: absolute;
-    right: 20px;
+    right: 50px;
   }
  @media screen and (max-width: 1440px) {
     width: 80px;
     position: absolute;
-    right: 20px;
+    right: 40px;
   }
   @media screen and (max-width: 1024px) {
     width: 80px;
     position: absolute;
-    right: 25px;
+    right: 35px;
   }
  @media screen and (max-width: 900px) {
     width: 80px;
@@ -565,6 +572,12 @@ const FlexNameV2 = styled(Flex)`
   @media screen and (max-width: 400px) {
     width: 200px;
   }
+  @media screen and (max-width: 340px) {
+    width: 100px;
+  }
+  @media screen and (max-width: 319px) {
+    display: none;
+  }
 `
 const FlexAddressV2 = styled(Flex)`
 @media screen and (min-width: 2560px) {
@@ -577,20 +590,22 @@ const FlexAddressV2 = styled(Flex)`
   }
   @media screen and (max-width: 1440px) {
     width: 350px;
-    margin-left: 5rem;
+    margin-left: 0rem;
   }
   @media screen and (max-width: 1024px) {
     width: 250px;
-    margin-left: 7rem;
+    margin-left: 2rem;
   }
   @media screen and (max-width: 900px) {
     width: 220px;
-    margin-left: 2rem;
+    margin-left: 0rem;
   }
   @media screen and (max-width: 840px) {
     width: 220px;
+    margin-left: -2rem;
   }
-  @media screen and (max-width: 600px) {
+
+  @media screen and (max-width: 700px) {
     display: none;
   }
 `
@@ -599,34 +614,34 @@ const FlexBalanceV2 = styled(Flex)`
     width: 70px;
     margin-left: 3rem;
     position: absolute;
-    right: 20px;
+    right: 70px;
   }
  @media screen and (max-width: 2560px) {
     width: 70px;
     margin-left: 3rem;
     position: absolute;
-    right: 20px;
+    right: 70px;
   }
  @media screen and (max-width: 1440px) {
     width: 70px;
     margin-left: 3rem;
     position: absolute;
-    right: 20px;
+    right: 60px;
   }
   @media screen and (max-width: 1024px) {
     width: 70px;
     position: absolute;
-    right: 20px;
+    right: 40px;
   }
   @media screen and (max-width: 900px) {
     width: 70px;
     position: absolute;
-    right: 20px;
+    right: 85px;
   }
   @media screen and (max-width: 600px) {
     width: 70px;
     position: absolute;
-    right: 20px;
+    right: 35px;
   }
  
 `
