@@ -41,7 +41,6 @@ const ResponsiveGrid = styled.div`
   grid-gap: 1em;
   align-items: center;
   grid-template-columns: 20px 3.5fr repeat(5, 1fr);
-
   padding: 0 24px;
   @media screen and (max-width: 900px) {
     grid-template-columns: 20px 1.5fr repeat(3, 1fr);

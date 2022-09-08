@@ -26,28 +26,7 @@ const ResponsiveGrid = styled.div`
   grid-template-columns: 20px 5fr 5fr 0fr 10fr;
   padding: 0 24px;
   overflow: hidden;
-  /* @media screen and (max-width: 900px) {
-    grid-template-columns: 20px 1.5fr repeat(3, 1fr);
-    & :nth-child(4),
-    & :nth-child(5) {
-    }
-  }
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 20px 1.5fr repeat(1, 1fr);
-    & :nth-child(3),
-    & :nth-child(4),
-
-    & :nth-child(7)
-    {
-      display: none;
-    }
-  }
-  @media screen and (max-width: 480px) {
-    grid-template-columns: 2.5fr repeat(1, 1fr);
-    > *:nth-child(1) {
-      display: none;
-    }
-  } */
+  position: relative;
 `
 
 const SORT_FIELD = {
@@ -130,41 +109,41 @@ const DataRow = () => {
           <ResponsiveGrid>
             {tokenAuth ? (
               <>
-                <FlexID width="4vw">
+                <FlexID>
                   <Text>{index + 1}</Text>
                 </FlexID>
-                <FlexName width="25vw">
+                <FlexName>
                   <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                     {data.name}
                   </Link>
                 </FlexName>
                 <input type="hidden" value={data._id} />
-                <FlexAddress width="20vw">
+                <FlexAddress>
                   <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                     {sAccount(data.address)}
                   </Link>
                 </FlexAddress>
-                <FlexBalance width="12vw">
+                <FlexBalance>
                   {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
                 </FlexBalance>
               </>
             ) : (
               <>
-                <FlexIDV2 width="4vw">
+                <FlexIDV2>
                   <Text>{index + 1}</Text>
                 </FlexIDV2>
-                <FlexNameV2 width="25vw">
+                <FlexNameV2>
                   <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                     {data.name}
                   </Link>
                 </FlexNameV2>
                 <input type="hidden" value={data._id} />
-                <FlexAddressV2 width="20vw">
+                <FlexAddressV2>
                   <Link href={getBscScanLink(data.address, 'address', chainId)} external>
                     {sAccount(data.address)}
                   </Link>
                 </FlexAddressV2>
-                <FlexBalanceV2 width="12vw">
+                <FlexBalanceV2>
                   {formatAmount(Math.round(tokenBalances.tokenBalanceVal[index]), { isInteger: true })}
                 </FlexBalanceV2>
               </>
@@ -276,17 +255,17 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
       <ResponsiveGrid>
         {tokenAuth ? (
           <>
-            <FlexID width="4vw">
+            <FlexID >
               <Text color="secondary" fontSize="12px" bold>
                 #
               </Text>
             </FlexID>
-            <FlexName width="25vw">
+            <FlexName>
               <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Name')}
               </Text>
             </FlexName>
-            <FlexAddress width="20vw">
+            <FlexAddress>
               <ClickableColumnHeader
                 color="secondary"
                 fontSize="12px"
@@ -297,7 +276,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
                 {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
               </ClickableColumnHeader>
             </FlexAddress>
-            <FlexBalance width="12vw">
+            <FlexBalance>
               <ClickableColumnHeader
                 color="secondary"
                 fontSize="12px"
@@ -308,7 +287,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
                 {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
               </ClickableColumnHeader>
             </FlexBalance>
-            <FlexActionTitle width="12vw">
+            <FlexActionTitle>
               <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Action')}
               </ClickableColumnHeader>
@@ -316,17 +295,17 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
           </>
         ) : (
           <>
-            <FlexIDV2 width="4vw">
+            <FlexIDV2>
               <Text color="secondary" fontSize="12px" bold>
                 #
               </Text>
             </FlexIDV2>
-            <FlexNameV2 width="25vw">
+            <FlexNameV2>
               <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Name')}
               </Text>
             </FlexNameV2>
-            <FlexAddressV2 width="20vw">
+            <FlexAddressV2>
               <ClickableColumnHeader
                 color="secondary"
                 fontSize="12px"
@@ -337,7 +316,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
                 {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
               </ClickableColumnHeader>
             </FlexAddressV2>
-            <FlexBalanceV2 width="12vw">
+            <FlexBalanceV2>
               <ClickableColumnHeader
                 color="secondary"
                 fontSize="12px"
@@ -348,11 +327,11 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
                 {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
               </ClickableColumnHeader>
             </FlexBalanceV2>
-            <FlexActionV2 width="12vw">
+            <FlexActionTitleV2>
               <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
                 {t('Action')}
               </ClickableColumnHeader>
-            </FlexActionV2>
+            </FlexActionTitleV2>
           </>
         )}
       </ResponsiveGrid>
@@ -405,147 +384,252 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
 
 export default TeamWalletTable
 
-const FlexName = styled(Flex)`
-  @media screen and (max-width: 600px) {
-    width: 50vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 400px;
-    margin-left: 0vw;
-  }
-`
-const FlexBalance = styled(Flex)`
-  @media screen and (max-width: 600px) {
-    width: 25vw;
-    margin-left: 50vw;
-  }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: 15vw;
-  }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
-    margin-left: 10vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 250px;
-    margin-left: 5vw;
-  }
-`
 const FlexID = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
 `
+const FlexName = styled(Flex)`
+  @media screen and (min-width: 2560px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 2560px) {
+    width: 350px;
+  }
+ @media screen and (max-width: 1440px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 250px;
+  }
+  @media screen and (max-width: 900px) {
+    width: 230px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 220px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 200px;
+  }
+`
 const FlexAddress = styled(Flex)`
+@media screen and (min-width: 2560px) {
+    width: 350px;
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 2560px) {
+    width: 350px;
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 1440px) {
+    width: 350px;
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 250px;
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 900px) {
+    width: 220px;
+    margin-left: 2rem;
+  }
+  @media screen and (max-width: 840px) {
+    width: 220px;
+  }
   @media screen and (max-width: 600px) {
     display: none;
   }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 25vw;
-    margin-left: 2rem;
+`
+const FlexBalance = styled(Flex)`
+ @media screen and (min-width: 2560px) {
+    width: 70px;
+    margin-left: 3rem;
   }
-  @media screen and (min-width: 1440px) {
-    width: 250px;
-    margin-left: 0vw;
+ @media screen and (max-width: 2560px) {
+    width: 70px;
+    margin-left: 3rem;
+  }
+ @media screen and (max-width: 1440px) {
+    width: 70px;
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 70px;
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 900px) {
+    width: 70px;
+    position: absolute;
+    right: 40px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 70px;
+    position: absolute;
+    right: 30px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 70px;
+    margin-left: 12rem;
   }
 `
+
 const FlexAction = styled(Flex)`
+ @media screen and (min-width: 2560px) {
+    width: 80px;
+    position: absolute;
+    right: 40px;
+  }
+ @media screen and (max-width: 2560px) {
+    width: 80px;
+    position: absolute;
+    right: 40px;
+  }
+  @media screen and (max-width: 1440px) {
+    width: 80px;
+    position: absolute;
+    right: 40px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 80px;
+    position: absolute;
+    right: 40px;
+  }
+  @media screen and (max-width: 900px) {
+    width: 80px;
+    display: none;
+  }
   @media screen and (max-width: 600px) {
     width: 10vw;
     margin-left: -10vw;
     display: none;
   }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: -8vw;
-    display: none;
-  }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
-    margin-left: -1vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 70px;
-    margin-left: -6vw;
-  }
 `
 
 const FlexActionTitle = styled(Flex)`
+@media screen and (min-width: 2560px) {
+    width: 80px;
+    position: absolute;
+    right: 20px;
+  }
+  @media screen and (max-width: 2560px) {
+    width: 80px;
+    position: absolute;
+    right: 20px;
+  }
+ @media screen and (max-width: 1440px) {
+    width: 80px;
+    position: absolute;
+    right: 20px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 80px;
+    position: absolute;
+    right: 25px;
+  }
+ @media screen and (max-width: 900px) {
+    width: 80px;
+    margin-left: 20px;
+    display: none;
+  }
   @media screen and (max-width: 600px) {
     width: 10vw;
     margin-left: -5vw;
     display: none;
   }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: -5vw;
-    display: none;
-  }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
-    margin-left: 0vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 70px;
-    margin-left: -5vw;
-  }
 `
 // No login
-const FlexNameV2 = styled(Flex)`
-  width: 34vw;
-  @media screen and (max-width: 600px) {
-    width: 55vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 400px;
-    margin-left: 0vw;
-  }
-`
-const FlexBalanceV2 = styled(Flex)`
-  width: 20vw;
-  margin-left: 13vw;
-  @media screen and (max-width: 600px) {
-    width: 20vw;
-    margin-left: 50vw;
-  }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: 13vw;
-  }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
-    margin-left: 13vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 130px;
-    margin-left: 2vw;
-  }
-`
 const FlexIDV2 = styled(Flex)`
   @media screen and (max-width: 600px) {
     display: none;
   }
 `
+const FlexNameV2 = styled(Flex)`
+  @media screen and (min-width: 2560px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 2560px) {
+    width: 350px;
+  }
+ @media screen and (max-width: 1440px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 250px;
+  }
+  @media screen and (max-width: 900px) {
+    width: 230px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 220px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 200px;
+  }
+`
 const FlexAddressV2 = styled(Flex)`
+@media screen and (min-width: 2560px) {
+    width: 350px;
+    margin-left: 5rem;
+  }
+  @media screen and (max-width: 2560px) {
+    width: 350px;
+    margin-left: 5rem;
+  }
+  @media screen and (max-width: 1440px) {
+    width: 350px;
+    margin-left: 5rem;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 250px;
+    margin-left: 7rem;
+  }
+  @media screen and (max-width: 900px) {
+    width: 220px;
+    margin-left: 2rem;
+  }
+  @media screen and (max-width: 840px) {
+    width: 220px;
+  }
   @media screen and (max-width: 600px) {
     display: none;
   }
-  @media screen and (min-width: 601px) and (max-width: 768px) {
-    width: 20vw;
-    margin-left: -5vw;
-  }
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    width: 20vw;
-    margin-left: -2vw;
-  }
-  @media screen and (min-width: 1440px) {
-    width: 400px;
-    margin-left: 0vw;
-  }
 `
-const FlexActionV2 = styled(Flex)`
-  display: none;
-  @media screen and (max-width: 600px) {
+const FlexBalanceV2 = styled(Flex)`
+ @media screen and (min-width: 2560px) {
+    width: 70px;
+    margin-left: 3rem;
+    position: absolute;
+    right: 20px;
   }
+ @media screen and (max-width: 2560px) {
+    width: 70px;
+    margin-left: 3rem;
+    position: absolute;
+    right: 20px;
+  }
+ @media screen and (max-width: 1440px) {
+    width: 70px;
+    margin-left: 3rem;
+    position: absolute;
+    right: 20px;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 70px;
+    position: absolute;
+    right: 20px;
+  }
+  @media screen and (max-width: 900px) {
+    width: 70px;
+    position: absolute;
+    right: 20px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 70px;
+    position: absolute;
+    right: 20px;
+  }
+ 
+`
+const FlexActionTitleV2 = styled(Flex)`
+  display: none;
 `
