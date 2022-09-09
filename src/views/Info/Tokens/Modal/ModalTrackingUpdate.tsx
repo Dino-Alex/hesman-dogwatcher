@@ -169,7 +169,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
           </Text>
         )}
         {name === '' && (
-          <Text marginTop="1rem" width="100%" textAlign="center">
+          <Text marginBottom="2rem" marginTop="1rem" width="100%" textAlign="center">
             Tên ví trống
           </Text>
         )}
@@ -226,6 +226,7 @@ const FlexInput = styled(Flex)`
   }
 `
 const CustomModal = styled(Modal)`
+  padding-bottom: 3rem;
   @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;

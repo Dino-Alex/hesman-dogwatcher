@@ -85,22 +85,23 @@ const TableLoader: React.FC<React.PropsWithChildren> = () => (
 
 const DataRow = ({ poolData, index }: { poolData: PoolData; index: number }) => {
   return (
-    <LinkWrapper to={`/info/pool/${poolData.address}`}>
-      <ResponsiveGrid>
-        <Text>{index + 1}</Text>
-        <Flex>
-          <DoubleCurrencyLogo address0={poolData.token0.address} address1={poolData.token1.address} />
-          <Text ml="8px">
-            {poolData.token0.symbol}/{poolData.token1.symbol}
-          </Text>
-        </Flex>
-        <Text>${formatAmount(poolData.volumeUSD)}</Text>
-        <Text>${formatAmount(poolData.volumeUSDWeek)}</Text>
-        <Text>${formatAmount(poolData.lpFees24h)}</Text>
-        <Text>{formatAmount(poolData.lpApr7d)}%</Text>
-        <Text>${formatAmount(poolData.liquidityUSD)}</Text>
-      </ResponsiveGrid>
-    </LinkWrapper>
+    // <LinkWrapper to={`/info/pool/${poolData.address}`}>
+    // <LinkWrapper to={`/`}>
+    <ResponsiveGrid>
+      <Text>{index + 1}</Text>
+      <Flex>
+        <DoubleCurrencyLogo address0={poolData.token0.address} address1={poolData.token1.address} />
+        <Text ml="8px">
+          {poolData.token0.symbol}/{poolData.token1.symbol}
+        </Text>
+      </Flex>
+      <Text>${formatAmount(poolData.volumeUSD)}</Text>
+      <Text>${formatAmount(poolData.volumeUSDWeek)}</Text>
+      <Text>${formatAmount(poolData.lpFees24h)}</Text>
+      <Text>{formatAmount(poolData.lpApr7d)}%</Text>
+      <Text>${formatAmount(poolData.liquidityUSD)}</Text>
+    </ResponsiveGrid>
+    // </LinkWrapper>
   )
 }
 

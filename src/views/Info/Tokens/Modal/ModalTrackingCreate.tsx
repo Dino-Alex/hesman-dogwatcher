@@ -18,8 +18,6 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
   const [posts, setPosts] = useState([])
 
   const tokenAuth = localStorage.getItem('token')
-  console.log('Stake Token: ', stakeToken)
-  console.log('Reward Token: ', rewardToken)
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -189,7 +187,7 @@ const ModalTrackingCreate: React.FC<Proptype> = ({ onDismiss, onRefresh }) => {
             </Text>
           )}
           {name === '' && (
-            <Text marginTop="1rem" width="100%" textAlign="center">
+            <Text marginBottom="2rem" marginTop="1rem" width="100%" textAlign="center">
               Tên ví trống
             </Text>
           )}
@@ -258,6 +256,7 @@ const FlexInputText = styled(Flex)`
   }
 `
 const CustomModal = styled(Modal)`
+  padding-bottom: 3rem;
   @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
