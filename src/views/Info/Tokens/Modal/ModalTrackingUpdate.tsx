@@ -157,7 +157,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
             Update
           </Button>
         </Flex>
-
+        <Flex>
         {check === 2 && (
           <Text marginTop="1rem" width="100%" textAlign="center">
             Địa chỉ nhận đang là ví của bạn
@@ -173,6 +173,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
             Tên ví trống
           </Text>
         )}
+        </Flex>
       </CustomFlex>
     </CustomModal>
   )
@@ -187,10 +188,8 @@ const CustomInputGroup = styled(InputGroup)`
 const CustomFlex = styled(Flex)`
   margin-bottom: 10rem;
   width: 100%;
-  height: 100px;
-  padding-top: 10rem;
+  margin-top: 0rem;
 `
-
 const CustomFlexInput = styled(Flex)`
   @media screen and (max-width: 600px) {
     width: 98%;
@@ -227,6 +226,7 @@ const FlexInput = styled(Flex)`
 `
 const CustomModal = styled(Modal)`
   padding-bottom: 3rem;
+  height: 70%;
   @media screen and (max-width: 600px) {
     display: flex;
     flex-direction: column;
@@ -235,7 +235,6 @@ const CustomModal = styled(Modal)`
     margin-bottom: 5rem;
     border-radius: 30px;
   }
-
   @media screen and (min-width: 601px) and (max-width: 768px) {
     display: flex;
     flex-direction: column;

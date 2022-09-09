@@ -79,7 +79,7 @@ const Login = () => {
               </Text>
             )}
           </Flex>
-          <Flex mt="5rem" width="100%" justifyContent="space-around" alignItems="center">
+          <Flex mt="5rem" justifyContent="center" alignItems="center" style={{gap: '40px'}}>
             <Button onClick={handleSubmit} disabled={padding === true || passWord === '' || userName === ''}>
               Login
             </Button>
