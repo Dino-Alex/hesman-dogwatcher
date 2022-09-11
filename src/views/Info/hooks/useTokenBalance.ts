@@ -9,7 +9,7 @@ export const FetchTokenBalance = async (addresses: string[]): Promise<{ tokenBal
     const calls = []
     addresses.forEach((teams) => {
       calls.push({
-        address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        address: '0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0',
         name: 'balanceOf',
         params: [teams],
       })

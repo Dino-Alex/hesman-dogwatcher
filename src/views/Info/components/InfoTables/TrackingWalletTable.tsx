@@ -26,7 +26,6 @@ const ResponsiveGrid = styled.div`
   grid-template-columns: 20px 5fr 5fr 0fr 10fr;
   padding: 0 24px;
   position: relative;
-
 `
 
 const SORT_FIELD = {
@@ -308,7 +307,7 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                   onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
                   textTransform="uppercase"
                 >
-                  {t('RUN')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                  {t('HES')} {arrow(SORT_FIELD.volumeUSDWeek)}
                 </ClickableColumnHeader>
               </FlexBalance>
               <FlexReward>
@@ -361,7 +360,7 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
                   onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
                   textTransform="uppercase"
                 >
-                  {t('RUN')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                  {t('HES')} {arrow(SORT_FIELD.volumeUSDWeek)}
                 </ClickableColumnHeader>
               </FlexBalanceV2>
               <FlexRewardV2>
@@ -440,7 +439,7 @@ const FlexName = styled(Flex)`
   @media screen and (max-width: 2560px) {
     width: 350px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 350px;
   }
   @media screen and (max-width: 1024px) {
@@ -463,7 +462,7 @@ const FlexName = styled(Flex)`
   }
 `
 const FlexBalance = styled(Flex)`
-   width: 100%;
+  width: 100%;
 `
 const FlexReward = styled(Flex)`
   width: 100%;
@@ -474,7 +473,7 @@ const FlexID = styled(Flex)`
   }
 `
 const FlexAddress = styled(Flex)`
-@media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 350px;
     margin-left: 5rem;
   }
@@ -500,7 +499,6 @@ const FlexAddress = styled(Flex)`
   @media screen and (max-width: 700px) {
     display: none;
   }
-  
 `
 const FlexPriceToken = styled(Flex)`
   @media screen and (min-width: 2560px) {
@@ -509,13 +507,13 @@ const FlexPriceToken = styled(Flex)`
     position: absolute;
     right: 180px;
   }
- @media screen and (max-width: 2560px) {
+  @media screen and (max-width: 2560px) {
     width: 200px;
     gap: 50px;
     position: absolute;
     right: 180px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 180px;
     position: absolute;
     right: 160px;
@@ -565,8 +563,8 @@ const FlexAction = styled(Flex)`
   }
 `
 const FlexActionTitle = styled(Flex)`
-@media screen and (min-width: 2560px) {
-  width: 70px;
+  @media screen and (min-width: 2560px) {
+    width: 70px;
     position: absolute;
     right: 70px;
   }
@@ -602,7 +600,7 @@ const FlexNameV2 = styled(Flex)`
   @media screen and (max-width: 2560px) {
     width: 350px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 350px;
   }
   @media screen and (max-width: 1024px) {
@@ -666,13 +664,13 @@ const FlexPriceTokenV2 = styled(Flex)`
     position: absolute;
     right: 70px;
   }
- @media screen and (max-width: 2560px) {
+  @media screen and (max-width: 2560px) {
     width: 200px;
     gap: 50px;
     position: absolute;
     right: 70px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 180px;
     gap: 40px;
     position: absolute;

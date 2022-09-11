@@ -7,7 +7,7 @@ export const FetchTokenBalance = async (addresses: string[]): Promise<{ tokenBal
     const calls = []
     addresses.forEach((teams) => {
       calls.push({
-        address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        address: '0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0',
         name: 'balanceOf',
         params: [teams],
       })
@@ -33,7 +33,7 @@ export const fetchTotalSuppy = async (): Promise<{ totalSupply: number }> => {
   try {
     const calls = [
       {
-        address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        address: '0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0',
         name: 'totalSupply',
         params: [],
       },
@@ -56,7 +56,7 @@ export const FetchCirculatingSupply = async (addresses: string[]): Promise<{ cir
     const calls = []
     addresses.forEach((teams) => {
       calls.push({
-        address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        address: '0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0',
         name: 'balanceOf',
         params: [teams],
       })
@@ -75,7 +75,7 @@ export const FetchCirculatingSupply = async (addresses: string[]): Promise<{ cir
 
     const totalSupplyCalls = [
       {
-        address: '0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        address: '0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0',
         name: 'totalSupply',
         params: [],
       },

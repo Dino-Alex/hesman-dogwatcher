@@ -176,7 +176,11 @@ const TokenPage: React.FC<React.PropsWithChildren<{ routeAddress: string }>> = (
             <Flex justifyContent="space-between" flexDirection={['column', 'column', 'column', 'row']}>
               <Flex flexDirection="column" mb={['8px', null]}>
                 <Flex alignItems="center">
-                  <img src="https://s2.coinmarketcap.com/static/img/coins/64x64/19638.png" alt="Token Run" width="32" />
+                  <img
+                    src="https://s2.coinmarketcap.com/static/img/coins/64x64/20283.png"
+                    alt="Hesman Shard"
+                    width="48"
+                  />
                   {/* <CurrencyLogo size="32px" address={address} /> */}
                   <Text
                     ml="12px"

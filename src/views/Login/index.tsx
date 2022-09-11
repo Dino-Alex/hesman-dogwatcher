@@ -19,7 +19,7 @@ const Login = () => {
       const resp = await loginClient.post('', { name: userName, password: passWord }).then((response) => {
         setPosts([response.data, ...posts])
         localStorage.setItem('token', response.data.token)
-        router.push('/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7')
+        router.push('/info/token/0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0')
       })
       setPadding(true)
     } catch (error: any) {
@@ -29,7 +29,7 @@ const Login = () => {
     }
   }
   function handleBack() {
-    router.push('/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7')
+    router.push('/info/token/0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0')
   }
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const Login = () => {
               </Text>
             )}
           </Flex>
-          <Flex mt="5rem" justifyContent="center" alignItems="center" style={{gap: '40px'}}>
+          <Flex mt="5rem" justifyContent="center" alignItems="center" style={{ gap: '40px' }}>
             <Button onClick={handleSubmit} disabled={padding === true || passWord === '' || userName === ''}>
               Login
             </Button>

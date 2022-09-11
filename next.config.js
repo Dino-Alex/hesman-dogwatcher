@@ -92,7 +92,7 @@ const config = {
     return [
       {
         source: '/',
-        destination: '/info/token/0xc643e83587818202e0fff5ed96d10abbc8bb48e7',
+        destination: '/info/token/0x80A466Cea081bDd8E9c3Be80268Aad16915D03D0',
         permanent: false,
       },
     ]
