@@ -32,7 +32,7 @@ const ModalUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) => {
 
   const updatePost = async () => {
     await axios.put(
-      `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${id}`,
+      `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/hes/admin/product/${id}`,
       { name, address, limit },
       {
         headers: {

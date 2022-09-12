@@ -20,7 +20,7 @@ const ModalDelete: React.FC<Proptype> = ({ onDismiss, onRefresh, ID }) => {
   const [posts, setPosts] = useState([])
 
   const deletePost = async () => {
-    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/product/${ID}`, {
+    await axios.delete(`https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/hes/admin/product/${ID}`, {
       headers: {
         'Content-Type': 'application/json',
         token: `${tokenAuth}`,
@@ -78,4 +78,3 @@ const CustomFlex = styled(Flex)`
   width: 100%;
   height: 100%;
 `
-
