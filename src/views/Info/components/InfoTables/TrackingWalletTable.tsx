@@ -288,37 +288,19 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
               </Text>
             </FlexName>
             <FlexAddress>
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-                textTransform="uppercase"
-              >
-                {t('Pool Address')} {arrow(SORT_FIELD.volumeUSD)}
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Pool Address')}
               </ClickableColumnHeader>
             </FlexAddress>
             <FlexPriceToken>
               <FlexBalance>
-                <ClickableColumnHeader
-                  color="secondary"
-                  fontSize="12px"
-                  bold
-                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                  textTransform="uppercase"
-                >
-                  {t('HES')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                  {t('HES')}
                 </ClickableColumnHeader>
               </FlexBalance>
               <FlexReward>
-                <ClickableColumnHeader
-                  color="secondary"
-                  fontSize="12px"
-                  bold
-                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                  textTransform="uppercase"
-                >
-                  {t('BUSD')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                  {t('BUSD')}
                 </ClickableColumnHeader>
               </FlexReward>
             </FlexPriceToken>
@@ -341,37 +323,19 @@ const TrackingWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = (
               </Text>
             </FlexNameV2>
             <FlexAddressV2>
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-                textTransform="uppercase"
-              >
-                {t('Pool Address')} {arrow(SORT_FIELD.volumeUSD)}
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Pool Address')}
               </ClickableColumnHeader>
             </FlexAddressV2>
             <FlexPriceTokenV2>
               <FlexBalanceV2>
-                <ClickableColumnHeader
-                  color="secondary"
-                  fontSize="12px"
-                  bold
-                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                  textTransform="uppercase"
-                >
-                  {t('HES')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                  {t('HES')}
                 </ClickableColumnHeader>
               </FlexBalanceV2>
               <FlexRewardV2>
-                <ClickableColumnHeader
-                  color="secondary"
-                  fontSize="12px"
-                  bold
-                  onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                  textTransform="uppercase"
-                >
-                  {t('BUSD')} {arrow(SORT_FIELD.volumeUSDWeek)}
+                <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                  {t('BUSD')}
                 </ClickableColumnHeader>
               </FlexRewardV2>
             </FlexPriceTokenV2>

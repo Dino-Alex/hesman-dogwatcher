@@ -255,7 +255,7 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
       <ResponsiveGrid>
         {tokenAuth ? (
           <>
-            <FlexID >
+            <FlexID>
               <Text color="secondary" fontSize="12px" bold>
                 #
               </Text>
@@ -266,25 +266,13 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
               </Text>
             </FlexName>
             <FlexAddress>
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-                textTransform="uppercase"
-              >
-                {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Address')}
               </ClickableColumnHeader>
             </FlexAddress>
             <FlexBalance>
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                textTransform="uppercase"
-              >
-                {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Balance')}
               </ClickableColumnHeader>
             </FlexBalance>
             <FlexActionTitle>
@@ -306,25 +294,13 @@ const TeamWalletTable: React.FC<React.PropsWithChildren<PoolTableProps>> = ({ po
               </Text>
             </FlexNameV2>
             <FlexAddressV2>
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSD)}
-                textTransform="uppercase"
-              >
-                {t('Address')} {arrow(SORT_FIELD.volumeUSD)}
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Address')}
               </ClickableColumnHeader>
             </FlexAddressV2>
             <FlexBalanceV2>
-              <ClickableColumnHeader
-                color="secondary"
-                fontSize="12px"
-                bold
-                onClick={() => handleSort(SORT_FIELD.volumeUSDWeek)}
-                textTransform="uppercase"
-              >
-                {t('Balance')} {arrow(SORT_FIELD.volumeUSDWeek)}
+              <ClickableColumnHeader color="secondary" fontSize="12px" bold textTransform="uppercase">
+                {t('Balance')}
               </ClickableColumnHeader>
             </FlexBalanceV2>
             <FlexActionTitleV2>
@@ -396,7 +372,7 @@ const FlexName = styled(Flex)`
   @media screen and (max-width: 2560px) {
     width: 350px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 350px;
   }
   @media screen and (max-width: 1024px) {
@@ -419,7 +395,7 @@ const FlexName = styled(Flex)`
   }
 `
 const FlexAddress = styled(Flex)`
-@media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 350px;
     margin-left: 3rem;
   }
@@ -447,15 +423,15 @@ const FlexAddress = styled(Flex)`
   }
 `
 const FlexBalance = styled(Flex)`
- @media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 70px;
     margin-left: -2rem;
   }
- @media screen and (max-width: 2560px) {
+  @media screen and (max-width: 2560px) {
     width: 70px;
     margin-left: -2rem;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 70px;
     margin-left: -2rem;
   }
@@ -481,12 +457,12 @@ const FlexBalance = styled(Flex)`
 `
 
 const FlexAction = styled(Flex)`
- @media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 80px;
     position: absolute;
     right: 70px;
   }
- @media screen and (max-width: 2560px) {
+  @media screen and (max-width: 2560px) {
     width: 80px;
     position: absolute;
     right: 70px;
@@ -513,7 +489,7 @@ const FlexAction = styled(Flex)`
 `
 
 const FlexActionTitle = styled(Flex)`
-@media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 80px;
     position: absolute;
     right: 50px;
@@ -523,7 +499,7 @@ const FlexActionTitle = styled(Flex)`
     position: absolute;
     right: 50px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 80px;
     position: absolute;
     right: 40px;
@@ -533,7 +509,7 @@ const FlexActionTitle = styled(Flex)`
     position: absolute;
     right: 35px;
   }
- @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) {
     width: 80px;
     margin-left: 20px;
     display: none;
@@ -557,7 +533,7 @@ const FlexNameV2 = styled(Flex)`
   @media screen and (max-width: 2560px) {
     width: 350px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 350px;
   }
   @media screen and (max-width: 1024px) {
@@ -580,7 +556,7 @@ const FlexNameV2 = styled(Flex)`
   }
 `
 const FlexAddressV2 = styled(Flex)`
-@media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 350px;
     margin-left: 5rem;
   }
@@ -610,19 +586,19 @@ const FlexAddressV2 = styled(Flex)`
   }
 `
 const FlexBalanceV2 = styled(Flex)`
- @media screen and (min-width: 2560px) {
+  @media screen and (min-width: 2560px) {
     width: 70px;
     margin-left: 3rem;
     position: absolute;
     right: 70px;
   }
- @media screen and (max-width: 2560px) {
+  @media screen and (max-width: 2560px) {
     width: 70px;
     margin-left: 3rem;
     position: absolute;
     right: 70px;
   }
- @media screen and (max-width: 1440px) {
+  @media screen and (max-width: 1440px) {
     width: 70px;
     margin-left: 3rem;
     position: absolute;
@@ -643,7 +619,6 @@ const FlexBalanceV2 = styled(Flex)`
     position: absolute;
     right: 35px;
   }
- 
 `
 const FlexActionTitleV2 = styled(Flex)`
   display: none;
