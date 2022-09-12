@@ -67,10 +67,7 @@ function MyApp(props: AppProps) {
         />
         <meta name="description" content="Content V1" />
         <meta name="theme-color" content="#1FC7D4" />
-        <meta
-          name="twitter:image"
-          content="https://static-images.vnncdn.net/files/publish/2022/5/31/dung-si-hesman-blockchain-1-320.jpg"
-        />
+        <meta name="twitter:image" content="/MetaLogo.png" />
         <meta name="twitter:description" content="Content V2" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="🐶 Dog-Watcher" />
