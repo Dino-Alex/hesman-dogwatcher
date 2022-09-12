@@ -36,7 +36,7 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
 
   const updatePost = async () => {
     await axios.put(
-      `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/admin/tracking/${id}`,
+      `https://dog-watcher-api.deltalabsjsc.com:4001/api/v1/hes/admin/tracking/${id}`,
       { name, address, limit, stakeToken, rewardToken },
       {
         headers: {
@@ -158,21 +158,21 @@ const ModalTrackingUpdate: React.FC<Proptype> = ({ onDismiss, onRefresh, id }) =
           </Button>
         </Flex>
         <Flex>
-        {check === 2 && (
-          <Text marginTop="1rem" width="100%" textAlign="center">
-            Địa chỉ nhận đang là ví của bạn
-          </Text>
-        )}
-        {check === 1 && (
-          <Text marginTop="1rem" width="100%" textAlign="center">
-            Địa chỉ ví không đúng
-          </Text>
-        )}
-        {name === '' && (
-          <Text marginBottom="2rem" marginTop="1rem" width="100%" textAlign="center">
-            Tên ví trống
-          </Text>
-        )}
+          {check === 2 && (
+            <Text marginTop="1rem" width="100%" textAlign="center">
+              Địa chỉ nhận đang là ví của bạn
+            </Text>
+          )}
+          {check === 1 && (
+            <Text marginTop="1rem" width="100%" textAlign="center">
+              Địa chỉ ví không đúng
+            </Text>
+          )}
+          {name === '' && (
+            <Text marginBottom="2rem" marginTop="1rem" width="100%" textAlign="center">
+              Tên ví trống
+            </Text>
+          )}
         </Flex>
       </CustomFlex>
     </CustomModal>
